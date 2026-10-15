@@ -398,6 +398,15 @@
       </details>`;
   }
 
+  // o zi libera care pica in vacanta sau in weekend nu schimba nimic in program
+  function notaZiLibera(z, perioade) {
+    const vacanta = perioade.find((p) => p.tip === 'vacanta' && z.data >= p.start && z.data <= p.final);
+    if (vacanta) return 'în ' + vacanta.titlu.toLowerCase();
+    const zi = new Date(z.data + 'T12:00:00Z').getUTCDay();
+    if (zi === 0 || zi === 6) return 'cade în weekend';
+    return '';
+  }
+
   function cardPerioada(p, azi) {
     const t = TIPURI_PERIOADA[p.tip] || TIPURI_PERIOADA.reper;
     const stare = stareaPerioadei(p, azi);
@@ -539,10 +548,18 @@
     if (libere.length) {
       const sec = el('section', 'an-libere');
       sec.innerHTML = `<h3>Zile libere ce urmează</h3>` +
-        libere.map((z) => `<div class="zi-libera">
+        libere.map((z) => {
+          const nota = notaZiLibera(z, perioade);
+          return `<div class="zi-libera">
             <span class="zi-data">${esc(fmtLong(z.data))}</span>
-            <span class="zi-titlu">${esc(z.titlu)}</span>
-          </div>`).join('');
+            <span class="zi-corp">
+              <span class="zi-titlu">${esc(z.titlu)}</span>
+              ${nota ? `<span class="zi-nota">${esc(nota)}</span>` : ''}
+            </span>
+          </div>`;
+        }).join('') +
+        `<p class="zi-sursa">Sărbătorile legale sunt cele din art. 139 din Codul muncii;
+          Calendarul Studentului le menționează doar pe unele dintre ele.</p>`;
       main.appendChild(sec);
     }
 
@@ -1116,7 +1133,23 @@
 
     if ('serviceWorker' in navigator) {
       try {
-        await navigator.serviceWorker.register('sw.js');
+        const reg = await navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' });
+
+        // cautam un worker nou la pornire si la fiecare revenire in aplicatie
+        const cautaVersiuneNoua = () => { reg.update().catch(() => {}); };
+        cautaVersiuneNoua();
+        document.addEventListener('visibilitychange', () => {
+          if (!document.hidden) cautaVersiuneNoua();
+        });
+
+        // cand workerul nou preia controlul, reincarcam o singura data
+        let reincarcat = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (reincarcat) return;
+          reincarcat = true;
+          location.reload();
+        });
+
         // daca permisiunea e deja data, ne reasiguram ca Workerul
         // are un abonament valid pentru telefonul asta
         subscribeToPush({ tacut: true }).then(syncBellState);

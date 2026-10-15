@@ -79,12 +79,29 @@ PERIOADE = [
      ""),
 ]
 
+# Zilele nelucrătoare din art. 139 din Codul muncii care cad în anul universitar,
+# plus ziua ASE din Calendarul Studentului. Paștele ortodox din 2027 este pe 2 mai,
+# deci Vinerea Mare cade pe 30 aprilie, iar Rusaliile pe 20-21 iunie.
+# "calendar" = apare în Calendarul Studentului, "legal" = sărbătoare legală.
 ZILE_LIBERE = [
-    ("30.11", "Sfântul Andrei"),
-    ("01.12", "Ziua Națională a României"),
-    ("06.04", "Ziua ASE — 114 ani"),
-    ("01.05", "Ziua Internațională a Muncii"),
-    ("01.06", "Ziua Internațională a Copilului"),
+    ("30.11",      "Sfântul Andrei",                      "calendar"),
+    ("01.12",      "Ziua Națională a României",           "calendar"),
+    ("25.12",      "Prima zi de Crăciun",                 "legal"),
+    ("26.12",      "A doua zi de Crăciun",                "legal"),
+    ("01.01.2027", "Anul Nou",                            "legal"),
+    ("02.01.2027", "A doua zi a Anului Nou",              "legal"),
+    ("06.01.2027", "Boboteaza",                           "legal"),
+    ("07.01.2027", "Soborul Sfântului Ioan Botezătorul",  "legal"),
+    ("24.01.2027", "Ziua Unirii Principatelor Române",    "legal"),
+    ("06.04",      "Ziua ASE — 114 ani",                  "calendar"),
+    ("30.04",      "Vinerea Mare",                        "legal"),
+    ("01.05",      "Ziua Internațională a Muncii",        "calendar"),
+    ("02.05",      "Prima zi de Paște",                   "legal"),
+    ("03.05",      "A doua zi de Paște",                  "legal"),
+    ("01.06",      "Ziua Internațională a Copilului",     "calendar"),
+    ("20.06",      "Prima zi de Rusalii",                 "legal"),
+    ("21.06",      "A doua zi de Rusalii",                "legal"),
+    ("15.08",      "Adormirea Maicii Domnului",           "legal"),
 ]
 
 # ------------------------------------------------------------------
@@ -631,7 +648,9 @@ def build():
         "sursa": "Calendarul Studentului, Hotărârea CA nr. 751/21.09.2026",
         "sursa_url": "https://www.ase.ro",
         "perioade": perioade,
-        "zile_libere": [{"data": zi(d), "titlu": t} for d, t in ZILE_LIBERE],
+        "zile_libere": sorted(
+            ({"data": zi(d), "titlu": t, "sursa": sursa} for d, t, sursa in ZILE_LIBERE),
+            key=lambda z: z["data"]),
         "actiuni": actiuni,
     }
 
@@ -640,7 +659,7 @@ def build():
 
     print("Scris: %s" % OUT)
     print("  %d perioade, %d zile libere, %d acțiuni" %
-          (len(perioade), len(ZILE_LIBERE), len(actiuni)))
+          (len(perioade), len(date["zile_libere"]), len(actiuni)))
 
     from collections import Counter
     for tema, n in Counter(a["tema"] for a in actiuni).most_common():

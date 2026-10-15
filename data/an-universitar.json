@@ -127,23 +127,93 @@
   "zile_libere": [
     {
       "data": "2026-11-30",
-      "titlu": "Sfântul Andrei"
+      "titlu": "Sfântul Andrei",
+      "sursa": "calendar"
     },
     {
       "data": "2026-12-01",
-      "titlu": "Ziua Națională a României"
+      "titlu": "Ziua Națională a României",
+      "sursa": "calendar"
+    },
+    {
+      "data": "2026-12-25",
+      "titlu": "Prima zi de Crăciun",
+      "sursa": "legal"
+    },
+    {
+      "data": "2026-12-26",
+      "titlu": "A doua zi de Crăciun",
+      "sursa": "legal"
+    },
+    {
+      "data": "2027-01-01",
+      "titlu": "Anul Nou",
+      "sursa": "legal"
+    },
+    {
+      "data": "2027-01-02",
+      "titlu": "A doua zi a Anului Nou",
+      "sursa": "legal"
+    },
+    {
+      "data": "2027-01-06",
+      "titlu": "Boboteaza",
+      "sursa": "legal"
+    },
+    {
+      "data": "2027-01-07",
+      "titlu": "Soborul Sfântului Ioan Botezătorul",
+      "sursa": "legal"
+    },
+    {
+      "data": "2027-01-24",
+      "titlu": "Ziua Unirii Principatelor Române",
+      "sursa": "legal"
     },
     {
       "data": "2027-04-06",
-      "titlu": "Ziua ASE — 114 ani"
+      "titlu": "Ziua ASE — 114 ani",
+      "sursa": "calendar"
+    },
+    {
+      "data": "2027-04-30",
+      "titlu": "Vinerea Mare",
+      "sursa": "legal"
     },
     {
       "data": "2027-05-01",
-      "titlu": "Ziua Internațională a Muncii"
+      "titlu": "Ziua Internațională a Muncii",
+      "sursa": "calendar"
+    },
+    {
+      "data": "2027-05-02",
+      "titlu": "Prima zi de Paște",
+      "sursa": "legal"
+    },
+    {
+      "data": "2027-05-03",
+      "titlu": "A doua zi de Paște",
+      "sursa": "legal"
     },
     {
       "data": "2027-06-01",
-      "titlu": "Ziua Internațională a Copilului"
+      "titlu": "Ziua Internațională a Copilului",
+      "sursa": "calendar"
+    },
+    {
+      "data": "2027-06-20",
+      "titlu": "Prima zi de Rusalii",
+      "sursa": "legal"
+    },
+    {
+      "data": "2027-06-21",
+      "titlu": "A doua zi de Rusalii",
+      "sursa": "legal"
+    },
+    {
+      "data": "2027-08-15",
+      "titlu": "Adormirea Maicii Domnului",
+      "sursa": "legal"
     }
   ],
   "actiuni": [

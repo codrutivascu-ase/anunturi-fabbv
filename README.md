@@ -14,6 +14,8 @@ manifest.webmanifest       metadatele PWA
 data/events.json           datele citite de aplicație (generat)
 evenimente_fabbv.xlsx      fișierul în care introduci evenimentele
 icons/                     iconițele PWA (generate)
+data/an-universitar.json   structura anului, zilele libere, termenele (generat)
+tools/make_an_universitar.py  Calendarul Studentului -> data/an-universitar.json
 tools/make_sample_xlsx.py  creează Excel-ul cu exemple
 tools/xlsx_to_json.py      Excel -> data/events.json
 tools/make_icons.py        generează iconițele
@@ -57,6 +59,36 @@ URL-ul va fi `https://<user>.github.io/anunturi-fabbv/`. Toate căile din proiec
 **iPhone (Safari, obligatoriu Safari)** — deschizi linkul, butonul *Partajare* › *Adaugă la ecranul principal* › *Adaugă*. Apoi deschizi aplicația **de pe ecranul principal** și apeși clopoțelul. Fără pasul de instalare, iOS nu permite nicio notificare. Aplicația detectează situația și afișează instrucțiunile automat.
 
 Butonul de test trimite o notificare locală cu evenimentele zilei — confirmă că permisiunea și service worker-ul funcționează, dar nu testează push-ul de la server.
+
+## Cum ajunge pe telefon ultima versiune
+
+Aplicația e un PWA cu service worker, deci telefonul poate rula luni întregi un cod
+vechi fără să bănuiești nimic. Regulile din `sw.js` sunt alese ca asta să nu se mai
+întâmple:
+
+| Ce se cere | Strategie | De ce |
+|---|---|---|
+| pagina (`index.html`) | rețea întâi, 3,5 s, apoi cache | să nu rămâi pe o interfață veche |
+| `css/`, `js/`, `data/`, manifestul | rețea întâi, 3,5 s, apoi cache | codul și datele se schimbă des |
+| iconițe, imagini | cache întâi, reîmprospătate în fundal | se schimbă rar, pornirea rămâne instant |
+
+Offline merge în continuare: dacă rețeaua tace, răspunde cache-ul, iar pentru pagini
+cade pe `index.html`.
+
+În plus, `js/app.js` cere `reg.update()` la pornire și la fiecare revenire în aplicație,
+iar când un worker nou preia controlul pagina se reîncarcă o singură dată.
+
+**Deci, după un push obișnuit nu ai nimic de făcut** — nici reinstalare, nici bump de
+versiune. GitHub Pages publică în 1–2 minute, iar următoarea deschidere a aplicației
+aduce noul cod.
+
+`VERSION` din `sw.js` rămâne doar numele cache-ului. Îl urci când vrei să **ștergi**
+ce e în cache pe telefoanele oamenilor — de exemplu după ce redenumești fișiere din
+`SHELL` sau schimbi strategiile de mai sus. Altfel îl poți lăsa în pace.
+
+Dacă totuși un telefon pare blocat pe o versiune veche: închizi complet aplicația și
+o redeschizi de două ori. Pe Android, `chrome://serviceworker-internals` arată ce
+worker rulează efectiv.
 
 ## Ce mai lipsește pentru notificările zilnice reale
 

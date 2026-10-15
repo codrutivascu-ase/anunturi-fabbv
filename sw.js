@@ -4,7 +4,7 @@
    - primește push-ul zilnic trimis de cron
    =========================================================== */
 
-const VERSION = 'fabbv-v13';
+const VERSION = 'fabbv-v14';
 const SHELL = [
   './',
   'index.html',
@@ -33,6 +33,44 @@ self.addEventListener('activate', (e) => {
   );
 });
 
+// Interfața și datele se iau din rețea, cu timeout scurt și cădere pe cache.
+// Așa aplicația arată ultima versiune publicată fără să mai urcăm VERSION
+// la fiecare modificare, dar rămâne funcțională și offline.
+const ASTEPTARE = 3500;
+
+function dinRetea(req, ms) {
+  return new Promise((rezolva, respinge) => {
+    const ceas = setTimeout(() => respinge(new Error('timeout')), ms);
+    fetch(req).then(
+      (res) => { clearTimeout(ceas); rezolva(res); },
+      (err) => { clearTimeout(ceas); respinge(err); }
+    );
+  });
+}
+
+function pastreaza(req, res) {
+  if (res && res.ok) {
+    const copie = res.clone();
+    caches.open(VERSION).then((c) => c.put(req, copie));
+  }
+  return res;
+}
+
+// rețea întâi, cache dacă rețeaua tace
+function reteaIntai(req, rezerva) {
+  return dinRetea(req, ASTEPTARE)
+    .then((res) => pastreaza(req, res))
+    .catch(() => caches.match(req).then((hit) => hit || (rezerva ? caches.match(rezerva) : undefined)));
+}
+
+// cache întâi, dar reîmprospătăm în fundal pentru data viitoare
+function cacheSiReimprospatare(req) {
+  return caches.match(req).then((hit) => {
+    const proaspat = fetch(req).then((res) => pastreaza(req, res)).catch(() => hit);
+    return hit || proaspat;
+  });
+}
+
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return;
@@ -40,26 +78,21 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
 
-  // datele: încearcă rețeaua, cade pe cache (ca să mergem offline)
-  if (url.pathname.includes('/data/')) {
-    e.respondWith(
-      fetch(req)
-        .then((res) => {
-          caches.open(VERSION).then((c) => c.put(req, res.clone()));
-          return res;
-        })
-        .catch(() => caches.match(req))
-    );
+  // paginile: mereu ultima variantă publicată
+  if (req.mode === 'navigate') {
+    e.respondWith(reteaIntai(req, 'index.html'));
     return;
   }
 
-  // shell: cache întâi
-  e.respondWith(
-    caches.match(req).then((hit) => hit || fetch(req).then((res) => {
-      if (res.ok) caches.open(VERSION).then((c) => c.put(req, res.clone()));
-      return res;
-    }).catch(() => caches.match('index.html')))
-  );
+  // interfața și datele: la fel, ca să nu rămână telefonul pe o versiune veche
+  if (url.pathname.includes('/data/') ||
+      /\.(?:css|js|webmanifest)$/.test(url.pathname)) {
+    e.respondWith(reteaIntai(req));
+    return;
+  }
+
+  // iconițe și imagini: se schimbă rar, le servim instant
+  e.respondWith(cacheSiReimprospatare(req));
 });
 
 /* ---------------- push ---------------- */
