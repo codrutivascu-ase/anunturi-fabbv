@@ -245,6 +245,15 @@ async function difuzeaza(mesaj, env) {
 const LIMITA_ANUNTURI_PE_RUNDA = 3;   // cate pot pleca intr-o singura rulare
 const PLAFON_ZILNIC = 3;              // cate notificari de anunt, cel mult, intr-o zi
 
+// Amprenta campurilor care conteaza. Daca se schimba intre doua
+// citiri, inseamna ca randul inca se scrie.
+async function amprentaAnunt(a) {
+  const text = [a.titlu, a.descriere, a.valabil_pana_la, a.valabil_de_la,
+                a.tip, a.link, a.text_buton, a.persoana_contact].join('\u0000');
+  const h = await crypto.subtle.digest('SHA-256', ute.encode(text));
+  return b64urlEncode(new Uint8Array(h)).slice(0, 16);
+}
+
 function mesajAnunt(a) {
   const termen = new Date(a.valabil_pana_la + 'T12:00:00Z');
   const zi = termen.getUTCDate();
@@ -275,11 +284,39 @@ async function anunturiNoi(env, date, azi) {
     return { initializare: active.length };
   }
 
-  const noi = [];
-  for (const a of active) {
-    if (!(await env.ABONAMENTE.get('notificat:' + a.id))) noi.push(a);
+  // Daca un anunt a disparut din Sheet inainte sa apuce sa fie trimis,
+  // nu lasam amprenta in urma.
+  const idActive = new Set(active.map((a) => a.id));
+  const urme = await env.ABONAMENTE.list({ prefix: 'vazut:' });
+  for (const u of urme.keys) {
+    if (!idActive.has(u.name.slice('vazut:'.length))) await env.ABONAMENTE.delete(u.name);
   }
-  if (!noi.length) return null;
+
+  // Un anunt pleaca abia dupa ce a fost vazut de doua ori la rand cu
+  // acelasi continut. Google Sheets salveaza la fiecare tasta, deci un
+  // rand surprins la jumatate ar genera o notificare gresita - si o
+  // notificare trimisa nu se mai poate retrage.
+  const noi = [];
+  let inAsteptare = 0;
+
+  for (const a of active) {
+    if (await env.ABONAMENTE.get('notificat:' + a.id)) continue;
+
+    const amprenta = await amprentaAnunt(a);
+    const vazut = await env.ABONAMENTE.get('vazut:' + a.id);
+
+    if (vazut === amprenta) {
+      noi.push(a);
+    } else {
+      // prima aparitie, sau s-a modificat de la ultima citire
+      await env.ABONAMENTE.put('vazut:' + a.id, amprenta, { expirationTtl: 2592000 });
+      inAsteptare++;
+    }
+  }
+
+  if (!noi.length) {
+    return inAsteptare ? { seStabilizeaza: inAsteptare } : null;
+  }
 
   // Plafon pe zi: chiar daca secretariatul publica multe, telefoanele
   // nu primesc mai mult de PLAFON_ZILNIC notificari de anunt. Ce ramane
@@ -298,6 +335,7 @@ async function anunturiNoi(env, date, azi) {
   for (const a of acum) {
     const r = await difuzeaza(mesajAnunt(a), env);
     await env.ABONAMENTE.put('notificat:' + a.id, azi);
+    await env.ABONAMENTE.delete('vazut:' + a.id);
     rezultate.push({ id: a.id, ...r });
   }
 
@@ -306,6 +344,7 @@ async function anunturiNoi(env, date, azi) {
 
   return {
     anunturiTrimise: rezultate,
+    seStabilizeaza: inAsteptare,
     amanate: noi.length - acum.length,
     trimiseAzi: trimiseAzi + acum.length,
     plafon: PLAFON_ZILNIC
@@ -367,7 +406,7 @@ async function cheiaPentru(endpoint) {
 
 /* Exporturi pentru teste. Workerul foloseste doar exportul implicit de mai jos;
    acestea permit incarcarea functiilor individual, din afara. */
-export { cripteaza, vapidHeader, compuneMesaj, mesajAnunt, ziLocala, oraLocala, b64urlDecode, b64urlEncode };
+export { cripteaza, vapidHeader, compuneMesaj, mesajAnunt, amprentaAnunt, ziLocala, oraLocala, b64urlDecode, b64urlEncode };
 
 export default {
   async fetch(req, env) {

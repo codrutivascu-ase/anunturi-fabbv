@@ -102,7 +102,9 @@ Un marcaj în KV (`ultima-trimitere`) garantează o singură rundă pe zi, chiar
 
 **Câte una per anunț nou** — la fiecare rulare, Workerul compară anunțurile active cu cele deja notificate (marcaje `notificat:<id>` în KV) și trimite pentru cele noi. Fiecare are `tag` propriu, deci nu se suprascriu pe telefon.
 
-Două protecții:
+Trei protecții:
+
+- **Un anunț pleacă abia după ce a stat neschimbat între două citiri** (deci cel puțin 15 minute). Google Sheets salvează la fiecare tastă, fără buton de save: fără verificarea asta, un rând surprins pe jumătate scris ar genera o notificare greșită — iar o notificare trimisă nu se mai poate retrage. Amprenta acoperă titlul, descrierea, termenul, tipul, linkul și persoana de contact.
 
 - **La prima rulare după publicare** se marchează toate anunțurile existente fără să se trimită nimic, altfel abonații ar primi deodată o notificare pentru fiecare anunț vechi.
 - **Maximum 3 anunțuri pe rundă și 3 pe zi.** Dacă secretariatul adaugă zece deodată, primele trei pleacă azi, restul în zilele următoare. Un anunț neanunțat încă rămâne nemarcat, deci nu se pierde.

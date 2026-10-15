@@ -12,7 +12,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
 import {
-  cripteaza, vapidHeader, compuneMesaj, mesajAnunt, b64urlDecode, b64urlEncode
+  cripteaza, vapidHeader, compuneMesaj, mesajAnunt, amprentaAnunt,
+  b64urlDecode, b64urlEncode
 } from '../src/index.js';
 
 const AICI = dirname(fileURLToPath(import.meta.url));
@@ -248,11 +249,41 @@ function testAnuntIndividual() {
 
 /* ---------------- ---------------- */
 
+async function testAmprenta() {
+  console.log('\nAmprenta de stabilitate:');
+
+  const a = {
+    id: 'an-010', titlu: 'Înscriere licență', descriere: 'Dosar complet',
+    valabil_pana_la: '2026-11-01', tip: 'inscriere', link: '', text_buton: '',
+    persoana_contact: 'Secretariat'
+  };
+
+  const h1 = await amprentaAnunt(a);
+  const h2 = await amprentaAnunt({ ...a });
+  verifica('aceleași date → aceeași amprentă', h1 === h2);
+
+  const titluSchimbat = await amprentaAnunt({ ...a, titlu: 'Înscriere licenț' });
+  verifica('titlu pe jumătate → altă amprentă', h1 !== titluSchimbat);
+
+  const descSchimbata = await amprentaAnunt({ ...a, descriere: 'Dosar compl' });
+  verifica('descriere pe jumătate → altă amprentă', h1 !== descSchimbata);
+
+  const termenSchimbat = await amprentaAnunt({ ...a, valabil_pana_la: '2026-11-02' });
+  verifica('termen schimbat → altă amprentă', h1 !== termenSchimbat);
+
+  // id-ul nu intra in amprenta: conteaza doar continutul
+  const altId = await amprentaAnunt({ ...a, id: 'an-999' });
+  verifica('id-ul nu schimbă amprenta', h1 === altId);
+
+  verifica('amprenta e scurtă și stabilă', h1.length === 16, h1);
+}
+
 console.log('Teste pentru motorul de notificări');
 await testCriptare();
 await testVapid();
 testMesaj();
 testAnuntIndividual();
+await testAmprenta();
 
 console.log(`\n${trecute} trecute, ${picate} picate`);
 process.exit(picate ? 1 : 0);
