@@ -1016,24 +1016,42 @@ main {
   letter-spacing: .14em;
   color: var(--text-muted);
 }
+/* pe telefon data stă deasupra titlului, ca totul să pornească din aceeași
+   margine; de la 480px încolo trec pe două coloane, cu data pe lățime fixă */
 .zi-libera {
-  display: flex;
-  gap: 12px;
-  padding: 8px 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  padding: 9px 0;
   font-size: 13px;
-  align-items: baseline;
 }
+.zi-libera + .zi-libera { border-top: 1px solid var(--border); }
+
+.zi-data {
+  font-size: 11.5px;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
 .zi-corp {
   display: flex;
   flex-direction: column;
   gap: 1px;
   min-width: 0;
 }
+
+.zi-titlu {
+  font-weight: 500;
+  color: var(--text-head);
+  line-height: 1.35;
+}
+
 .zi-nota {
   font-size: 11.5px;
   font-style: italic;
   color: var(--text-faint);
 }
+
 .zi-sursa {
   margin: 12px 0 0;
   padding-top: 10px;
@@ -1042,17 +1060,14 @@ main {
   line-height: 1.5;
   color: var(--text-faint);
 }
-.zi-libera + .zi-libera { border-top: 1px solid var(--border); }
-.zi-data {
-  flex: 0 0 auto;
-  color: var(--text-faint);
-  font-variant-numeric: tabular-nums;
-  min-width: 42%;
-}
-.zi-titlu { font-weight: 500; color: var(--text-head); }
 
-@media (min-width: 640px) {
-  .zi-data { min-width: 34%; }
+@media (min-width: 480px) {
+  .zi-libera {
+    grid-template-columns: 11.5rem 1fr;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .zi-data { font-size: 12.5px; }
 }
 
 .an-sursa {
