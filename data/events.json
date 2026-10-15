@@ -1,6 +1,6 @@
 {
-  "actualizat_la": "15.10.2026, 17:55",
-  "sursa": "evenimente_fabbv.xlsx",
+  "actualizat_la": "15.10.2026, 18:42",
+  "sursa": "Google Sheets",
   "evenimente": [
     {
       "id": "ev-001",
@@ -69,19 +69,6 @@
     },
     {
       "id": "ev-006",
-      "data": "2026-10-16",
-      "ora_start": "18:00",
-      "ora_final": "20:00",
-      "titlu": "Clubul de Investiții FABBV — ședința săptămânală",
-      "descriere": "Analiza portofoliului simulat al clubului și prezentarea a două idei de investiții de către membri. Intrarea liberă.",
-      "locatie": "Sala 2102",
-      "organizator": "Clubul de Investiții FABBV",
-      "categorie": "anunt",
-      "link": "",
-      "important": ""
-    },
-    {
-      "id": "ev-007",
       "data": "2026-10-17",
       "ora_start": "09:00",
       "ora_final": "17:00",
@@ -94,7 +81,7 @@
       "important": "da"
     },
     {
-      "id": "ev-008",
+      "id": "ev-007",
       "data": "2026-10-18",
       "ora_start": "14:00",
       "ora_final": "16:00",
@@ -107,20 +94,7 @@
       "important": ""
     },
     {
-      "id": "ev-009",
-      "data": "2026-10-18",
-      "ora_start": "17:00",
-      "ora_final": "18:30",
-      "titlu": "Prezentare program de masterat: Finanțe Corporative",
-      "descriere": "Pentru studenții de anul III: structura programului, criteriile de admitere, oportunități de carieră.",
-      "locatie": "Sala 2104",
-      "organizator": "Departamentul de Finanțe",
-      "categorie": "anunt",
-      "link": "",
-      "important": ""
-    },
-    {
-      "id": "ev-010",
+      "id": "ev-008",
       "data": "2026-10-19",
       "ora_start": "10:00",
       "ora_final": "12:00",
@@ -133,7 +107,7 @@
       "important": ""
     },
     {
-      "id": "ev-011",
+      "id": "ev-009",
       "data": "2026-10-21",
       "ora_start": "11:00",
       "ora_final": "13:00",
@@ -146,7 +120,7 @@
       "important": ""
     },
     {
-      "id": "ev-012",
+      "id": "ev-010",
       "data": "2026-10-22",
       "ora_start": "15:00",
       "ora_final": "17:00",
@@ -159,7 +133,7 @@
       "important": ""
     },
     {
-      "id": "ev-013",
+      "id": "ev-011",
       "data": "2026-10-23",
       "ora_start": "",
       "ora_final": "",
@@ -172,7 +146,7 @@
       "important": ""
     },
     {
-      "id": "ev-014",
+      "id": "ev-012",
       "data": "2026-10-24",
       "ora_start": "09:00",
       "ora_final": "11:00",
@@ -185,7 +159,7 @@
       "important": "da"
     },
     {
-      "id": "ev-015",
+      "id": "ev-013",
       "data": "2026-10-25",
       "ora_start": "13:00",
       "ora_final": "15:00",
@@ -198,7 +172,7 @@
       "important": ""
     },
     {
-      "id": "ev-016",
+      "id": "ev-014",
       "data": "2026-10-26",
       "ora_start": "16:00",
       "ora_final": "19:00",
@@ -211,7 +185,7 @@
       "important": ""
     },
     {
-      "id": "ev-017",
+      "id": "ev-015",
       "data": "2026-10-28",
       "ora_start": "10:00",
       "ora_final": "14:00",
@@ -224,7 +198,7 @@
       "important": "da"
     },
     {
-      "id": "ev-018",
+      "id": "ev-016",
       "data": "2026-10-30",
       "ora_start": "12:00",
       "ora_final": "13:30",
@@ -237,20 +211,7 @@
       "important": ""
     },
     {
-      "id": "ev-019",
-      "data": "2026-11-02",
-      "ora_start": "",
-      "ora_final": "",
-      "titlu": "Anunț: program special al secretariatului",
-      "descriere": "În perioada sesiunii, secretariatul are program cu publicul doar între 10:00 și 13:00.",
-      "locatie": "Secretariat FABBV, etaj 2",
-      "organizator": "Secretariatul FABBV",
-      "categorie": "anunt",
-      "link": "",
-      "important": ""
-    },
-    {
-      "id": "ev-020",
+      "id": "ev-017",
       "data": "2026-11-05",
       "ora_start": "09:00",
       "ora_final": "18:00",
