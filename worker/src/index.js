@@ -277,6 +277,10 @@ async function cheiaPentru(endpoint) {
   return 'sub:' + b64urlEncode(new Uint8Array(h)).slice(0, 32);
 }
 
+/* Exporturi pentru teste. Workerul foloseste doar exportul implicit de mai jos;
+   acestea permit incarcarea functiilor individual, din afara. */
+export { cripteaza, vapidHeader, compuneMesaj, ziLocala, oraLocala, b64urlDecode, b64urlEncode };
+
 export default {
   async fetch(req, env) {
     const url = new URL(req.url);
