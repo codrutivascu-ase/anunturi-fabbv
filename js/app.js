@@ -63,13 +63,6 @@
     return d.toISOString().slice(0, 10);
   };
 
-  // luni = început de săptămână
-  function weekBounds(key) {
-    const d = new Date(key + 'T12:00:00Z');
-    const dow = (d.getUTCDay() + 6) % 7; // 0 = luni
-    return { start: addDays(key, -dow), end: addDays(key, 6 - dow) };
-  }
-
   const DOW = ['duminică', 'luni', 'marți', 'miercuri', 'joi', 'vineri', 'sâmbătă'];
   const MON = ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie',
                'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'];
@@ -183,10 +176,6 @@
   function inRange(ev, range) {
     const t = todayKey();
     if (range === 'azi') return ev.data === t;
-    if (range === 'saptamana') {
-      const { start, end } = weekBounds(t);
-      return ev.data >= start && ev.data <= end;
-    }
     return ev.data >= t; // "toate" = de azi înainte
   }
 
@@ -207,13 +196,14 @@
     const t = todayKey();
     const counts = {
       azi: state.events.filter((e) => e.data === t).length,
-      saptamana: state.events.filter((e) => inRange(e, 'saptamana')).length,
       toate: state.events.filter((e) => e.data >= t).length
     };
     counts.anunturi = state.anunturi.filter(anuntActiv).length;
 
     document.querySelectorAll('[data-count]').forEach((n) => {
-      n.textContent = counts[n.dataset.count];
+      const v = counts[n.dataset.count] || 0;
+      n.textContent = v > 99 ? '99+' : v;
+      n.hidden = v === 0;
     });
 
     $('#today-date').textContent = fmtLong(t);
@@ -341,8 +331,8 @@
       const why = state.q || state.cats.size
         ? 'Niciun eveniment nu corespunde filtrelor. Încearcă să le resetezi.'
         : state.range === 'azi'
-          ? 'Nu e programat nimic astăzi. Verifică „Săptămâna asta”.'
-          : 'Nu există evenimente în acest interval.';
+          ? 'Nu e programat nimic astăzi. Vezi „Toate” pentru zilele următoare.'
+          : 'Nu există evenimente viitoare.';
       e.innerHTML = `${icon('i-inbox')}<h3>Niciun eveniment</h3><p>${esc(why)}</p>`;
       main.appendChild(e);
       return;
@@ -622,14 +612,15 @@
   /* ---------- evenimente UI ---------- */
 
   function wireUI() {
-    document.querySelectorAll('.tab').forEach((tab) => {
+    document.querySelectorAll('.nav-item').forEach((tab) => {
       tab.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach((t) =>
+        document.querySelectorAll('.nav-item').forEach((t) =>
           t.setAttribute('aria-selected', String(t === tab)));
         state.range = tab.dataset.range;
         // categoriile sunt ale evenimentelor, nu ale anunțurilor
         document.querySelector('.cat-bar').hidden = (state.range === 'anunturi');
         renderList();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     });
 

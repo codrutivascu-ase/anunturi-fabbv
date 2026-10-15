@@ -61,6 +61,12 @@
     <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/>
     </symbol>
+    <symbol id="i-lista" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/>
+    </symbol>
+    <symbol id="i-azi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 11h18"/><circle cx="12" cy="16" r="2" fill="currentColor" stroke="none"/>
+    </symbol>
     <symbol id="i-megafon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="m3 11 15-6v14l-15-6z"/><path d="M3 11v2a2 2 0 0 0 2 2h1"/><path d="M7 15v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3"/><path d="M21 9v4"/>
     </symbol>
@@ -102,12 +108,6 @@
       <input type="search" id="search" placeholder="Caută eveniment, sală, profesor…" autocomplete="off" enterkeyhint="search">
     </div>
 
-    <div class="tabs" role="tablist" aria-label="Interval">
-      <button class="tab" role="tab" data-range="azi" aria-selected="true">Azi <span class="tab-badge" data-count="azi">0</span></button>
-      <button class="tab" role="tab" data-range="saptamana" aria-selected="false">Săptămâna asta <span class="tab-badge" data-count="saptamana">0</span></button>
-      <button class="tab" role="tab" data-range="toate" aria-selected="false">Toate <span class="tab-badge" data-count="toate">0</span></button>
-      <button class="tab" role="tab" data-range="anunturi" aria-selected="false">Anunțuri <span class="tab-badge" data-count="anunturi">0</span></button>
-    </div>
   </div>
 </header>
 
@@ -147,6 +147,30 @@
   <h2 id="notify-title">Notificări zilnice</h2>
   <div id="notify-content"></div>
 </section>
+
+<nav class="bottom-nav" role="tablist" aria-label="Secțiuni">
+  <button class="nav-item" role="tab" data-range="azi" aria-selected="true">
+    <span class="nav-icon">
+      <svg aria-hidden="true"><use href="#i-azi"/></svg>
+      <span class="nav-badge" data-count="azi" hidden>0</span>
+    </span>
+    <span class="nav-label">Azi</span>
+  </button>
+  <button class="nav-item" role="tab" data-range="toate" aria-selected="false">
+    <span class="nav-icon">
+      <svg aria-hidden="true"><use href="#i-lista"/></svg>
+      <span class="nav-badge" data-count="toate" hidden>0</span>
+    </span>
+    <span class="nav-label">Toate</span>
+  </button>
+  <button class="nav-item" role="tab" data-range="anunturi" aria-selected="false">
+    <span class="nav-icon">
+      <svg aria-hidden="true"><use href="#i-megafon"/></svg>
+      <span class="nav-badge" data-count="anunturi" hidden>0</span>
+    </span>
+    <span class="nav-label">Anunțuri</span>
+  </button>
+</nav>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
