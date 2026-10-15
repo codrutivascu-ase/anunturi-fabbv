@@ -4,13 +4,15 @@
 
      POST /subscribe     salvează abonamentul unui telefon
      POST /unsubscribe   îl șterge
-     cron (din oră în oră)  trimite rezumatul zilei la 7:30, ora României
+     cron (la 15 minute):
+       - trimite o notificare pentru fiecare anunț nou publicat
+       - la 9:00, ora României, trimite rezumatul zilei
 
    Nu folosește nicio bibliotecă externă: semnarea VAPID și criptarea
    mesajului (RFC 8291) sunt făcute cu WebCrypto, disponibil nativ.
    =========================================================== */
 
-const ORA_TRIMITERII = 7;              // 7:xx, ora Bucureștiului
+const ORA_TRIMITERII = 9;              // 9:xx, ora Bucureștiului
 const TZ = 'Europe/Bucharest';
 const TTL = 86400;                     // cât timp încearcă serverul de push să livreze
 
@@ -173,13 +175,11 @@ function adunaZile(key, n) {
 function compuneMesaj(date, azi) {
   const evenimente = (date.evenimente || []).filter((e) => e.data === azi);
 
-  // un anunț intră în notificare a doua zi după ce a fost scris
-  // și din nou în ziua termenului
+  // Anunțurile proaspete își primesc propria notificare la publicare,
+  // deci în rezumat intră doar cele care expiră azi — ca memento final.
   const anunturi = (date.anunturi || []).filter((a) => {
     if (a.valabil_de_la && azi < a.valabil_de_la) return false;
-    if (azi > a.valabil_pana_la) return false;
-    if (azi === a.valabil_pana_la) return true;
-    return a.adaugat_la && azi === adunaZile(a.adaugat_la, 1);
+    return azi === a.valabil_pana_la;
   });
 
   if (!evenimente.length && !anunturi.length) return null;   // zi liberă: nu trimitem nimic
@@ -191,7 +191,7 @@ function compuneMesaj(date, azi) {
   if (evenimente.length > 4) linii.push(`…și încă ${evenimente.length - 4}`);
 
   for (const a of anunturi.slice(0, 2)) {
-    linii.push((azi === a.valabil_pana_la ? '⏳ Ultima zi: ' : '📣 ') + a.titlu);
+    linii.push('⏳ Ultima zi: ' + a.titlu);
   }
 
   const n = evenimente.length;
@@ -203,26 +203,10 @@ function compuneMesaj(date, azi) {
 }
 
 /* ------------------------------------------------------------------ */
-/* cron: rulează din oră în oră, trimite o singură dată pe zi          */
+/* difuzare către toate abonamentele                                   */
 /* ------------------------------------------------------------------ */
 
-async function rundaZilnica(env, fortat = false) {
-  const azi = ziLocala();
-
-  if (!fortat) {
-    if (oraLocala() !== ORA_TRIMITERII) return { sarit: 'nu e ora' };
-    if (await env.ABONAMENTE.get('ultima-trimitere') === azi) return { sarit: 'deja trimis azi' };
-  }
-
-  const res = await fetch(env.EVENTS_URL, { cf: { cacheTtl: 0 } });
-  if (!res.ok) return { eroare: 'nu pot citi events.json: ' + res.status };
-
-  const mesaj = compuneMesaj(await res.json(), azi);
-  if (!mesaj) {
-    if (!fortat) await env.ABONAMENTE.put('ultima-trimitere', azi);
-    return { sarit: 'nimic de anunțat azi' };
-  }
-
+async function difuzeaza(mesaj, env) {
   let trimise = 0, sterse = 0, esuate = 0;
   let cursor;
 
@@ -251,8 +235,94 @@ async function rundaZilnica(env, fortat = false) {
     }
   } while (cursor);
 
+  return { trimise, sterse, esuate };
+}
+
+/* ------------------------------------------------------------------ */
+/* anunțuri noi: o notificare pentru fiecare, la publicare             */
+/* ------------------------------------------------------------------ */
+
+const LIMITA_ANUNTURI_PE_RUNDA = 3;
+
+function mesajAnunt(a) {
+  const termen = new Date(a.valabil_pana_la + 'T12:00:00Z');
+  const zi = termen.getUTCDate();
+  const luni = ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie',
+                'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'];
+
+  return {
+    title: 'FABBV · anunț nou',
+    body: a.titlu + `\nTermen: ${zi} ${luni[termen.getUTCMonth()]}`,
+    tag: 'fabbv-anunt-' + a.id,
+    url: './?an=' + encodeURIComponent(a.id)
+  };
+}
+
+async function anunturiNoi(env, date, azi) {
+  const active = (date.anunturi || []).filter((a) => {
+    if (a.valabil_de_la && azi < a.valabil_de_la) return false;
+    return azi <= a.valabil_pana_la;
+  });
+
+  // La prima rulare după publicarea Workerului marcăm tot ce există
+  // deja, fără să trimitem nimic. Altfel abonații ar primi deodată
+  // o notificare pentru fiecare anunț vechi.
+  const initializat = await env.ABONAMENTE.get('anunturi-initializate');
+  if (!initializat) {
+    for (const a of active) await env.ABONAMENTE.put('notificat:' + a.id, azi);
+    await env.ABONAMENTE.put('anunturi-initializate', new Date().toISOString());
+    return { initializare: active.length };
+  }
+
+  const noi = [];
+  for (const a of active) {
+    if (!(await env.ABONAMENTE.get('notificat:' + a.id))) noi.push(a);
+  }
+  if (!noi.length) return null;
+
+  // Dacă secretariatul adaugă multe deodată, nu bombardăm telefoanele:
+  // restul pleacă la rundele următoare.
+  const acum = noi.slice(0, LIMITA_ANUNTURI_PE_RUNDA);
+  const rezultate = [];
+
+  for (const a of acum) {
+    const r = await difuzeaza(mesajAnunt(a), env);
+    await env.ABONAMENTE.put('notificat:' + a.id, azi);
+    rezultate.push({ id: a.id, ...r });
+  }
+
+  return { anunturiTrimise: rezultate, inAsteptare: noi.length - acum.length };
+}
+
+/* ------------------------------------------------------------------ */
+/* cron: rulează la 15 minute; rezumatul pleacă o singură dată pe zi   */
+/* ------------------------------------------------------------------ */
+
+async function citesteDate(env) {
+  const res = await fetch(env.EVENTS_URL, { cf: { cacheTtl: 0 } });
+  return res.ok ? res.json() : null;
+}
+
+async function rundaZilnica(env, fortat = false) {
+  const azi = ziLocala();
+
+  if (!fortat) {
+    if (oraLocala() !== ORA_TRIMITERII) return { sarit: 'nu e ora' };
+    if (await env.ABONAMENTE.get('ultima-trimitere') === azi) return { sarit: 'deja trimis azi' };
+  }
+
+  const date = await citesteDate(env);
+  if (!date) return { eroare: 'nu pot citi events.json' };
+
+  const mesaj = compuneMesaj(date, azi);
+  if (!mesaj) {
+    if (!fortat) await env.ABONAMENTE.put('ultima-trimitere', azi);
+    return { sarit: 'nimic de anunțat azi' };
+  }
+
+  const r = await difuzeaza(mesaj, env);
   if (!fortat) await env.ABONAMENTE.put('ultima-trimitere', azi);
-  return { trimise, sterse, esuate, titlu: mesaj.title };
+  return { ...r, titlu: mesaj.title };
 }
 
 /* ------------------------------------------------------------------ */
@@ -279,7 +349,7 @@ async function cheiaPentru(endpoint) {
 
 /* Exporturi pentru teste. Workerul foloseste doar exportul implicit de mai jos;
    acestea permit incarcarea functiilor individual, din afara. */
-export { cripteaza, vapidHeader, compuneMesaj, ziLocala, oraLocala, b64urlDecode, b64urlEncode };
+export { cripteaza, vapidHeader, compuneMesaj, mesajAnunt, ziLocala, oraLocala, b64urlDecode, b64urlEncode };
 
 export default {
   async fetch(req, env) {
@@ -311,10 +381,19 @@ export default {
       return json(await rundaZilnica(env, true), env);
     }
 
+    // verifica acum daca exista anunturi nenotificate
+    if (url.pathname === '/anunturi-noi' && url.searchParams.get('cheie') === env.CHEIE_TEST) {
+      const date = await citesteDate(env);
+      if (!date) return json({ eroare: 'nu pot citi events.json' }, env, 500);
+      return json(await anunturiNoi(env, date, ziLocala()) || { noi: 0 }, env);
+    }
+
     if (url.pathname === '/stare') {
       const lot = await env.ABONAMENTE.list({ prefix: 'sub:' });
+      const notif = await env.ABONAMENTE.list({ prefix: 'notificat:' });
       return json({
         abonamente: lot.keys.length + (lot.list_complete ? 0 : '+'),
+        anunturiNotificate: notif.keys.length,
         ultimaTrimitere: await env.ABONAMENTE.get('ultima-trimitere'),
         oraBucuresti: oraLocala(),
         ziua: ziLocala()
@@ -327,6 +406,16 @@ export default {
   },
 
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(rundaZilnica(env).then((r) => console.log('runda zilnică:', JSON.stringify(r))));
+    ctx.waitUntil((async () => {
+      const azi = ziLocala();
+      const date = await citesteDate(env);
+
+      if (date) {
+        const noi = await anunturiNoi(env, date, azi);
+        if (noi) console.log('anunțuri:', JSON.stringify(noi));
+      }
+
+      console.log('rezumat:', JSON.stringify(await rundaZilnica(env)));
+    })());
   }
 };

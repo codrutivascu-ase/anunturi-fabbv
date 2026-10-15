@@ -12,7 +12,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
 import {
-  cripteaza, vapidHeader, compuneMesaj, b64urlDecode, b64urlEncode
+  cripteaza, vapidHeader, compuneMesaj, mesajAnunt, b64urlDecode, b64urlEncode
 } from '../src/index.js';
 
 const AICI = dirname(fileURLToPath(import.meta.url));
@@ -197,21 +197,53 @@ function testMesaj() {
   verifica('anunț în ziua termenului → mesaj', term !== null);
   verifica('e marcat „Ultima zi”', term && term.body.includes('Ultima zi'), term && term.body);
 
-  // anunț scris ieri
+  // Anunțurile proaspete NU mai intră în rezumat: primesc propria
+  // notificare la publicare. În rezumat apar doar cele care expiră azi.
   const ieri = new Date(azi + 'T12:00:00Z');
   ieri.setUTCDate(ieri.getUTCDate() - 1);
-  const nou = compuneMesaj({
+  const proaspat = compuneMesaj({
     evenimente: [],
     anunturi: [{ titlu: 'Licență', valabil_pana_la: '2099-01-01', adaugat_la: ieri.toISOString().slice(0, 10) }]
   }, azi);
-  verifica('anunț scris ieri → apare', nou !== null);
+  verifica('anunț proaspăt → NU intră în rezumat', proaspat === null);
 
-  // anunț scris acum o săptămână, termen departe: nu apare
   const vechi = compuneMesaj({
     evenimente: [],
     anunturi: [{ titlu: 'Vechi', valabil_pana_la: '2099-01-01', adaugat_la: '2020-01-01' }]
   }, azi);
   verifica('anunț vechi, termen departe → nu apare', vechi === null);
+
+  // anunț care nu a început încă
+  const viitor = compuneMesaj({
+    evenimente: [],
+    anunturi: [{ titlu: 'Viitor', valabil_de_la: '2099-01-01', valabil_pana_la: '2099-02-01' }]
+  }, azi);
+  verifica('anunț care nu a început → nu apare', viitor === null);
+}
+
+/* ---------------- 4. notificarea individuală de anunț ---------------- */
+
+function testAnuntIndividual() {
+  console.log('\nNotificarea de anunț nou:');
+
+  const m = mesajAnunt({
+    id: 'an-002',
+    titlu: 'Înscrie-te la examenul de licență',
+    valabil_pana_la: '2026-10-21'
+  });
+
+  verifica('titlul spune că e anunț', m.title.includes('anunț'), m.title);
+  verifica('corpul conține titlul anunțului', m.body.includes('Înscrie-te'));
+  verifica('corpul conține termenul în cuvinte', m.body.includes('21 octombrie'), m.body);
+  verifica('tag unic per anunț', m.tag === 'fabbv-anunt-an-002', m.tag);
+  verifica('linkul deschide anunțul', m.url.includes('an-002'), m.url);
+
+  // două anunțuri diferite nu trebuie să se suprascrie pe telefon
+  const m2 = mesajAnunt({ id: 'an-003', titlu: 'Altul', valabil_pana_la: '2026-11-01' });
+  verifica('tag-urile diferă între anunțuri', m.tag !== m2.tag);
+
+  console.log('     titlu: ' + m.title);
+  for (const l of m.body.split('\n')) console.log('     ' + l);
 }
 
 /* ---------------- ---------------- */
@@ -220,6 +252,7 @@ console.log('Teste pentru motorul de notificări');
 await testCriptare();
 await testVapid();
 testMesaj();
+testAnuntIndividual();
 
 console.log(`\n${trecute} trecute, ${picate} picate`);
 process.exit(picate ? 1 : 0);

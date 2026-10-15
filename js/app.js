@@ -43,6 +43,7 @@
   const state = {
     events: [],
     anunturi: [],
+    abonat: false,
     range: 'azi',
     cats: new Set(),
     q: '',
@@ -512,7 +513,7 @@
         </div>`;
     } else if (Notification.permission === 'granted') {
       box.innerHTML = `
-        <p>Notificările sunt <strong>active</strong>. Vei primi un rezumat în fiecare dimineață la 7:30, în zilele cu evenimente.</p>
+        <p>Notificările sunt <strong>active</strong>: rezumatul zilei la 9:00 și câte o notificare la fiecare anunț nou.</p>
         <div class="modal-actions">
           <button class="btn btn-primary" id="notify-test">Trimite o notificare de test</button>
           <button class="btn btn-ghost" id="notify-ok">Închide</button>
@@ -526,7 +527,7 @@
         </div>`;
     } else {
       box.innerHTML = `
-        <p>Primești o singură notificare pe zi, dimineața, cu evenimentele FABBV din ziua respectivă. Zero notificări în zilele libere.</p>
+        <p>Dimineața la ora 9:00 primești un rezumat cu ce se întâmplă azi la FABBV, plus o notificare separată când apare un anunț nou. În zilele fără nimic, nu primești nimic.</p>
         <div class="modal-actions">
           <button class="btn btn-primary" id="notify-enable">Activează notificările</button>
           <button class="btn btn-ghost" id="notify-ok">Mai târziu</button>
@@ -593,13 +594,49 @@
     }
   }
 
+  // Oprirea notificarilor. Permisiunea data browserului nu poate fi
+  // retrasa din cod, dar abonamentul poate fi anulat - iar fara el
+  // serverul nu mai are unde trimite.
+  async function unsubscribeFromPush() {
+    try {
+      const reg = await navigator.serviceWorker.ready;
+      const sub = await reg.pushManager.getSubscription();
+      if (!sub) return true;
+
+      if (PUSH_API) {
+        // anuntam serverul inainte sa pierdem endpointul
+        await fetch(PUSH_API + '/unsubscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ endpoint: sub.endpoint })
+        }).catch(() => {});
+      }
+      await sub.unsubscribe();
+      return true;
+    } catch (e) {
+      console.warn('dezabonarea a esuat:', e);
+      return false;
+    }
+  }
+
+  async function esteAbonat() {
+    if (!('serviceWorker' in navigator) || !('PushManager' in window)) return false;
+    if (!('Notification' in window) || Notification.permission !== 'granted') return false;
+    try {
+      const reg = await navigator.serviceWorker.ready;
+      return !!(await reg.pushManager.getSubscription());
+    } catch (_) {
+      return false;
+    }
+  }
+
   async function requestPermission() {
     try {
       const p = await Notification.requestPermission();
       if (p === 'granted') {
         closeNotifyModal();
-        syncBellState();
         const abonat = await subscribeToPush();
+        await syncBellState();
         toast(abonat ? 'Notificări activate' : 'Notificări permise');
         testNotification();
       } else {
@@ -642,11 +679,41 @@
     }
   }
 
-  function syncBellState() {
+  async function syncBellState() {
     const btn = $('#btn-notify');
-    const on = 'Notification' in window && Notification.permission === 'granted';
-    btn.classList.toggle('is-on', on);
-    btn.setAttribute('aria-label', on ? 'Notificări active' : 'Activează notificările zilnice');
+    state.abonat = await esteAbonat();
+    btn.classList.toggle('is-on', state.abonat);
+    btn.setAttribute('aria-pressed', String(state.abonat));
+    btn.setAttribute('aria-label', state.abonat
+      ? 'Notificări active — apasă pentru a le opri'
+      : 'Activează notificările zilnice');
+  }
+
+  // Clopotelul comuta direct cand nu e nimic de explicat. Deschide
+  // fereastra doar cand utilizatorul trebuie sa afle ceva: pe iPhone
+  // neinstalat, la prima cerere de permisiune, sau dupa un refuz.
+  async function onBellClick() {
+    const btn = $('#btn-notify');
+
+    if (isIOS() && !isStandalone()) { openNotifyModal(); return; }
+    if (!('Notification' in window) || !('PushManager' in window)) { openNotifyModal(); return; }
+    if (Notification.permission === 'default') { openNotifyModal(); return; }
+    if (Notification.permission === 'denied') { openNotifyModal(); return; }
+
+    btn.disabled = true;
+    try {
+      if (state.abonat) {
+        const ok = await unsubscribeFromPush();
+        await syncBellState();
+        toast(ok ? 'Notificări oprite' : 'Nu am putut opri notificările');
+      } else {
+        const ok = await subscribeToPush();
+        await syncBellState();
+        toast(ok ? 'Notificări pornite' : 'Nu am putut porni notificările');
+      }
+    } finally {
+      btn.disabled = false;
+    }
   }
 
   /* ---------- toast ---------- */
@@ -684,7 +751,7 @@
       }, 160);
     });
 
-    $('#btn-notify').addEventListener('click', openNotifyModal);
+    $('#btn-notify').addEventListener('click', onBellClick);
 
     $('#btn-refresh').addEventListener('click', async () => {
       toast('Se actualizează…');
@@ -702,6 +769,30 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') { closeSheet(); closeNotifyModal(); }
     });
+  }
+
+  /* ---------- întrebarea de la prima pornire ---------- */
+
+  const CHEIE_INTREBAT = 'fabbv-intrebat-notificari';
+
+  function amIntrebatDeja() {
+    try { return localStorage.getItem(CHEIE_INTREBAT) === 'da'; }
+    catch (_) { return false; }
+  }
+
+  function marcheazaIntrebat() {
+    try { localStorage.setItem(CHEIE_INTREBAT, 'da'); } catch (_) {}
+  }
+
+  // Intrebam o singura data, la prima deschidere din aplicatia instalata.
+  // Nu intrebam in tab de browser: pe iPhone abonarea nici nu e posibila
+  // acolo, iar un refuz reflex ar fi definitiv.
+  function poateIntrebaAcum() {
+    return isStandalone()
+      && 'Notification' in window
+      && 'PushManager' in window
+      && Notification.permission === 'default'
+      && !amIntrebatDeja();
   }
 
   /* ---------- pornire ---------- */
@@ -732,8 +823,14 @@
         await navigator.serviceWorker.register('sw.js');
         // daca permisiunea e deja data, ne reasiguram ca Workerul
         // are un abonament valid pentru telefonul asta
-        subscribeToPush({ tacut: true });
+        subscribeToPush({ tacut: true }).then(syncBellState);
       } catch (e) { console.warn('SW nu s-a înregistrat:', e); }
+    }
+
+    if (poateIntrebaAcum()) {
+      marcheazaIntrebat();
+      // lasam interfata sa se aseze inainte de a cere ceva
+      setTimeout(openNotifyModal, 1100);
     }
 
     // reîncarcă lista când revii în aplicație (poate s-a schimbat ziua)

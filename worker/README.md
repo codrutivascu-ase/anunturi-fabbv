@@ -1,6 +1,6 @@
 # Motorul de notificări
 
-Un singur Cloudflare Worker care face tot: păstrează abonamentele, și trimite rezumatul zilnic la 7:30.
+Un singur Cloudflare Worker care face tot: păstrează abonamentele, și trimite rezumatul zilnic la 9:00.
 
 Nu folosește nicio bibliotecă externă. Semnarea VAPID și criptarea mesajului (RFC 8291) sunt scrise direct peste WebCrypto. Pașii de criptare au fost verificați împotriva vectorului de test oficial din RFC 8291 — toate cele 7 valori intermediare coincid.
 
@@ -77,7 +77,7 @@ curl https://anunturi-fabbv-push.<contul-tău>.workers.dev/stare
 
 **Te abonezi:** deschizi aplicația pe telefon, apeși clopoțelul, accepți. Apoi `/stare` ar trebui să arate `abonamente: 1`.
 
-**Forțezi o trimitere, fără să aștepți dimineața:**
+**Forțezi rezumatul, fără să aștepți dimineața:**
 ```bash
 curl "https://anunturi-fabbv-push.<contul-tău>.workers.dev/trimite-acum?cheie=PAROLA_TA"
 ```
@@ -90,21 +90,32 @@ npx wrangler tail
 
 ## Cum funcționează trimiterea
 
-Cron-ul rulează **din oră în oră**, nu o dată pe zi. Motivul: Cloudflare programează în UTC, iar 7:30 la București cade la 4:30 UTC vara și 5:30 UTC iarna. Workerul verifică singur ora locală și iese imediat dacă nu e 7:xx.
+Cron-ul rulează **la 15 minute**, nu o dată pe zi. Motivul: Cloudflare programează în UTC, iar 9:00 la București cade la 6:00 UTC vara și 7:00 UTC iarna. Workerul verifică singur ora locală și iese imediat dacă nu e 9:xx.
 
 Un marcaj în KV (`ultima-trimitere`) garantează o singură rundă pe zi, chiar dacă cron-ul se declanșează de mai multe ori.
 
 **În zilele fără evenimente și fără anunțuri, nu se trimite nimic.** O notificare goală e cel mai rapid mod de a face oamenii să dezactiveze notificările.
 
-## Ce intră în notificare
+## Două feluri de notificări
 
-- primele 4 evenimente ale zilei, cu ora
-- anunțurile care se califică: a doua zi după ce au fost scrise (`📣`) și în ziua termenului (`⏳ Ultima zi`)
+**Rezumatul zilnic, la 9:00** — primele 4 evenimente ale zilei, plus anunțurile care expiră chiar azi (`⏳ Ultima zi`). Dacă nu e nimic, nu pleacă nimic.
 
-Logica e aceeași cu cea din aplicație, dar scrisă separat în Worker — dacă o schimbi într-un loc, schimb-o și în celălalt.
+**Câte una per anunț nou** — la fiecare rulare, Workerul compară anunțurile active cu cele deja notificate (marcaje `notificat:<id>` în KV) și trimite pentru cele noi. Fiecare are `tag` propriu, deci nu se suprascriu pe telefon.
+
+Două protecții:
+
+- **La prima rulare după publicare** se marchează toate anunțurile existente fără să se trimită nimic, altfel abonații ar primi deodată o notificare pentru fiecare anunț vechi.
+- **Maximum 3 anunțuri pe rundă.** Dacă secretariatul adaugă zece deodată, restul pleacă la rundele următoare, din 15 în 15 minute.
+
+Anunțurile proaspete nu mai intră în rezumatul zilnic: și-au primit deja notificarea la publicare.
 
 ## Întreținere
 
 Abonamentele moarte se șterg singure: când serverul de push răspunde 404 sau 410 (telefon dezinstalat, permisiune revocată), Workerul șterge rândul în aceeași rundă.
 
 Nivelul gratuit acoperă 100.000 de cereri pe zi. O facultate cu 2.000 de abonați consumă ~2.000 pe zi.
+
+**Verifici dacă există anunțuri nenotificate:**
+```bash
+curl "https://anunturi-fabbv-push.fabbv-ase.workers.dev/anunturi-noi?cheie=PAROLA_TA"
+```

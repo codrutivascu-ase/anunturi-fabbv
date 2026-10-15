@@ -2,11 +2,12 @@ name = "anunturi-fabbv-push"
 main = "src/index.js"
 compatibility_date = "2026-09-01"
 
-# Rulează din oră în oră. Workerul verifică singur dacă e 7:xx la București
-# și dacă nu a trimis deja azi — altfel iese imediat.
-# Rulăm orar pentru că ora de vară mută 7:30 local între 4:30 și 5:30 UTC.
+# Rulează la 15 minute: destul de des ca un anunț nou să fie notificat
+# prompt, iar rezumatul zilnic se auto-limitează la o trimitere pe zi.
+# Nu putem programa direct 9:00 local: Cloudflare lucrează în UTC, iar
+# ora de vară mută 9:00 de la București între 6:00 și 7:00 UTC.
 [triggers]
-crons = ["11 * * * *"]
+crons = ["*/15 * * * *"]
 
 [vars]
 EVENTS_URL = "https://codrutivascu-ase.github.io/anunturi-fabbv/data/events.json"
