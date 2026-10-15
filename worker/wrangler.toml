@@ -1,0 +1,27 @@
+name = "anunturi-fabbv-push"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+# Rulează din oră în oră. Workerul verifică singur dacă e 7:xx la București
+# și dacă nu a trimis deja azi — altfel iese imediat.
+# Rulăm orar pentru că ora de vară mută 7:30 local între 4:30 și 5:30 UTC.
+[triggers]
+crons = ["11 * * * *"]
+
+[vars]
+EVENTS_URL = "https://codrutivascu-ase.github.io/anunturi-fabbv/data/events.json"
+ORIGIN_PERMIS = "https://codrutivascu-ase.github.io"
+VAPID_SUBJECT = "mailto:ivascu_codrut@yahoo.com"
+
+# Cheia publică VAPID nu e secretă: apare oricum în codul aplicației.
+VAPID_PUBLIC_KEY = "BOnTwlO3AcECZxwvsL_L-3iDX9vyZKWVCiltB0k4J7udveP0k9NGYnXiUInvyhLXIzFuYkBwV4WeShv2MVT5WRY"
+
+# Secretele NU stau aici. Se pun o singură dată, din linia de comandă:
+#   npx wrangler secret put VAPID_PRIVATE_KEY
+#   npx wrangler secret put CHEIE_TEST
+
+# Sertarul cu abonamente. Înlocuiește id-ul cu cel primit la crearea spațiului:
+#   npx wrangler kv namespace create ABONAMENTE
+[[kv_namespaces]]
+binding = "ABONAMENTE"
+id = "PUNE_AICI_ID_UL_PRIMIT"

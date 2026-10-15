@@ -7,6 +7,15 @@
   'use strict';
 
   const DATA_URL = 'data/events.json';
+
+  /* ===== configurarea notificarilor =====================================
+     PUSH_API: adresa Workerului de pe Cloudflare. Cat timp e gol,
+     clopotelul cere permisiunea si trimite doar notificarea de test,
+     fara sa inregistreze telefonul pentru rezumatul zilnic.
+     ===================================================================== */
+  const PUSH_API = '';
+  const VAPID_PUBLIC_KEY =
+    'BOnTwlO3AcECZxwvsL_L-3iDX9vyZKWVCiltB0k4J7udveP0k9NGYnXiUInvyhLXIzFuYkBwV4WeShv2MVT5WRY';
   const TZ = 'Europe/Bucharest';
 
   /* ---------- categorii ---------- */
@@ -541,16 +550,58 @@
     if (!$('#sheet').classList.contains('open')) $('#scrim').classList.remove('open');
   }
 
+  /* ---------- abonarea la rezumatul zilnic ---------- */
+
+  // cheia VAPID se trimite catre browser ca octeti, nu ca text
+  function cheieInOcteti(b64) {
+    const pad = '='.repeat((4 - (b64.length % 4)) % 4);
+    const brut = atob((b64 + pad).replace(/-/g, '+').replace(/_/g, '/'));
+    return Uint8Array.from(brut, (c) => c.charCodeAt(0));
+  }
+
+  // Inregistreaza telefonul la Worker. Rulam asta si la fiecare pornire
+  // cand permisiunea e deja data: abonamentele expira, iar reinstalarea
+  // aplicatiei genereaza unul nou.
+  async function subscribeToPush({ tacut = false } = {}) {
+    if (!PUSH_API) return false;
+    if (!('PushManager' in window)) return false;
+    if (Notification.permission !== 'granted') return false;
+
+    try {
+      const reg = await navigator.serviceWorker.ready;
+      let sub = await reg.pushManager.getSubscription();
+
+      if (!sub) {
+        sub = await reg.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: cheieInOcteti(VAPID_PUBLIC_KEY)
+        });
+      }
+
+      const res = await fetch(PUSH_API + '/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(sub)
+      });
+
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return true;
+    } catch (e) {
+      console.warn('abonarea la push a esuat:', e);
+      if (!tacut) toast('Notificarile zilnice nu au putut fi activate');
+      return false;
+    }
+  }
+
   async function requestPermission() {
     try {
       const p = await Notification.requestPermission();
       if (p === 'granted') {
         closeNotifyModal();
         syncBellState();
-        toast('Notificări activate');
+        const abonat = await subscribeToPush();
+        toast(abonat ? 'Notificări activate' : 'Notificări permise');
         testNotification();
-        // Pasul următor (de implementat cu serverul de push):
-        // await subscribeToPush();
       } else {
         toast('Notificările nu au fost permise');
         closeNotifyModal();
@@ -677,8 +728,12 @@
     }
 
     if ('serviceWorker' in navigator) {
-      try { await navigator.serviceWorker.register('sw.js'); }
-      catch (e) { console.warn('SW nu s-a înregistrat:', e); }
+      try {
+        await navigator.serviceWorker.register('sw.js');
+        // daca permisiunea e deja data, ne reasiguram ca Workerul
+        // are un abonament valid pentru telefonul asta
+        subscribeToPush({ tacut: true });
+      } catch (e) { console.warn('SW nu s-a înregistrat:', e); }
     }
 
     // reîncarcă lista când revii în aplicație (poate s-a schimbat ziua)

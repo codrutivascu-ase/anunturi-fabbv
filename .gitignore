@@ -3,3 +3,8 @@ __pycache__/
 ~$*.xlsx
 .DS_Store
 Thumbs.db
+
+# chei private - nu ajung NICIODATA in repo
+.secrete/
+vapid-*.pem
+*.key
