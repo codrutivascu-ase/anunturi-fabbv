@@ -12,8 +12,8 @@ Rulare:
 Sau cu variabile de mediu (așa face GitHub Actions):
   SHEET_EVENIMENTE_CSV=...  SHEET_ANUNTURI_CSV=...  python tools/sheets_to_json.py
 
-Refolosește validarea din xlsx_to_json.py, ca Excelul și Sheet-ul să
-fie interpretate identic.
+Validarea e în tools/comun.py, aceeași folosită de convertorul din
+Excel — ca Sheet-ul și Excelul să fie interpretate identic.
 """
 import csv
 import io
@@ -29,8 +29,9 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 
-from xlsx_to_json import (          # noqa: E402
-    CATEGORII, TIPURI_ANUNT, as_date, as_text, as_time, fara_diacritice,
+from comun import (                 # noqa: E402
+    as_date, as_text, as_time, e_rand_de_indicatii,
+    normalizeaza_categorie, normalizeaza_tip,
 )
 
 OUT = ROOT / "data" / "events.json"
@@ -81,7 +82,7 @@ def citeste_evenimente(url, erori):
         # randul de indicatii de sub cap
         if nr == cap + 1 and not as_date(data_bruta):
             continue
-        if fara_diacritice(titlu.lower()).startswith(("titlul afisat", "identificator")):
+        if e_rand_de_indicatii(titlu):
             continue
         if as_text(r.get("activ")).lower() == "nu":
             sarite += 1
@@ -93,11 +94,7 @@ def citeste_evenimente(url, erori):
             sarite += 1
             continue
 
-        cat = as_text(r.get("categorie")).lower()
-        if cat not in CATEGORII:
-            if cat:
-                erori.append("Evenimente, randul %d: categoria '%s' nu exista - pusa pe 'anunt'" % (nr, cat))
-            cat = "anunt"
+        cat = normalizeaza_categorie(r.get("categorie"), erori, "Evenimente, randul %d" % nr)
 
         iesire.append({
             "id": as_text(r.get("id")) or "ev-%d" % nr,
@@ -131,7 +128,7 @@ def citeste_anunturi(url, erori):
             continue
         if nr == cap + 1 and not as_date(pana_brut):
             continue
-        if fara_diacritice(titlu.lower()).startswith(("titlul anuntului", "identificator")):
+        if e_rand_de_indicatii(titlu):
             continue
         if as_text(r.get("activ")).lower() == "nu":
             continue
@@ -141,11 +138,7 @@ def citeste_anunturi(url, erori):
             erori.append("Anunturi, randul %d: valabil_pana_la invalid - sarit" % nr)
             continue
 
-        tip = as_text(r.get("tip")).lower()
-        if tip not in TIPURI_ANUNT:
-            if tip:
-                erori.append("Anunturi, randul %d: tipul '%s' nu exista - pus pe 'administrativ'" % (nr, tip))
-            tip = "administrativ"
+        tip = normalizeaza_tip(r.get("tip"), erori, "Anunturi, randul %d" % nr)
 
         iesire.append({
             "id": as_text(r.get("id")) or "an-%d" % nr,

@@ -16,62 +16,15 @@ from pathlib import Path
 
 from openpyxl import load_workbook
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from comun import (                                      # noqa: E402
+    CATEGORII, TIPURI_ANUNT, as_date, as_text, as_time,
+    e_rand_de_indicatii, normalizeaza_categorie, normalizeaza_tip,
+)
+
 ROOT = Path(__file__).resolve().parent.parent
 SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "evenimente_fabbv.xlsx"
 OUT = ROOT / "data" / "events.json"
-
-CATEGORII = {"open-course", "conferinta", "workshop", "cariera", "deadline", "examen", "anunt"}
-CAMPURI = ["id", "data", "ora_start", "ora_final", "titlu", "descriere",
-           "locatie", "organizator", "categorie", "link", "important", "activ"]
-TIPURI_ANUNT = {"inscriere", "administrativ", "oportunitate", "urgent"}
-
-
-def fara_diacritice(t):
-    """Pentru comparatii robuste: textul din foi poate avea sau nu diacritice."""
-    return (t.replace("ă", "a").replace("â", "a").replace("î", "i")
-             .replace("ș", "s").replace("ş", "s")
-             .replace("ț", "t").replace("ţ", "t"))
-
-
-def as_text(v):
-    if v is None:
-        return ""
-    if isinstance(v, str):
-        return v.strip()
-    return str(v).strip()
-
-
-def as_date(v):
-    """Acceptă atât text AAAA-LL-ZZ cât și o dată reală din Excel."""
-    if isinstance(v, datetime):
-        return v.date().isoformat()
-    if isinstance(v, date):
-        return v.isoformat()
-    s = as_text(v)
-    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", s):
-        return s
-    # formate tolerate: 20.10.2026 / 20/10/2026
-    m = re.fullmatch(r"(\d{1,2})[./](\d{1,2})[./](\d{4})", s)
-    if m:
-        d, mo, y = (int(x) for x in m.groups())
-        return f"{y:04d}-{mo:02d}-{d:02d}"
-    return None
-
-
-def as_time(v):
-    if isinstance(v, datetime):
-        return v.strftime("%H:%M")
-    if isinstance(v, time):
-        return v.strftime("%H:%M")
-    s = as_text(v)
-    if not s:
-        return ""
-    m = re.fullmatch(r"(\d{1,2})[:.](\d{2})", s)
-    if m:
-        h, mi = int(m.group(1)), int(m.group(2))
-        if 0 <= h < 24 and 0 <= mi < 60:
-            return f"{h:02d}:{mi:02d}"
-    return ""
 
 
 def find_header(ws, *obligatorii):
@@ -106,7 +59,7 @@ def citeste_anunturi(wb):
         nr = cells[0].row
         if nr == header_row + 1 and not as_date(pana_raw):
             continue
-        if fara_diacritice(titlu.lower()).startswith(("titlul anuntului", "identificator")):
+        if e_rand_de_indicatii(titlu):
             continue
         if as_text(get("activ")).lower() == "nu":
             continue
@@ -116,11 +69,7 @@ def citeste_anunturi(wb):
             erori.append("Anunturi, randul %d: valabil_pana_la invalid - sarit" % nr)
             continue
 
-        tip = as_text(get("tip")).lower()
-        if tip not in TIPURI_ANUNT:
-            if tip:
-                erori.append("Anunturi, randul %d: tipul '%s' nu exista - pus pe 'administrativ'" % (nr, tip))
-            tip = "administrativ"
+        tip = normalizeaza_tip(get("tip"), erori, "Anunturi, randul %d" % nr)
 
         anunturi.append({
             "id": as_text(get("id")) or "an-%d" % nr,
@@ -171,7 +120,7 @@ def main():
         # randul de indicatii de sub capul de tabel nu e un eveniment
         if nr == header_row + 1 and not as_date(data_raw):
             continue
-        if fara_diacritice(titlu.lower()).startswith(("titlul afisat", "identificator")):
+        if e_rand_de_indicatii(titlu):
             continue
 
         d = as_date(data_raw)
@@ -185,11 +134,7 @@ def main():
             sarite += 1
             continue
 
-        cat = as_text(get("categorie")).lower()
-        if cat not in CATEGORII:
-            if cat:
-                erori.append(f"rândul {nr}: categoria „{cat}” nu există — pusă pe „anunt”")
-            cat = "anunt"
+        cat = normalizeaza_categorie(get("categorie"), erori, "Evenimente, randul %d" % nr)
 
         ev = {
             "id": as_text(get("id")) or f"ev-{nr}",
