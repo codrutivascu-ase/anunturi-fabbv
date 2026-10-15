@@ -1,0 +1,1199 @@
+{
+  "an": "2026–2027",
+  "sursa": "Calendarul Studentului, Hotărârea CA nr. 751/21.09.2026",
+  "sursa_url": "https://www.ase.ro",
+  "perioade": [
+    {
+      "id": "deschidere",
+      "titlu": "Festivitatea de deschidere a anului universitar",
+      "start": "2026-09-25",
+      "final": "2026-09-25",
+      "tip": "reper",
+      "semestru": 1,
+      "detaliu": "Festivitatea de deschidere a anului universitar 2026-2027"
+    },
+    {
+      "id": "sem1-cursuri-a",
+      "titlu": "Activități didactice, semestrul I",
+      "start": "2026-09-28",
+      "final": "2026-12-20",
+      "tip": "cursuri",
+      "semestru": 1
+    },
+    {
+      "id": "vacanta-iarna",
+      "titlu": "Vacanța de iarnă",
+      "start": "2026-12-21",
+      "final": "2027-01-10",
+      "tip": "vacanta",
+      "semestru": 1
+    },
+    {
+      "id": "sem1-cursuri-b",
+      "titlu": "Activități didactice, semestrul I",
+      "start": "2027-01-11",
+      "final": "2027-01-22",
+      "tip": "cursuri",
+      "semestru": 1,
+      "detaliu": "Prima zi de activități didactice după vacanța de iarnă"
+    },
+    {
+      "id": "sesiune-iarna",
+      "titlu": "Sesiunea de evaluare a cunoștințelor",
+      "start": "2027-01-25",
+      "final": "2027-02-13",
+      "tip": "sesiune",
+      "semestru": 1,
+      "detaliu": "Sesiunea de evaluare a cunoștințelor la programele de studii universitare de licență (IF, IFR, ID), de masterat (cu excepția programelor de masterat organizate modularizat pentru care evaluarea este prevăzută la finalul modulului), anul pregătitor de limba română pentru cetățenii străini, la programul de formare psihopedagogică în vederea certificării competențelor pentru profesia didactică"
+    },
+    {
+      "id": "vacanta-sem",
+      "titlu": "Vacanță după semestrul I",
+      "start": "2027-02-15",
+      "final": "2027-02-21",
+      "tip": "vacanta",
+      "semestru": 1
+    },
+    {
+      "id": "sem2-cursuri-a",
+      "titlu": "Activități didactice, semestrul al II-lea",
+      "start": "2027-02-22",
+      "final": "2027-04-25",
+      "tip": "cursuri",
+      "semestru": 2,
+      "detaliu": "Prima zi a semestrului al II-lea pentru studiile universitare de licență (IF și IFR) și pentru studiile universitare de masterat, anul pregătitor de limba română pentru cetățenii străini, programul de formare psihopedagogică în vederea certificării competențelor pentru profesia didactică organizat la forma de învățământ cu frecvență"
+    },
+    {
+      "id": "vacanta-paste",
+      "titlu": "Vacanța de Paște",
+      "start": "2027-04-26",
+      "final": "2027-05-04",
+      "tip": "vacanta",
+      "semestru": 2
+    },
+    {
+      "id": "sem2-cursuri-b",
+      "titlu": "Activități didactice, semestrul al II-lea",
+      "start": "2027-05-05",
+      "final": "2027-06-05",
+      "tip": "cursuri",
+      "semestru": 2
+    },
+    {
+      "id": "sesiune-vara",
+      "titlu": "Sesiunea de evaluare a cunoștințelor",
+      "start": "2027-06-07",
+      "final": "2027-06-26",
+      "tip": "sesiune",
+      "semestru": 2
+    },
+    {
+      "id": "disertatie",
+      "titlu": "Susținerea examenului de disertație",
+      "start": "2027-06-30",
+      "final": "2027-07-02",
+      "tip": "finalizare",
+      "semestru": 2,
+      "nota": "Cu excepția programelor de masterat de tip MBA",
+      "detaliu": "Susținerea examenului de disertație (cu excepția programelor de masterat de tip MBA)"
+    },
+    {
+      "id": "restante-vara",
+      "titlu": "Sesiuni de reprogramare a examenelor",
+      "start": "2027-07-05",
+      "final": "2027-07-11",
+      "tip": "restante",
+      "semestru": 2
+    },
+    {
+      "id": "licenta",
+      "titlu": "Susținerea examenului de licență",
+      "start": "2027-07-14",
+      "final": "2027-07-16",
+      "tip": "finalizare",
+      "semestru": 2,
+      "nota": "Facultatea de Drept: Proba 1 pe 12.07, Proba 2 pe 15-16.07"
+    },
+    {
+      "id": "vacanta-vara",
+      "titlu": "Vacanța de vară",
+      "start": "2027-07-17",
+      "final": "2027-09-24",
+      "tip": "vacanta",
+      "semestru": 2,
+      "nota": "Nu apare în Calendarul Studentului; intervalul rămas până la deschiderea anului următor"
+    }
+  ],
+  "zile_libere": [
+    {
+      "data": "2026-11-30",
+      "titlu": "Sfântul Andrei"
+    },
+    {
+      "data": "2026-12-01",
+      "titlu": "Ziua Națională a României"
+    },
+    {
+      "data": "2027-04-06",
+      "titlu": "Ziua ASE — 114 ani"
+    },
+    {
+      "data": "2027-05-01",
+      "titlu": "Ziua Internațională a Muncii"
+    },
+    {
+      "data": "2027-06-01",
+      "titlu": "Ziua Internațională a Copilului"
+    }
+  ],
+  "actiuni": [
+    {
+      "id": "act-001",
+      "titlu": "Afișarea repartizării la cazare",
+      "start": "2026-09-15",
+      "final": "2026-09-15",
+      "tema": "cazare",
+      "detaliu": "Afișarea repartizării studenților de la toate ciclurile de studii, care au depus cerere de cazare, pe site-ul http://cazare.ase.ro"
+    },
+    {
+      "id": "act-002",
+      "titlu": "Depunerea contestațiilor privind repartizarea locurilor de cazare",
+      "start": "2026-09-15",
+      "final": "2026-09-16",
+      "tema": "cazare",
+      "detaliu": "Depunerea eventualelor contestații privind modul de repartizare a locurilor de cazare"
+    },
+    {
+      "id": "act-003",
+      "titlu": "Afișarea rezultatului contestațiilor privind repartizarea locurilor de cazare",
+      "start": "2026-09-17",
+      "final": "2026-09-17",
+      "tema": "cazare",
+      "detaliu": "Afișarea rezultatului privind soluționarea contestațiilor privind repartizarea locurilor de cazare, pe site-ul http://cazare.ase.ro"
+    },
+    {
+      "id": "act-004",
+      "titlu": "Eliberarea legitimațiilor de cămin și a contractelor de cazare",
+      "start": "2026-09-21",
+      "final": "2026-09-24",
+      "tema": "cazare",
+      "detaliu": "Eliberarea legitimațiilor de cămin și a contractelor de cazare, de la Compartimentul Cazare Studenți (Strada Frumoasă, nr. 31, sala 12)"
+    },
+    {
+      "id": "act-005",
+      "titlu": "Ocuparea locurilor în cămine",
+      "start": "2026-09-21",
+      "final": "2026-09-27",
+      "tema": "cazare",
+      "detaliu": "Ocuparea locurilor în cămine de către studenții beneficiari, indiferent de anul de studiu. (Inclusiv studenții care și-au ridicat legitimațiile de cămin și contractele de cazare în luna mai a anului 2026)"
+    },
+    {
+      "id": "act-006",
+      "titlu": "Eliberarea legitimațiilor de cămin de la administrația căminului",
+      "start": "2026-09-25",
+      "final": "2026-09-27",
+      "tema": "cazare",
+      "detaliu": "Eliberarea legitimațiilor de cămin și a contractelor de cazare, de la administrația căminului unde studenții au fost repartizați, pentru anul universitar 2026-20"
+    },
+    {
+      "id": "act-007",
+      "titlu": "Afișarea propunerilor de teme de disertație — Facultatea de Drept",
+      "start": "2026-09-25",
+      "final": "2026-10-09",
+      "tema": "finalizare",
+      "detaliu": "Stabilirea la nivelul departamentului de Drept și afișarea, pe web-site-ul Facultății de Drept a listei cu propunerile de teme pentru lucrările de disertație pentru programele de masterat Dreptul european al afacerilor și Carieră judiciară, aferente examenului de disertație sesiunea iulie 2026 și a capacității maxime de coordonare pentru fiecare coordonator științific"
+    },
+    {
+      "id": "act-008",
+      "titlu": "Plata taxei de școlarizare aferentă semestrului I",
+      "start": "2026-09-25",
+      "final": "2026-10-16",
+      "tema": "taxe",
+      "detaliu": "Plata taxei de școlarizare aferentă semestrului I, pentru studiile universitare de licență (anul I – pentru programele de studii a căror taxă de școlarizare semestrială este mai mare de 3250 lei - taxa trebuie achitată anterior semnării contractului de studii -, anii II, III, IV, III suplimentar și IV suplimentar), masterat (anul I – pentru programele de studii a căror taxă de școlarizare semestrială este mai mare de 4000 lei - taxa trebuie achitată anterior semnării contractului de studii, anii II, I suplimentar și II suplimentar) și doctorat, cu excehpţia programelor de masterat de tip MBA, a căror taxă de şcolarizare este achitată conform contractului de studii"
+    },
+    {
+      "id": "act-009",
+      "titlu": "Depunerea adeverințelor de către studenții copii ai personalului didactic",
+      "start": "2026-09-26",
+      "final": "2026-09-28",
+      "tema": "cazare",
+      "detaliu": "Depunerea adeverințelor (eliberate după 1 septembrie 2026) de către studenții copii ai personalului didactic aflat în activitate, care vor fi cazați începând cu semestrul I sau care se află în mobilitate Erasmus în primul semestru și doresc să ocupe un loc de cazare începând cu semestrul al II-lea, pentru a beneficia în semestrul I de facilități la cazare, prevăzute de legislația în vigoare"
+    },
+    {
+      "id": "act-010",
+      "titlu": "Semnarea contractelor de studii universitare — anul I",
+      "start": "2026-09-28",
+      "final": "2026-10-16",
+      "tema": "administrativ",
+      "detaliu": "Semnarea contractelor de studii universitare pentru întreaga perioadă de școlarizare pentru studenții anului I: 1) de la programele de studii universitare de licență și masterat și a contractului anual de studii (în cazul studenților de la ID), depunerea documentelor de studii și a Declarației pe proprie răspundere (Anexa 7), în original; 2) de la programul de formare psihopedagogică în vederea certificării competențelor pentru profesia didactică (nivelul I, respectiv nivelul II), forma de invățământ cu frecvență"
+    },
+    {
+      "id": "act-011",
+      "titlu": "Transmiterea dosarelor de candidatură ale studenților care reprezintă cazuri sociale",
+      "start": "2026-10-08",
+      "final": "2026-10-15",
+      "tema": "burse",
+      "detaliu": "Transmiterea, în format electronic, la adresa burse@ase.ro, a dosarelor de candidatură ale studenților, reprezentând cazuri sociale, care doresc să desfășoare activități în cadrul universității și să primească burse semestriale din venituri proprii ale ASE București care să le permită plata taxei de școlarizare"
+    },
+    {
+      "id": "act-012",
+      "titlu": "Transmiterea dosarelor de candidatură pentru activități în interesul ASE",
+      "start": "2026-10-08",
+      "final": "2026-10-15",
+      "tema": "burse",
+      "detaliu": "Depunerea, în format electronic, la adresa burse@ase.ro, a dosarelor de candidatură ale studenților care doresc să se implice în activități în interesul Academiei de Studii Economice din București"
+    },
+    {
+      "id": "act-013",
+      "titlu": "Transmiterea dosarelor pentru bursele de excelență ASE",
+      "start": "2026-10-12",
+      "final": "2026-10-16",
+      "tema": "burse",
+      "detaliu": "Transmiterea, în format electronic, la adresa burse@ase.ro, a dosarelor de candidatură pentru obținerea burselor de excelență acordate din fonduri proprii ale ASE"
+    },
+    {
+      "id": "act-014",
+      "titlu": "Transmiterea dosarelor pentru bursele speciale pentru rezultate deosebite",
+      "start": "2026-10-12",
+      "final": "2026-10-16",
+      "tema": "burse",
+      "detaliu": "Transmiterea, în format electronic, la adresele de email ale secretariatelor facultăților sau prin completarea formularului electronic(după caz), a dosarelor de candidatură pentru obținerea burselor speciale pentru rezultate deosebite în activitățile culturale și organizatorice și de performanță pentru activitatea de cercetare științifică"
+    },
+    {
+      "id": "act-015",
+      "titlu": "Transmiterea dosarelor pentru bursa de ajutor social ocazional",
+      "start": "2026-10-12",
+      "final": "2026-10-23",
+      "tema": "burse",
+      "detaliu": "Transmiterea, în format electronic, la adresa burse@ase.ro, a dosarelor pentru obținerea bursei de ajutor social ocazional pentru îmbrăcăminte și încălțăminte, pentru semestrul I al anului universitar 2026-2027"
+    },
+    {
+      "id": "act-016",
+      "titlu": "Transmiterea dosarelor pentru bursele de performanță sportivă",
+      "start": "2026-10-19",
+      "final": "2026-10-23",
+      "tema": "burse",
+      "detaliu": "Transmiterea, în format electronic, la adresele de email ale secretariatelor facultăților sau prin completarea formularului electronic(după caz), a dosarelor de candidatură pentru obținerea burselor de performanță sportivă"
+    },
+    {
+      "id": "act-017",
+      "titlu": "Termenul final pentru alegerea temei lucrării de licență și a coordonatorului științific",
+      "start": "2026-10-31",
+      "final": "2026-10-31",
+      "tema": "finalizare",
+      "detaliu": "Termenul final de transmitere, în format electronic, la adresele de email ale secretariatelor facultăților sau prin completarea formularului electronic (după caz), a cererilor pentru alegerea temei lucrării de licență și a coordonatorului științific, pentru sesiunea iulie 2027, aprobarea acestora și stabilirea coordonatorului științific"
+    },
+    {
+      "id": "act-018",
+      "titlu": "Afișarea rezultatelor pentru bursele speciale și bursele de excelență",
+      "start": "2026-11-05",
+      "final": "2026-11-05",
+      "tema": "burse",
+      "detaliu": "Afișarea, pe pagina webstudent.ase.ro, a rezultatelor concursurilor de obținere a burselor speciale pentru rezultate deosebite în activitățile culturale și organizatorice, de performanță pentru activitatea de cercetare științifică și de performanță sportivă\nAfișarea, pe site-ul social.ase.ro, a rezultatelor concursului pentru obținerea burselor de excelență acordate din fonduri proprii ale ASE"
+    },
+    {
+      "id": "act-019",
+      "titlu": "Transmiterea contestațiilor privind bursele speciale și bursele de excelență",
+      "start": "2026-11-05",
+      "final": "2026-11-06",
+      "tema": "burse",
+      "detaliu": "Transmiterea, în format electronic, la adresele de email ale secretariatelor facultăților, a contestațiilor privind acordarea burselor speciale pentru rezultate deosebite în activitățile culturale, organizatorice și de performanță pentru activitatea de cercetare științifică și de performanță sportivă\nTransmiterea, în format electronic, la adresa burse@ase.ro, a contestațiilor privind acordarea burselor de excelență acordate din fonduri proprii ale ASE"
+    },
+    {
+      "id": "act-020",
+      "titlu": "Afișarea listelor cu beneficiarii burselor sociale și de performanță I și II",
+      "start": "2026-11-12",
+      "final": "2026-11-12",
+      "tema": "burse",
+      "detaliu": "Afișarea, pe pagina webstudent.ase.ro, a listelor cu studenții beneficiari ai burselor sociale, de performanță I și II și a celor pentru implicarea în activități extracurriculare în cadrul ASE București"
+    },
+    {
+      "id": "act-021",
+      "titlu": "Afișarea rezultatelor finale pentru bursele speciale și bursele de excelență",
+      "start": "2026-11-12",
+      "final": "2026-11-12",
+      "tema": "burse",
+      "detaliu": "Afișarea, pe pagina webstudent.ase.ro, a rezultatelor finale ale concursului pentru obținerea burselor speciale pentru rezultate deosebite în activitățile culturale și organizatorice, de performanță pentru activitatea de cercetare științifică și de performanță sportivă\nAfișarea, pe site-ul social.ase.ro, a rezultatelor finale ale concursului pentru obținerea burselor de excelență, acordate din fonduri proprii ale ASE"
+    },
+    {
+      "id": "act-022",
+      "titlu": "Transmiterea contestațiilor privind bursele sociale și de performanță",
+      "start": "2026-11-12",
+      "final": "2026-11-13",
+      "tema": "burse",
+      "detaliu": "Transmiterea, în format electronic, la adresele de email ale secretariatelor facultăților, a contestațiilor privind acordarea burselor sociale, de performanță I și II, și a celor pentru implicarea în activități extracurriculare în cadrul ASE București"
+    },
+    {
+      "id": "act-023",
+      "titlu": "Afișarea listelor finale și a răspunsurilor la contestații",
+      "start": "2026-11-19",
+      "final": "2026-11-19",
+      "tema": "burse",
+      "detaliu": "Afișarea, pe pagina webstudent.ase.ro, a listelor finale cu studenții beneficiari ai burselor sociale, de performanță I și II și a celor pentru implicarea în activități extracurriculare în cadrul ASE București, afișarea răspunsurilor la contestații"
+    },
+    {
+      "id": "act-024",
+      "titlu": "Termenul final pentru alegerea temei de disertație și a coordonatorului științific",
+      "start": "2026-11-27",
+      "final": "2026-11-27",
+      "tema": "finalizare",
+      "detaliu": "Termenul final de transmitere, în format electronic, la adresele de email ale secretariatelor facultăților sau prin completarea formularului electronic (după caz), a cererilor pentru alegerea temei de disertație și a coordonatorului științific pentru sesiunea iulie 2027, aprobarea acestora și stabilirea coordonatorului științific"
+    },
+    {
+      "id": "act-025",
+      "titlu": "Evaluarea cadrelor didactice de către studenți",
+      "start": "2026-12-07",
+      "final": "2026-12-20",
+      "tema": "administrativ",
+      "detaliu": "Evaluarea cadrelor didactice de către studenții din anul I, II, III și IV de la studiile universitare de licență și anul I și II de la studiile universitare de masterat"
+    },
+    {
+      "id": "act-026",
+      "titlu": "Finalizarea evaluărilor pentru disciplinele cu forma de evaluare verificare",
+      "start": "2027-01-11",
+      "final": "2027-01-22",
+      "tema": "examene",
+      "detaliu": "Finalizarea evaluărilor pentru disciplinele cu forma de evaluare verificare și comunicarea rezultatelor"
+    },
+    {
+      "id": "act-027",
+      "titlu": "Afișarea ofertei de mobilități Erasmus și asimilate",
+      "start": "2027-01-29",
+      "final": "2027-01-29",
+      "tema": "erasmus",
+      "detaliu": "Afișarea ofertei de mobilități Erasmus și asimilate pentru anul universitar 2027 - 2028"
+    },
+    {
+      "id": "act-028",
+      "titlu": "Transmiterea dosarelor pentru bursele sociale disponibilizate",
+      "start": "2027-02-08",
+      "final": "2027-02-12",
+      "tema": "burse",
+      "detaliu": "Transmiterea, în format electronic, la adresele de email ale secretariatelor facultăților sau prin completarea formularului electronic (după caz), dosarelor pentru obținerea burselor sociale disponibilizate, de către toți studenții de la studiile universitare de licență și masterat"
+    },
+    {
+      "id": "act-029",
+      "titlu": "Transmiterea cererilor pentru mobilități definitive",
+      "start": "2027-02-15",
+      "final": "2027-02-15",
+      "tema": "administrativ",
+      "detaliu": "Transmiterea cererilor pentru mobilități definitive de către studenții înmatriculați în: ● anii I, II și III programul de studii universitare licență organizat de Facultatea de Drept; ● anii I și II - celelalte programe de studii universitare de licență; ● anul I programe de studii universitare de masterat, la adresele de e-mail ale secretariatelor facultăților unde sunt studenți, respectiv la adresa de e-mail a secretariatului facultății pentru care solicită mobilitatea (în cazul studenților altor universități)"
+    },
+    {
+      "id": "act-030",
+      "titlu": "Depunerea dosarelor de candidatură pentru mobilități Erasmus",
+      "start": "2027-02-15",
+      "final": "2027-02-26",
+      "tema": "erasmus",
+      "detaliu": "Depunerea dosarelor de candidatură pentru mobilități Erasmus și asimilate pentru anul universitar 2027-2028"
+    },
+    {
+      "id": "act-031",
+      "titlu": "Soluționarea cererilor pentru mobilități definitive",
+      "start": "2027-02-16",
+      "final": "2027-02-16",
+      "tema": "administrativ",
+      "detaliu": "Soluționarea cererilor pentru mobilități definitive"
+    },
+    {
+      "id": "act-032",
+      "titlu": "Afișarea orarului pentru semestrul al II-lea",
+      "start": "2027-02-19",
+      "final": "2027-02-20",
+      "tema": "administrativ",
+      "detaliu": "Afișarea orarului pentru semestrul al II-lea al anului universitar 2026-2027"
+    },
+    {
+      "id": "act-033",
+      "titlu": "Afișarea statutului financiar al studenților din anul I de licență IF",
+      "start": "2027-02-22",
+      "final": "2027-02-22",
+      "tema": "administrativ",
+      "detaliu": "Afișarea pe pagina personală a studenților (webstudent.ase.ro) a statutului financiar (buget sau taxă) al studenților înmatriculați în anul I de studii la programele de studii universitare de licență IF, ca urmare a ierarhizării acestora pentru ocuparea locurilor finanțate de la bugetul de stat, pentru semestrul al II-lea"
+    },
+    {
+      "id": "act-034",
+      "titlu": "Aprobarea listei studenților care beneficiază de reducerea taxei de școlarizare",
+      "start": "2027-02-22",
+      "final": "2027-02-22",
+      "tema": "taxe",
+      "detaliu": "Aprobarea listei studenților din anii I-III, studii universitare de licență, forma de învățământ cu frecvență, de la Facultatea de Economie Agroalimentară și a Mediului, care beneficiază de reducerea taxei de școlarizare pentru semestrul al II-lea conform prevederilor Metodologiei privind taxele aplicate în Academia de Studii Economice din București"
+    },
+    {
+      "id": "act-035",
+      "titlu": "Transmiterea cererilor de implicare în activități în interesul ASE",
+      "start": "2027-02-22",
+      "final": "2027-02-26",
+      "tema": "burse",
+      "detaliu": "Transmiterea, în format electronic, la adresa burse@ase.ro, a cererilor și dosarelor de implicare în activități în interesul ASE București în vederea obținerii unor burse speciale pentru implicarea în activități extracurriculare în cadrul ASE"
+    },
+    {
+      "id": "act-036",
+      "titlu": "Transmiterea dosarelor pentru bursele speciale și de performanță sportivă disponibilizate",
+      "start": "2027-02-22",
+      "final": "2027-02-26",
+      "tema": "burse",
+      "detaliu": "Transmiterea, în format electronic, la adresele de email ale secretariatelor facultăților, a dosarelor de candidatură pentru obținerea burselor speciale pentru rezultate deosebite în activitățile culturale și organizatorice, de performanță pentru activitatea de cercetare științifică și burselor de performanță sportivă disponibilizate"
+    },
+    {
+      "id": "act-037",
+      "titlu": "Plata taxei de școlarizare aferentă semestrului al II-lea",
+      "start": "2027-02-22",
+      "final": "2027-03-12",
+      "tema": "taxe",
+      "detaliu": "Plata taxei de școlarizare aferentă semestrului al II-lea, pentru studiile universitare de licență, masterat și doctorat, anul pregătitor de limba română pentru cetățenii străini, pentru programul de formare psihopedagogică în vederea certificării competențelor pentru profesia didactică (Nivelul I, respectiv Nivelul II cu excepţia programelor de masterat de tip MBA, a căror taxă de şcolarizare se achită conform contractului de studii"
+    },
+    {
+      "id": "act-038",
+      "titlu": "Prima zi a semestrului al II-lea pentru studiile universitare de licență ID",
+      "start": "2027-02-26",
+      "final": "2027-02-26",
+      "tema": "evenimente",
+      "detaliu": "Prima zi a semestrului al II-lea pentru studiile universitare de licență ID"
+    },
+    {
+      "id": "act-039",
+      "titlu": "Transmiterea dosarelor pentru bursa de ajutor social ocazional",
+      "start": "2027-03-01",
+      "final": "2027-03-12",
+      "tema": "burse",
+      "detaliu": "Transmiterea, în format electronic, la adresa burse@ase.ro, a dosarelor pentru obținerea bursei de ajutor social ocazional pentru îmbrăcăminte și încălțăminte, pentru semestrul II al anului universitar 2026-2027"
+    },
+    {
+      "id": "act-040",
+      "titlu": "Afișarea rezultatelor pentru bursele pentru rezultate deosebite disponibilizate",
+      "start": "2027-03-04",
+      "final": "2027-03-04",
+      "tema": "burse",
+      "detaliu": "Afișarea, pe pagina webstudent.ase.ro, a rezultatelor concursului privind acordarea burselor pentru rezultate deosebite în activitățile culturale și organizatorice, de performanță pentru activitatea de cercetare științifică și burselor de performanță sportivă disponibilizate"
+    },
+    {
+      "id": "act-041",
+      "titlu": "Transmiterea contestațiilor privind bursele pentru rezultate deosebite disponibilizate",
+      "start": "2027-03-04",
+      "final": "2027-03-05",
+      "tema": "burse",
+      "detaliu": "Transmiterea, în format electronic, la adresele de email a secretariatelor facultăților, a contestațiilor privind acordarea burselor pentru rezultate deosebite în activitățile culturale și organizatorice, de performanță pentru activitatea de cercetare științifică și burselor de performanță sportivă disponibilizate"
+    },
+    {
+      "id": "act-042",
+      "titlu": "Afișarea rezultatelor finale pentru bursele pentru rezultate deosebite disponibilizate",
+      "start": "2027-03-07",
+      "final": "2027-03-07",
+      "tema": "burse",
+      "detaliu": "Afișarea pe pagina webstudent.ase.ro a rezultatelor finale ale concursului privind acordarea burselor pentru rezultate deosebite în activitățile culturale și organizatorice, de performanță pentru activitatea de cercetare științifică și burselor de performanță sportivă disponibilizate"
+    },
+    {
+      "id": "act-043",
+      "titlu": "Înscrierea lucrărilor pentru Sesiunea științifică studențească",
+      "start": "2027-03-08",
+      "final": "2027-03-21",
+      "tema": "evenimente",
+      "detaliu": "Înscrierea lucrărilor pentru Sesiunea științifică studențească (la departamente sau conform informațiilor publicate de prodecanul de resort), faza locală a Olimpiadei Naționale a Economiștilor în Formare (ONEF)"
+    },
+    {
+      "id": "act-044",
+      "titlu": "Afișarea listelor nominale cu candidații Erasmus+ înscriși",
+      "start": "2027-03-09",
+      "final": "2027-03-09",
+      "tema": "erasmus",
+      "detaliu": "Afișarea listelor nominale cu candidații Erasmus+ înscriși (rezultate academice)"
+    },
+    {
+      "id": "act-045",
+      "titlu": "Afișarea repartizării pe comisii a candidaților pentru interviul Erasmus+",
+      "start": "2027-03-12",
+      "final": "2027-03-12",
+      "tema": "erasmus",
+      "detaliu": "Afișarea repartizării pe comisii a candidaților pentru interviul de selecție pentru mobilitățile Erasmus+ și asimilate pentru anul universitar 2027-2028"
+    },
+    {
+      "id": "act-046",
+      "titlu": "Interviuri de selecție Erasmus",
+      "start": "2027-03-15",
+      "final": "2027-03-19",
+      "tema": "erasmus",
+      "detaliu": "Interviuri de selecție Erasmus"
+    },
+    {
+      "id": "act-047",
+      "titlu": "Afișarea listelor cu beneficiarii burselor sociale și de performanță disponibilizate",
+      "start": "2027-03-16",
+      "final": "2027-03-16",
+      "tema": "burse",
+      "detaliu": "Afișarea pe pagina webstudent.ase.ro a listelor cu studenții beneficiari ai burselor sociale, de performanță I și II și speciale pentru implicarea în activități extracurriculare în cadrul ASE București disponibilizate"
+    },
+    {
+      "id": "act-048",
+      "titlu": "Transmiterea contestațiilor privind bursele sociale disponibilizate",
+      "start": "2027-03-16",
+      "final": "2027-03-17",
+      "tema": "burse",
+      "detaliu": "Transmiterea, în format electronic, la adresele de email ale secretariatelor facultăților, a contestațiilor privind acordarea burselor sociale,de performanță I și II, speciale pentru implicarea în activități extracurriculare în cadrul ASE București disponibilizate"
+    },
+    {
+      "id": "act-049",
+      "titlu": "Afișarea listelor finale și a răspunsurilor la contestații",
+      "start": "2027-03-22",
+      "final": "2027-03-22",
+      "tema": "burse",
+      "detaliu": "Afișarea răspunsurilor la contestațiile privind acordarea burselor și afișarea listelor finale cu studenții beneficiari ai burselor sociale, de performanță I și II, speciale pentru implicarea în activități extracurriculare în cadrul ASE București pe pagina webstudent.ase.ro"
+    },
+    {
+      "id": "act-050",
+      "titlu": "Afișarea rezultatelor interviului de selecție pentru mobilități Erasmus+",
+      "start": "2027-03-22",
+      "final": "2027-03-22",
+      "tema": "erasmus",
+      "detaliu": "Afișarea rezultatelor interviului de selecție pentru mobilități Erasmus+ și asimilate pentru anul universitar 2027-2028"
+    },
+    {
+      "id": "act-051",
+      "titlu": "Transmiterea programului secțiunilor Sesiunii științifice studențești",
+      "start": "2027-03-24",
+      "final": "2027-03-26",
+      "tema": "evenimente",
+      "detaliu": "Transmiterea programului secțiunilor Sesiunii științifice studențești de către Prodecanul responsabil cu cercetarea științifică la Direcția Managementul Cercetării și Inovării"
+    },
+    {
+      "id": "act-052",
+      "titlu": "Afișarea rezultatelor selecției pentru mobilități Erasmus+",
+      "start": "2027-03-26",
+      "final": "2027-03-26",
+      "tema": "erasmus",
+      "detaliu": "Afișarea rezultatelor selecției pentru mobilități Erasmus+ și asimilate pentru anul universitar 2027-2028"
+    },
+    {
+      "id": "act-053",
+      "titlu": "Aprobarea și afișarea numărului și cuantumului premiilor Sesiunii științifice studențești",
+      "start": "2027-03-26",
+      "final": "2027-03-29",
+      "tema": "evenimente",
+      "detaliu": "Aprobarea și afișarea numărului și cuantumului premiilor Sesiunii științifice studențești"
+    },
+    {
+      "id": "act-054",
+      "titlu": "Afișarea listelor cu propunerile de teme pentru lucrările de licență și disertație",
+      "start": "2027-03-29",
+      "final": "2027-04-02",
+      "tema": "finalizare",
+      "detaliu": "Afișarea listelor cu propunerile de teme pentru lucrările de licență și disertație (cu excepția programului de masterat Dreptul european al afacerilor și Carieră judiciară) pentru anul universitar 2027-2028, sesiunea iulie 2028 și a capacității maxime de coordonare pentru fiecare cadru didactic pe website-urile facultăților"
+    },
+    {
+      "id": "act-055",
+      "titlu": "Depunerea cererilor de cazare de către studenții care provin din aceeași familie",
+      "start": "2027-03-30",
+      "final": "2027-04-20",
+      "tema": "cazare",
+      "detaliu": "Depunerea cererilor de cazare de către studenții care provin din aceeași familie (frați sau surori) în variantă electronică, accesând site-ul https://asecommodation.ase.ro/"
+    },
+    {
+      "id": "act-056",
+      "titlu": "Depunerea cererilor de cazare de către studenții reveniți din mobilități Erasmus+",
+      "start": "2027-03-30",
+      "final": "2027-04-20",
+      "tema": "cazare",
+      "detaliu": "Depunerea cererilor de cazare de către studenții străini din anii I și II de la programele de licență și doctorat, respectiv anul III în cadrul Facultății de Drept și studenții anului I de la programele de masterat, în format electronic, la adresa oana.carnicianu@ase.ro"
+    },
+    {
+      "id": "act-057",
+      "titlu": "Depunerea cererilor de cazare de către studenții străini",
+      "start": "2027-03-30",
+      "final": "2027-04-20",
+      "tema": "cazare",
+      "detaliu": "Depunrea cererii de cazare împreună cu situația școlară din care să rezulte notele necesare calculului mediei de cazare la adresa contact@cazare.ase.ro. de către studenții care au beneficiat de mobilități Erasmus+ pe primul semestru"
+    },
+    {
+      "id": "act-058",
+      "titlu": "Afișarea locurilor rămase disponibile după prima etapă a selecției Erasmus+",
+      "start": "2027-03-31",
+      "final": "2027-03-31",
+      "tema": "erasmus",
+      "detaliu": "Afișarea eventualelor locuri rămase disponibile în urma primei etape a selecției pentru mobilități Erasmus+ și asimilate în anul universitar 2027-2028"
+    },
+    {
+      "id": "act-059",
+      "titlu": "Desfășurarea lucrărilor Sesiunii științifice studențești",
+      "start": "2027-03-31",
+      "final": "2027-04-01",
+      "tema": "evenimente",
+      "detaliu": "Desfășurarea lucrărilor Sesiunii științifice studențești, faza locală a Olimpiadei Naționale a Economiștilor în Formare (ONEF)"
+    },
+    {
+      "id": "act-060",
+      "titlu": "Etapa de redistribuire a locurilor pentru mobilități Erasmus+",
+      "start": "2027-04-01",
+      "final": "2027-04-02",
+      "tema": "erasmus",
+      "detaliu": "Etapa de redistribuire a eventualelor locuri pentru mobilități Erasmus+ rămase disponibile"
+    },
+    {
+      "id": "act-061",
+      "titlu": "Alegerea disciplinelor opționale și facultative",
+      "start": "2027-04-05",
+      "final": "2027-05-07",
+      "tema": "administrativ",
+      "detaliu": "Alegerea disciplinelor opționale și facultative prevăzute în planurile de învățământ aferente programelor de studii universitare de licență, pentru anul universitar 2027-2028, prin exprimarea opțiunii pe pagina personala (webstudent.ase.ro)"
+    },
+    {
+      "id": "act-062",
+      "titlu": "Afișarea rezultatelor finale ale selecției pentru mobilități Erasmus+",
+      "start": "2027-04-06",
+      "final": "2027-04-06",
+      "tema": "erasmus",
+      "detaliu": "Afișarea rezultatelor finale ale selecției pentru mobilități Erasmus+ și asimilate pentru anul universitar 2027-2028"
+    },
+    {
+      "id": "act-063",
+      "titlu": "Data până la care se poate solicita modificarea titlului lucrării de disertație",
+      "start": "2027-04-09",
+      "final": "2027-04-09",
+      "tema": "finalizare",
+      "detaliu": "Data până la care studenții anului terminal de la programele de studii universitare de masterat, respectiv absolvenții ale căror cereri de alegere a lucrării de disertație pentru sesiunea iulie 2027 au fost aprobate conform termenelor stipulate de reglementările ASE, pot solicita aprobarea modificării titlului lucrării de disertație"
+    },
+    {
+      "id": "act-064",
+      "titlu": "Alegerea temei lucrării de disertație și a coordonatorului științific",
+      "start": "2027-04-21",
+      "final": "2027-10-19",
+      "tema": "finalizare",
+      "detaliu": "Alegerea temei lucrării de finalizare a studiilor universitare de masterat și a cadrului didactic coordonator științific pentru anul universitar 2027-2028 de către studenții din anul I la programele de studii universitare de masterat și absolvenții promoțiilor anterioare care nu au susținut examenul de finalizare (cu excepția studenților/absolvenților programelor de masterat organizate de Facultatea de Drept)"
+    },
+    {
+      "id": "act-065",
+      "titlu": "Alegerea temei lucrării de licență și a cadrului didactic coordonator",
+      "start": "2027-04-21",
+      "final": "2027-10-22",
+      "tema": "finalizare",
+      "detaliu": "Alegerea temei lucrării de finalizare a studiilor universitare de licență și a cadrului didactic coordonator nominalizat în listele de coordonatori științifici, pentru anul universitar 2027-2028 de către studenții din anul al II-lea la programele de studii universitare de licență, respectiv studenții din anul al III-lea ai Facultății de Drept și absolvenții promoțiilor anterioare care nu au susținut examenul de finalizare"
+    },
+    {
+      "id": "act-066",
+      "titlu": "Data până la care se poate solicita modificarea titlului lucrării de licență",
+      "start": "2027-04-28",
+      "final": "2027-04-28",
+      "tema": "finalizare",
+      "detaliu": "Data până la care studenții anului terminal de la programele de studii universitare de licență, respectiv absolvenții ale căror cereri de alegere a lucrării de licență pentru sesiunea iulie 2027 au fost aprobate conform termenelor stipulate de reglementările ASE pot solicita aprobarea modificării titlului lucrării de licență"
+    },
+    {
+      "id": "act-067",
+      "titlu": "Depunerea rapoartelor de progres al cercetării — studenți doctoranzi",
+      "start": "2027-05-03",
+      "final": "2027-05-28",
+      "tema": "administrativ",
+      "detaliu": "Depunerea online și în format fizic a rapoartelor de progres al cercetării, cu avizul conducătorului științific, pentru studenții doctoranzi"
+    },
+    {
+      "id": "act-068",
+      "titlu": "Evaluarea calității activităților didactice de către studenți",
+      "start": "2027-05-10",
+      "final": "2027-05-23",
+      "tema": "administrativ",
+      "detaliu": "Evaluarea calității activităților didactice de către studenții programelor de studii universitare de licență și masterat"
+    },
+    {
+      "id": "act-069",
+      "titlu": "Evaluarea studenților reprezentanți",
+      "start": "2027-05-24",
+      "final": "2027-06-06",
+      "tema": "administrativ",
+      "detaliu": "Evaluarea studenților reprezentanți de către toți studenții înmatriculați la învățământ cu frecvență și cu frecvență redusă de la programele de studii universitare de licență, masterat și doctorat"
+    },
+    {
+      "id": "act-070",
+      "titlu": "Afișarea ofertei de mobilități Erasmus pentru semestrul al II-lea",
+      "start": "2027-05-28",
+      "final": "2027-05-28",
+      "tema": "erasmus",
+      "detaliu": "Afișarea ofertei de mobilități Erasmus disponibile după prima selecție pentru semestrul al II-lea din anul universitar 2027-2028"
+    },
+    {
+      "id": "act-071",
+      "titlu": "Comunicarea tematicii pentru Proba 1 — Anul pregătitor de limba română",
+      "start": "2027-05-28",
+      "final": "2027-05-28",
+      "tema": "finalizare",
+      "detaliu": "Comunicarea tematicii pentru Proba 1 a examenului de finalizare a studiilor în cazul Anului pregătitor de limba română pentru cetățenii străini"
+    },
+    {
+      "id": "act-072",
+      "titlu": "Susținerea ultimelor probe la disciplinele cu forma de evaluare verificare",
+      "start": "2027-05-31",
+      "final": "2027-06-06",
+      "tema": "examene",
+      "detaliu": "Perioada destinată susținerii ultimelor probe aferente disciplinelor a căror formă de evaluare este verificare și comunicarea rezultatelor pentru aceste discipline (excepție fac programele de masterat organizate modularizat)"
+    },
+    {
+      "id": "act-073",
+      "titlu": "Evaluarea rapoartelor de progres al cercetării — studenți doctoranzi",
+      "start": "2027-05-31",
+      "final": "2027-06-11",
+      "tema": "administrativ",
+      "detaliu": "Evaluarea online și orală a rapoartelor de progres al cercetării științifice, pentru studenții doctoranzi"
+    },
+    {
+      "id": "act-074",
+      "titlu": "Depunerea dosarelor de candidatură Erasmus pentru semestrul al II-lea",
+      "start": "2027-06-04",
+      "final": "2027-06-11",
+      "tema": "erasmus",
+      "detaliu": "Depunerea dosarelor de candidatură pentru mobilități Erasmus pentru semestrul II din anul universitar 2027-2028"
+    },
+    {
+      "id": "act-075",
+      "titlu": "Finalizarea activităților didactice aferente semestrului al II-lea",
+      "start": "2027-06-05",
+      "final": "2027-06-05",
+      "tema": "evenimente",
+      "detaliu": "Finalizarea activităților didactice aferente semestrului al doilea pentru studenții programelor de studii universitare de licență și masterat, ai anului pregătitor de limba română pentru cetățenii străini, respectiv ai programului de formare psihopedagogică în vederea certificării competențelor pentru profesia didactică (Nivelul I, repsctiv Nivelul II)"
+    },
+    {
+      "id": "act-076",
+      "titlu": "Sesiune de evaluare a cunoștințelor — anul terminal Nivel II",
+      "start": "2027-06-07",
+      "final": "2027-06-11",
+      "tema": "examene",
+      "detaliu": "Sesiune de evaluare a cunoștințelor pentru anul terminal Nivel II – program de formare psihopedagogică în vederea certificării competențelor pentru profesia didactică, forma de învățământ cu frecvență"
+    },
+    {
+      "id": "act-077",
+      "titlu": "Încărcarea lucrării de disertație în vederea verificării antiplagiat",
+      "start": "2027-06-07",
+      "final": "2027-06-11",
+      "tema": "finalizare",
+      "detaliu": "Încărcarea, pe pagina webstudent.ase.ro, a lucrării de disertație, în vederea acordării calificativului și a completării declarației de originalitate (verificare antiplagiat)"
+    },
+    {
+      "id": "act-078",
+      "titlu": "Sesiune de evaluare a cunoștințelor — anul terminal de licență și anul pregătitor",
+      "start": "2027-06-07",
+      "final": "2027-06-19",
+      "tema": "examene",
+      "detaliu": "Sesiune de evaluare a cunoștințelor, pentru studenții din anul terminal de la programele de studii universitare de licență, ai anului pregătitor de limbă română pentru cetățenii străini, din anul terminal de la Nivelul I al programului de formare psihopedagogică în vedererea certificării competențelor pentru profesia didactică"
+    },
+    {
+      "id": "act-079",
+      "titlu": "Stagiu pentru elaborarea lucrării de disertație",
+      "start": "2027-06-07",
+      "final": "2027-06-20",
+      "tema": "finalizare",
+      "detaliu": "Stagiu pentru elaborarea lucrării de disertaţie pentru studenţii din anul terminal, de la programele de studii universitare de masterat"
+    },
+    {
+      "id": "act-080",
+      "titlu": "Sesiune de evaluare a cunoștințelor — licență anii I–III și masterat anul I",
+      "start": "2027-06-07",
+      "final": "2027-06-26",
+      "tema": "examene",
+      "detaliu": "Sesiune de evaluare a cunoștințelor la programele de studii universitare de licență: anii I, II și III – licență Facultatea de Drept anii I și II pentru celelalte programe de studii universitare de licență anul I programe de studii universitare de masterat (excepție programele de masterat organizate de Facultatea de Drept) nivelul I (anii I și II de licență) și nivelul II (anul I masterat)– programul de formare psihopedagogică în vederea certificării competențelor pentru profesia didactică, forma de învățământ cu frecvență"
+    },
+    {
+      "id": "act-081",
+      "titlu": "Verificarea antiplagiat a lucrărilor de disertație",
+      "start": "2027-06-14",
+      "final": "2027-06-18",
+      "tema": "finalizare",
+      "detaliu": "Verificarea antiplagiat a lucrărilor de disertație și acordarea calificativului Admis/Respins, de către conducătorii științifici pentru lucrările de disertație încărcăte"
+    },
+    {
+      "id": "act-082",
+      "titlu": "Afișarea listelor nominale cu candidații Erasmus+ pentru a doua selecție",
+      "start": "2027-06-18",
+      "final": "2027-06-18",
+      "tema": "erasmus",
+      "detaliu": "Afișarea listelor nominale cu candidații Erasmus+ înscriși pentru a doua selecție (rezultate academice)"
+    },
+    {
+      "id": "act-083",
+      "titlu": "Încărcarea lucrării de licență în vederea verificării antiplagiat",
+      "start": "2027-06-21",
+      "final": "2027-06-25",
+      "tema": "finalizare",
+      "detaliu": "Încărcarea pe pagina webstudent.ase.ro, a lucrării de licență, în vederea acordării calificativului și a completării declarației de originalitate (verificare antiplagiat)"
+    },
+    {
+      "id": "act-084",
+      "titlu": "Sesiune de reprogramare — anul terminal Nivel I",
+      "start": "2027-06-21",
+      "final": "2027-07-03",
+      "tema": "examene",
+      "detaliu": "Sesiune de reprogramare pentru anul terminal Nivel I de la programele de formare psihopedagogică în vedererea certificării competențelor pentru profesia didactică, forma de învățământ cu frecvență"
+    },
+    {
+      "id": "act-085",
+      "titlu": "Afișarea calificativului Admis/Respins pentru lucrarea de disertație",
+      "start": "2027-06-22",
+      "final": "2027-06-22",
+      "tema": "finalizare",
+      "detaliu": "Afișarea pe pagina webstudent.ase.ro a calificativului Admis/Respins pentru lucrarea de disertație, sesiunea iulie 2027"
+    },
+    {
+      "id": "act-086",
+      "titlu": "Afișarea repartizării pe comisii pentru interviul Erasmus — a doua selecție",
+      "start": "2027-06-22",
+      "final": "2027-06-22",
+      "tema": "erasmus",
+      "detaliu": "Afișarea repartizării pe comisii a candidaților pentru interviul de selecție Erasmus pentru a doua selecție"
+    },
+    {
+      "id": "act-087",
+      "titlu": "Sesiune de reprogramare a examenelor — anul terminal de masterat",
+      "start": "2027-06-22",
+      "final": "2027-06-23",
+      "tema": "examene",
+      "detaliu": "Sesiune de reprogramare a examenelor pentru studenții din anul terminal al programelor de studii universitare de masterat"
+    },
+    {
+      "id": "act-088",
+      "titlu": "Sesiune de reprogramare a examenelor — anul pregătitor de limba română",
+      "start": "2027-06-22",
+      "final": "2027-06-26",
+      "tema": "examene",
+      "detaliu": "Sesiune de reprogramare a examenelor pentru studenții anului pregătitor de limbă română pentru cetățenii străini"
+    },
+    {
+      "id": "act-089",
+      "titlu": "Sesiune de reprogramare a examenelor (prima sesiune) — anul terminal de licență",
+      "start": "2027-06-22",
+      "final": "2027-06-30",
+      "tema": "examene",
+      "detaliu": "Sesiune de reprogramare a examenelor (prima sesiune), pentru studenții din anul terminal de la programele de studii universitare de licență"
+    },
+    {
+      "id": "act-090",
+      "titlu": "Interviuri de selecție Erasmus+ pentru semestrul al II-lea",
+      "start": "2027-06-23",
+      "final": "2027-06-25",
+      "tema": "erasmus",
+      "detaliu": "Interviuri de selecție pentru mobilitățile Erasmus+ și asimilate pentru semestrul II din anul universitar 2027-2028"
+    },
+    {
+      "id": "act-091",
+      "titlu": "Înscrieri pentru susținerea examenului de disertație",
+      "start": "2027-06-24",
+      "final": "2027-06-25",
+      "tema": "finalizare",
+      "detaliu": "Înscrieri pentru susținerea examenului de disertație, prin transmiterea documentelor aferente înscrierii la adresa de email a secretariatului facultății și transmiterea lucrării de disertație, versiunea validată în urma verificării antiplagiat, la adresa de email a departamentului din care face parte coordonatorul științific"
+    },
+    {
+      "id": "act-092",
+      "titlu": "Afișarea rezultatelor interviului Erasmus+ pentru semestrul al II-lea",
+      "start": "2027-06-28",
+      "final": "2027-06-28",
+      "tema": "erasmus",
+      "detaliu": "Afișarea rezultatelor interviului pentru mobilități Erasmus+ și asimilate pentru semestrul II din anul universitar 2027-2028"
+    },
+    {
+      "id": "act-093",
+      "titlu": "Transmiterea lucrării pentru Proba 1 — Anul pregătitor de limba română",
+      "start": "2027-06-28",
+      "final": "2027-06-28",
+      "tema": "finalizare",
+      "detaliu": "Transmiterea prin e-mailul instituțional a lucrării de finalizare care face obiectul probei 1 a examenului de finalizare a studiilor pentru programul de studii Anul pregătitor de limba română pentru cetățenii străini, la Departamentul de Limbi Moderne și Comunicare în Afaceri"
+    },
+    {
+      "id": "act-094",
+      "titlu": "Înscrierea pentru examenul de finalizare — Anul pregătitor de limba română",
+      "start": "2027-06-28",
+      "final": "2027-06-29",
+      "tema": "finalizare",
+      "detaliu": "Înscrierea pentru susținerea examenului de finalizare a studiilor pentru absolvenții Anului pregătitor de limbă română pentru cetățenii străini, la secretariatul Facultăţii de Relaţii Economice Internaţionale"
+    },
+    {
+      "id": "act-095",
+      "titlu": "Înscrierea pentru examenul de absolvire — Nivel II",
+      "start": "2027-06-28",
+      "final": "2027-07-01",
+      "tema": "finalizare",
+      "detaliu": "Înscrierea pentru examenul de absolvire a programului de formare psihopedagogică în vederea certificării competențelor pentru profesia didactică Nivel II, forma de învățământ cu frecvență"
+    },
+    {
+      "id": "act-096",
+      "titlu": "Reevaluarea rapoartelor de progres al cercetării — studenți doctoranzi",
+      "start": "2027-06-28",
+      "final": "2027-07-02",
+      "tema": "administrativ",
+      "detaliu": "Reevaluarea rapoartelor de progres al cercetării științifice pentru studenții doctoranzi"
+    },
+    {
+      "id": "act-097",
+      "titlu": "Verificarea antiplagiat a lucrărilor de licență",
+      "start": "2027-06-28",
+      "final": "2027-07-02",
+      "tema": "finalizare",
+      "detaliu": "Verificarea antiplagiat a lucrărilor de licență și acordarea calificativului Admis/Respins, de către coordonatorii științifici, pentru lucrările de licență încărcate"
+    },
+    {
+      "id": "act-098",
+      "titlu": "Depunerea documentelor de studii în original",
+      "start": "2027-06-28",
+      "final": "2027-07-30",
+      "tema": "administrativ",
+      "detaliu": "Depunerea, la secretariatul facultății, a documentelor de studii în original (după caz: diploma de bacalaureat însoțită de foaia matricolă în original, respectiv diploma de bacalaureat însoțită de foaia matricolă și diploma de licență însoțită de foaia matricolă/suplimentul la diplomă în original) conform reglementărilor în vigoare de studenții care îndeplinesc condițiile și doresc ocuparea unui loc finanțat de la bugetul de stat"
+    },
+    {
+      "id": "act-099",
+      "titlu": "Afișarea programării absolvenților Anului pregătitor de limba română",
+      "start": "2027-06-30",
+      "final": "2027-06-30",
+      "tema": "finalizare",
+      "detaliu": "Afișarea listei cu programarea absolvenţilor Anului pregătitor de limba română pentru cetățenii străini pentru susţinerea examenului de finalizare"
+    },
+    {
+      "id": "act-100",
+      "titlu": "Susținerea examenului de finalizare — Anul pregătitor de limba română",
+      "start": "2027-07-01",
+      "final": "2027-07-02",
+      "tema": "finalizare",
+      "detaliu": "Susținerea examenului de finalizare a studiilor pentru programul de studii Anul pregătitor de limba română pentru cetățenii străini"
+    },
+    {
+      "id": "act-101",
+      "titlu": "Afișarea calificativului Admis/Respins pentru lucrarea de licență",
+      "start": "2027-07-02",
+      "final": "2027-07-02",
+      "tema": "finalizare",
+      "detaliu": "Afișarea pe pagina webstudent.ase.ro a calificativului Admis/Respins pentru lucrarea de licență, sesiunea iulie 2027"
+    },
+    {
+      "id": "act-102",
+      "titlu": "Afișarea rezultatelor selecției Erasmus pentru semestrul al II-lea",
+      "start": "2027-07-02",
+      "final": "2027-07-02",
+      "tema": "erasmus",
+      "detaliu": "Afișarea rezultatelor selecției pentru mobilități Erasmus și asimilate asimilate pentru semestrul II din universitar 2027-2028"
+    },
+    {
+      "id": "act-103",
+      "titlu": "Sesiune de reprogramare a examenelor (a doua sesiune) — anul terminal de licență",
+      "start": "2027-07-05",
+      "final": "2027-07-09",
+      "tema": "examene",
+      "detaliu": "Sesiune de reprogramare a examenelor (a doua sesiune) pentru studenţii din anul terminal al programelor de studii universitare de licență"
+    },
+    {
+      "id": "act-104",
+      "titlu": "Înscrieri pentru susținerea examenului de licență",
+      "start": "2027-07-05",
+      "final": "2027-07-09",
+      "tema": "finalizare",
+      "detaliu": "Înscrieri pentru susținerea examenului de licență, prin depunerea documentelor aferente înscrierii la secretariatul facultății și transmiterea lucrării de licență, versiunea validată, la adresa de email a departamentului din care face parte conducătorul științific: - Facultatea de Drept - Celelalte facultăți"
+    },
+    {
+      "id": "act-105",
+      "titlu": "Sesiune de reprogramare a examenelor — Nivel I și Nivel II",
+      "start": "2027-07-05",
+      "final": "2027-07-11",
+      "tema": "examene",
+      "detaliu": "Sesiunea de reprogramare a examenelor pentru studenții de la Nivelul I (anii I și II de licență), respectiv de la Nivelul II (anul I masterat) de la programul de formare psihopedagogică în vederea certificării competențelor pentru profesia didactică, forma de învățământ cu frecvență"
+    },
+    {
+      "id": "act-106",
+      "titlu": "Sesiune de reprogramare a examenelor — licență anii I–III și masterat anul I",
+      "start": "2027-07-05",
+      "final": "2027-07-11",
+      "tema": "examene",
+      "detaliu": "Sesiune de reprogramare a examenelor pentru programele de studii universitare de licență: - anii I, II și III - programul de licență Drept - anii I și II - celelalte programe de studii universitare de licență anul I – programele de studii universitare de masterat"
+    },
+    {
+      "id": "act-107",
+      "titlu": "Afișarea locurilor rămase disponibile pentru mobilități Erasmus, semestrul al II-lea",
+      "start": "2027-07-06",
+      "final": "2027-07-06",
+      "tema": "erasmus",
+      "detaliu": "Afișarea eventualelor locuri rămase disponibile pentru mobilități Erasmus și asimilate pentru semestrul II din universitar 2027-2028"
+    },
+    {
+      "id": "act-108",
+      "titlu": "Etapa de redistribuire a locurilor Erasmus rămase după a doua selecție",
+      "start": "2027-07-07",
+      "final": "2027-07-08",
+      "tema": "erasmus",
+      "detaliu": "Etapa de redistribuire a eventualelor locuri pentru mobilități Erasmus rămase disponibile după a doua selecție"
+    },
+    {
+      "id": "act-109",
+      "titlu": "Susținerea examenului de absolvire — Nivel II",
+      "start": "2027-07-08",
+      "final": "2027-07-09",
+      "tema": "finalizare",
+      "detaliu": "Susținerea examenului de absolvire a programului de formare psihopedagogică în vedererea certificării competențelor pentru profesia didactică Nivel II, forma de învățământ cu frecvență"
+    },
+    {
+      "id": "act-110",
+      "titlu": "Afișarea rezultatelor finale ale selecției Erasmus pentru semestrul al II-lea",
+      "start": "2027-07-12",
+      "final": "2027-07-12",
+      "tema": "erasmus",
+      "detaliu": "Afișarea rezultatelor finale ale selecției pentru mobilități Erasmus și asimilate pentru semestrul II din universitar 2027-2028"
+    },
+    {
+      "id": "act-111",
+      "titlu": "Susținerea Probei 1 a examenului de LICENȚĂ — Facultatea de Drept",
+      "start": "2027-07-12",
+      "final": "2027-07-12",
+      "tema": "finalizare",
+      "detaliu": "Susţinerea probei 1 a examenului de LICENŢĂ de către absolvenții Facultății de Drept și afișarea punctajului"
+    },
+    {
+      "id": "act-112",
+      "titlu": "Înscrierea pentru examenul de absolvire — Nivel I",
+      "start": "2027-07-12",
+      "final": "2027-07-16",
+      "tema": "finalizare",
+      "detaliu": "Înscrierea pentru examenul de absolvire a programului de formare psihopedagogică în vedererea certificării competențelor pentru profesia didactică - Nivel I, forma de învățământ cu frecvență"
+    },
+    {
+      "id": "act-113",
+      "titlu": "Depunerea contestațiilor aferente Probei 1 — Facultatea de Drept",
+      "start": "2027-07-13",
+      "final": "2027-07-13",
+      "tema": "finalizare",
+      "detaliu": "Depunerea contestațiilor aferente Probei 1 (electronic, pe adresa de email a secretariatului Facultății de Drept"
+    },
+    {
+      "id": "act-114",
+      "titlu": "Soluționarea contestațiilor și afișarea listei pentru Proba 2 — Facultatea de Drept",
+      "start": "2027-07-14",
+      "final": "2027-07-14",
+      "tema": "finalizare",
+      "detaliu": "Soluționarea și afișarea rezultatelor contestațiilor depuse și afișarea listei cu absolvenții Facultății de Drept care pot susține Proba 2: prezentarea și susţinerea lucrării de licenţă"
+    },
+    {
+      "id": "act-115",
+      "titlu": "Susținerea examenului de LICENȚĂ",
+      "start": "2027-07-14",
+      "final": "2027-07-16",
+      "tema": "finalizare",
+      "detaliu": "Susţinerea examenului de LICENŢĂ de absolvenții programelor de studii universitare de licență organizate de facultățile din cadrul ASE, altele decât Facultatea de Drept"
+    },
+    {
+      "id": "act-116",
+      "titlu": "Susținerea Probei 2 — Facultatea de Drept",
+      "start": "2027-07-15",
+      "final": "2027-07-16",
+      "tema": "finalizare",
+      "detaliu": "Susținerea Probei 2: prezentarea și susţinerea lucrării de licenţă de către absolvenții Facultății de Drept"
+    },
+    {
+      "id": "act-117",
+      "titlu": "Eliberarea adeverinței de absolvire — masterat",
+      "start": "2027-07-16",
+      "final": "2027-07-16",
+      "tema": "administrativ",
+      "detaliu": "Eliberarea, la solicitarea absolventului, a documentelor de absolvire a studiilor universitare de masterat (adeverință de absolvire)"
+    },
+    {
+      "id": "act-118",
+      "titlu": "Transmiterea cererilor pentru mobilități definitive și reînmatriculări",
+      "start": "2027-07-19",
+      "final": "2027-07-23",
+      "tema": "administrativ",
+      "detaliu": "Transmiterea, în format electronic, la adresa de email a secretariatului facultății, a cererilor pentru mobilități definitive, reînmatriculări, reluarea studiilor la buget, înscrieri în anul suplimentar și plata taxelor de reînmatriculare, respectiv de înscriere în anul suplimentar, după caz"
+    },
+    {
+      "id": "act-119",
+      "titlu": "Transmiterea cererilor privind coordonatorul și tema lucrării de licență",
+      "start": "2027-07-19",
+      "final": "2027-10-22",
+      "tema": "finalizare",
+      "detaliu": "Completarea şi transmiterea, în format electronic, la adresa de email a secretariatul facultății, a cererilor privind alegerea conducătorului științific și temei lucrării de licență, de către studenții promoției curente, respectiv de către absolvenții promoțiilor anterioare, care nu au susținut/promovat examenul de finalizare a studiilor, pentru anul universitar 2027-2028"
+    },
+    {
+      "id": "act-120",
+      "titlu": "Transmiterea cererilor privind coordonatorul și tema lucrării de disertație",
+      "start": "2027-07-19",
+      "final": "2027-11-19",
+      "tema": "finalizare",
+      "detaliu": "Completarea şi transmiterea, în format electronic, la adresa de email a la secretariatul facultății, a cererilor privind alegerea conducătorului științific și temei lucrării de disertație, de către studenții promoției curente, respectiv absolvenții promoțiilor anterioare, care nu au susținut/promovat examenul de finalizare a studiilor (cu excepția programului de studii universitare de masterat Dreptul european al afacerilor), pentru anul universitar 2027-2028"
+    },
+    {
+      "id": "act-121",
+      "titlu": "Eliberarea adeverinței de absolvire — licență",
+      "start": "2027-07-21",
+      "final": "2027-07-21",
+      "tema": "administrativ",
+      "detaliu": "Eliberarea, la solicitarea absolventului, a documentelor de absolvire a studiilor universitare de licență (adeverință de absolvire)"
+    },
+    {
+      "id": "act-122",
+      "titlu": "Stabilirea și afișarea numărului de locuri disponibile pentru mobilități definitive",
+      "start": "2027-07-22",
+      "final": "2027-07-22",
+      "tema": "administrativ",
+      "detaliu": "Stabilirea și afișarea numărului de locuri disponibile pentru mobilități definitive, reluarea studiilor după întrerupere, respectiv reînmatriculare"
+    },
+    {
+      "id": "act-123",
+      "titlu": "Soluționarea cererilor pentru mobilități definitive și reînmatriculări",
+      "start": "2027-07-26",
+      "final": "2027-07-29",
+      "tema": "administrativ",
+      "detaliu": "Soluționarea cererilor pentru mobilități definitive, reînmatriculări, înscrieri în anul suplimentar și reluarea studiilor la buget.Orice solicitare depusă după 23 iulie nu mai este aprobată"
+    },
+    {
+      "id": "act-124",
+      "titlu": "Susținerea examenului de absolvire — Nivel I",
+      "start": "2027-07-28",
+      "final": "2027-07-30",
+      "tema": "finalizare",
+      "detaliu": "Susținerea examenului de absolvire a programului de formare psihopedagogică în vedererea certificării competențelor pentru profesia didactică - Nivel I, forma de învățământ cu frecvență"
+    },
+    {
+      "id": "act-125",
+      "titlu": "Transmiterea dosarelor sociale pentru semestrul I al anului 2027–2028",
+      "start": "2027-08-10",
+      "final": "2027-08-22",
+      "tema": "burse",
+      "detaliu": "Transmiterea exclusiv online, la adresa de email a secretariatelor facultăților sau prin completarea formularului electronic (după caz), a dosarelor sociale pentru obținerea unei burse sociale pe semestrul I al anului universitar 2027-2028 (pentru anii II și III/respectiv anul IV pentru Facultatea de Drept de la programele de studii universitare de licență și pentru anul II de la programele de studii universitare de masterat)"
+    },
+    {
+      "id": "act-126",
+      "titlu": "Încărcarea lucrării de licență sau disertație — mobilitate internațională",
+      "start": "2027-08-23",
+      "final": "2027-08-23",
+      "tema": "finalizare",
+      "detaliu": "Încărcarea pe pagina webstudent.ase.ro, a lucrării de licență/disertație în vederea acordării calificativului și a completării declarației de originalitate (verificare antiplagiat) de către studenţii participanţi la programe de mobilitate internaţională / dublă diplomă"
+    },
+    {
+      "id": "act-127",
+      "titlu": "Verificarea antiplagiat — mobilitate internațională",
+      "start": "2027-08-24",
+      "final": "2027-08-24",
+      "tema": "finalizare",
+      "detaliu": "Verificarea antiplagiat a lucrărilor de licență și disertație și acordarea calificativului Admis/Respins de către conducătorii științifici pentru lucrările de licență depuse"
+    },
+    {
+      "id": "act-128",
+      "titlu": "Afișarea listei cu calificativele și înscrierea online pentru examen",
+      "start": "2027-08-25",
+      "final": "2027-08-25",
+      "tema": "finalizare",
+      "detaliu": "Afișarea listei cu absolvenții care au obținut calificativul Admis/Respins pentru lucrarea de licență/disertație și înscrierea online pentru susținerea examenului de licență/disertație, la adresa de email a secretariatului facultății și transmiterea lucrării de licență/disertație, versiunea validată, la adresa de email a departamentului din care face parte coordonatorul științific"
+    },
+    {
+      "id": "act-129",
+      "titlu": "Susținerea examenului de licență și de disertație — mobilitate internațională",
+      "start": "2027-08-26",
+      "final": "2027-08-26",
+      "tema": "finalizare",
+      "detaliu": "Susţinerea examenului de licenţă şi a examenului de disertaţie de către studenţii participanţi la programe de mobilitate internaţională/dublă diplomă"
+    },
+    {
+      "id": "act-130",
+      "titlu": "Transmiterea dosarelor sociale pentru anul I, semestrul I 2027–2028",
+      "start": "2027-09-13",
+      "final": "2027-09-24",
+      "tema": "burse",
+      "detaliu": "Transmiterea exclusiv online, la adresa de email a secretariatelor facultăților sau prin completarea formularului electronic (după caz), a dosarelor sociale pentru obținerea unei burse sociale pe semestrul I al anului universitar 2027-2028 (pentru anul I licență și I masterat)"
+    },
+    {
+      "id": "act-131",
+      "titlu": "Afișarea grupelor de studiu și a orarului pentru semestrul I",
+      "start": "2027-09-20",
+      "final": "2027-09-20",
+      "tema": "administrativ",
+      "detaliu": "Afișarea grupelor de studiu și a orarului semestrului I la studiile universitare de licență și masterat"
+    }
+  ]
+}

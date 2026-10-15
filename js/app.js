@@ -7,6 +7,7 @@
   'use strict';
 
   const DATA_URL = 'data/events.json';
+  const AN_URL = 'data/an-universitar.json';
 
   /* ===== configurarea notificarilor =====================================
      PUSH_API: adresa Workerului de pe Cloudflare. Cat timp e gol,
@@ -43,6 +44,7 @@
   const state = {
     events: [],
     anunturi: [],
+    an: null,
     abonat: false,
     range: 'azi',
     cats: new Set(),
@@ -327,8 +329,294 @@
     list.forEach((a) => main.appendChild(anuntCard(a)));
   }
 
+  /* ---------- structura anului universitar ---------- */
+
+  const TEME_ACTIUNE = {
+    burse:         { eticheta: 'Burse',      culoare: 'var(--t-burse)' },
+    cazare:        { eticheta: 'Cazare',     culoare: 'var(--t-cazare)' },
+    finalizare:    { eticheta: 'Licență',    culoare: 'var(--t-finalizare)' },
+    examene:       { eticheta: 'Examene',    culoare: 'var(--t-examene)' },
+    erasmus:       { eticheta: 'Erasmus',    culoare: 'var(--t-erasmus)' },
+    taxe:          { eticheta: 'Taxe',       culoare: 'var(--t-taxe)' },
+    administrativ: { eticheta: 'Administrativ', culoare: 'var(--t-admin)' },
+    evenimente:    { eticheta: 'Evenimente', culoare: 'var(--t-evenim)' }
+  };
+  const temaOf = (k) => TEME_ACTIUNE[k] || TEME_ACTIUNE.administrativ;
+
+  // tema selectata in tabul An universitar; null = toate
+  let temaActiva = null;
+
+  const TIPURI_PERIOADA = {
+    cursuri:    { eticheta: 'Cursuri',   culoare: 'var(--p-cursuri)' },
+    sesiune:    { eticheta: 'Sesiune',   culoare: 'var(--p-sesiune)' },
+    restante:   { eticheta: 'Restanțe',  culoare: 'var(--p-restante)' },
+    vacanta:    { eticheta: 'Vacanță',   culoare: 'var(--p-vacanta)' },
+    finalizare: { eticheta: 'Finalizare', culoare: 'var(--p-finalizare)' },
+    reper:      { eticheta: 'Reper',     culoare: 'var(--p-reper)' }
+  };
+
+  async function incarcaAn() {
+    if (state.an) return state.an;
+    const res = await fetch(AN_URL);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    state.an = await res.json();
+    return state.an;
+  }
+
+  function stareaPerioadei(p, azi) {
+    if (azi < p.start) return 'viitoare';
+    if (azi > p.final) return 'trecuta';
+    return 'curenta';
+  }
+
+  function durataZile(p) {
+    return zileIntre(p.start, p.final) + 1;
+  }
+
+  function intervalText(p) {
+    if (p.start === p.final) return fmtLong(p.start);
+    const a = new Date(p.start + 'T12:00:00Z');
+    const b = new Date(p.final + 'T12:00:00Z');
+    const acelasiAn = a.getUTCFullYear() === b.getUTCFullYear();
+    const stangaLuna = MON[a.getUTCMonth()];
+    const dreaptaLuna = MON[b.getUTCMonth()];
+    if (acelasiAn && stangaLuna === dreaptaLuna) {
+      return `${a.getUTCDate()}–${b.getUTCDate()} ${stangaLuna} ${b.getUTCFullYear()}`;
+    }
+    if (acelasiAn) {
+      return `${a.getUTCDate()} ${stangaLuna} – ${b.getUTCDate()} ${dreaptaLuna} ${b.getUTCFullYear()}`;
+    }
+    return `${a.getUTCDate()} ${stangaLuna} ${a.getUTCFullYear()} – ${b.getUTCDate()} ${dreaptaLuna} ${b.getUTCFullYear()}`;
+  }
+
+  // textul din Calendarul Studentului, ascuns sub semnul +
+  function pliant(text) {
+    if (!text) return '';
+    return `<details class="pliant">
+        <summary><span class="pliant-eticheta">Detalii</span></summary>
+        <p class="pliant-text">${esc(text)}</p>
+      </details>`;
+  }
+
+  function cardPerioada(p, azi) {
+    const t = TIPURI_PERIOADA[p.tip] || TIPURI_PERIOADA.reper;
+    const stare = stareaPerioadei(p, azi);
+
+    const art = el('article', 'perioada is-' + stare);
+    art.style.setProperty('--p', t.culoare);
+
+    let marcaj = '';
+    if (stare === 'curenta') {
+      const ramase = zileIntre(azi, p.final);
+      marcaj = `<span class="perioada-acum">Acum${ramase > 0 ? ' · încă ' + ramase + (ramase === 1 ? ' zi' : ' zile') : ' · ultima zi'}</span>`;
+    } else if (stare === 'viitoare') {
+      const pana = zileIntre(azi, p.start);
+      marcaj = `<span class="perioada-cand">în ${pana} ${pana === 1 ? 'zi' : 'zile'}</span>`;
+    }
+
+    art.innerHTML = `
+      <div class="perioada-punct"></div>
+      <div class="perioada-corp">
+        <div class="perioada-sus">
+          <span class="perioada-tip">${esc(t.eticheta)}</span>
+          ${marcaj}
+        </div>
+        <h3 class="perioada-titlu">${esc(p.titlu)}</h3>
+        <p class="perioada-interval">${esc(intervalText(p))}
+          <span class="perioada-durata">· ${durataZile(p)} zile</span></p>
+        ${p.nota ? `<p class="perioada-nota">${esc(p.nota)}</p>` : ''}
+        ${pliant(p.detaliu)}
+      </div>`;
+    return art;
+  }
+
+  function cardActiune(a, azi) {
+    const t = temaOf(a.tema);
+    const stare = stareaPerioadei(a, azi);
+
+    const art = el('article', 'actiune is-' + stare);
+    art.style.setProperty('--t', t.culoare);
+
+    let cand = '';
+    if (stare === 'curenta') {
+      const r = zileIntre(azi, a.final);
+      cand = `<span class="actiune-cand is-acum">${r === 0 ? 'Ultima zi' : 'încă ' + r + (r === 1 ? ' zi' : ' zile')}</span>`;
+    } else if (stare === 'viitoare') {
+      const p = zileIntre(azi, a.start);
+      cand = `<span class="actiune-cand">în ${p} ${p === 1 ? 'zi' : 'zile'}</span>`;
+    }
+
+    art.innerHTML = `
+      <div class="actiune-sus">
+        <span class="actiune-tema">${esc(t.eticheta)}</span>
+        ${cand}
+      </div>
+      <h4 class="actiune-titlu">${esc(a.titlu)}</h4>
+      <p class="actiune-interval">${esc(intervalText(a))}</p>
+      ${pliant(a.detaliu)}`;
+    return art;
+  }
+
+  function barabTeme(actiuni, azi) {
+    const prezente = [...new Set(actiuni.map((a) => a.tema))]
+      .filter((k) => TEME_ACTIUNE[k]);
+    const ordine = Object.keys(TEME_ACTIUNE).filter((k) => prezente.includes(k));
+
+    const bar = el('div', 'teme-bar');
+    const toate = el('button', 'chip');
+    toate.type = 'button';
+    toate.textContent = 'Toate';
+    toate.setAttribute('aria-pressed', temaActiva === null ? 'true' : 'false');
+    toate.addEventListener('click', () => { temaActiva = null; renderAnTab(); });
+    bar.appendChild(toate);
+
+    ordine.forEach((k) => {
+      const t = temaOf(k);
+      const n = actiuni.filter((a) => a.tema === k).length;
+      const b = el('button', 'chip');
+      b.type = 'button';
+      b.setAttribute('aria-pressed', temaActiva === k ? 'true' : 'false');
+      b.style.setProperty('color', temaActiva === k ? '#fff' : t.culoare);
+      b.innerHTML = `<span class="dot" style="background:${t.culoare}"></span>${esc(t.eticheta)} <span class="chip-n">${n}</span>`;
+      b.addEventListener('click', () => {
+        temaActiva = (temaActiva === k) ? null : k;
+        renderAnTab();
+      });
+      bar.appendChild(b);
+    });
+    return bar;
+  }
+
+  function renderAnTab() {
+    const main = $('#list');
+    main.setAttribute('aria-busy', 'false');
+    main.textContent = '';
+
+    const date = state.an;
+    if (!date) {
+      main.innerHTML = `<div class="empty">${icon('i-busola')}
+        <h3>Calendarul nu s-a încărcat</h3><p>Încearcă să reîmprospătezi.</p></div>`;
+      return;
+    }
+
+    const azi = todayKey();
+    const perioade = [...date.perioade].sort((a, b) => a.start.localeCompare(b.start));
+
+    // unde suntem acum
+    const curente = perioade.filter((p) => stareaPerioadei(p, azi) === 'curenta');
+    const urmatoarea = perioade.find((p) => p.start > azi);
+
+    const antet = el('section', 'an-antet');
+    const liniiAcum = curente.length
+      ? curente.map((p) => esc(p.titlu)).join(' · ')
+      : 'În afara perioadelor de activitate';
+    antet.innerHTML = `
+      <p class="an-eticheta">Anul universitar ${esc(date.an)}</p>
+      <h2 class="an-acum">${liniiAcum}</h2>
+      ${urmatoarea ? `<p class="an-urmeaza">Urmează <strong>${esc(urmatoarea.titlu)}</strong>
+         în ${zileIntre(azi, urmatoarea.start)} zile</p>` : ''}
+      ${bandaAn(perioade, azi)}
+      ${(() => {
+        const act = (date.actiuni || []).filter((a) => a.final >= azi);
+        const urgent = act.filter((a) => a.final >= azi && zileIntre(azi, a.final) <= 7).length;
+        if (!act.length) return '';
+        return `<p class="an-termene">${act.length} termene urmează` +
+          (urgent ? ` · <strong>${urgent}</strong> se încheie în 7 zile` : '') + `</p>`;
+      })()}`;
+    main.appendChild(antet);
+
+    // structura anului
+    const titluStructura = el('h3', 'an-sectiune');
+    titluStructura.textContent = 'Structura anului universitar';
+    main.appendChild(titluStructura);
+
+    const lista = el('div', 'an-cronologie');
+    perioade.forEach((p) => lista.appendChild(cardPerioada(p, azi)));
+    main.appendChild(lista);
+
+    // zile libere
+    const libere = (date.zile_libere || []).filter((z) => z.data >= azi);
+    if (libere.length) {
+      const sec = el('section', 'an-libere');
+      sec.innerHTML = `<h3>Zile libere ce urmează</h3>` +
+        libere.map((z) => `<div class="zi-libera">
+            <span class="zi-data">${esc(fmtLong(z.data))}</span>
+            <span class="zi-titlu">${esc(z.titlu)}</span>
+          </div>`).join('');
+      main.appendChild(sec);
+    }
+
+    // termene administrative din Calendarul Studentului
+    const toateActiunile = (date.actiuni || []).filter((a) => a.final >= azi);
+    if (toateActiunile.length) {
+      const titluTermene = el('h3', 'an-sectiune');
+      titluTermene.textContent = 'Acțiuni, termene și perioade de realizare';
+      main.appendChild(titluTermene);
+
+      main.appendChild(barabTeme(toateActiunile, azi));
+
+      const vizibile = temaActiva
+        ? toateActiunile.filter((a) => a.tema === temaActiva)
+        : toateActiunile;
+
+      if (!vizibile.length) {
+        const gol = el('p', 'an-gol');
+        gol.textContent = 'Niciun termen pe tema aleasă.';
+        main.appendChild(gol);
+      } else {
+        // grupate pe luni
+        const peLuni = new Map();
+        vizibile.forEach((a) => {
+          const d = new Date(a.start + 'T12:00:00Z');
+          const cheie = a.start.slice(0, 7);
+          if (!peLuni.has(cheie)) {
+            peLuni.set(cheie, { eticheta: MON[d.getUTCMonth()] + ' ' + d.getUTCFullYear(), items: [] });
+          }
+          peLuni.get(cheie).items.push(a);
+        });
+
+        peLuni.forEach((grup) => {
+          const sec = el('section', 'luna-grup');
+          const cap = el('div', 'luna-cap');
+          cap.innerHTML = `<h4>${esc(grup.eticheta)}</h4><span class="rule"></span>
+            <span class="luna-n">${grup.items.length}</span>`;
+          sec.appendChild(cap);
+          grup.items.forEach((a) => sec.appendChild(cardActiune(a, azi)));
+          main.appendChild(sec);
+        });
+      }
+    }
+
+    const sursa = el('p', 'an-sursa');
+    sursa.innerHTML = `Date oficiale: <a href="${esc(date.sursa_url)}" target="_blank" rel="noopener">${esc(date.sursa)}</a>`;
+    main.appendChild(sursa);
+  }
+
+  // bara care arata cat din an a trecut
+  function bandaAn(perioade, azi) {
+    const start = perioade[0].start;
+    const final = perioade[perioade.length - 1].final;
+    const total = zileIntre(start, final);
+    const trecut = Math.max(0, Math.min(total, zileIntre(start, azi)));
+    const procent = Math.round((trecut / total) * 100);
+
+    const segmente = perioade.map((p) => {
+      const t = TIPURI_PERIOADA[p.tip] || TIPURI_PERIOADA.reper;
+      const lat = Math.max(0.6, (durataZile(p) / total) * 100);
+      const stanga = (zileIntre(start, p.start) / total) * 100;
+      return `<span class="banda-seg" style="left:${stanga}%;width:${lat}%;background:${t.culoare}"></span>`;
+    }).join('');
+
+    return `<div class="an-banda" role="img" aria-label="${procent}% din anul universitar a trecut">
+        ${segmente}
+        <span class="banda-acum" style="left:${(trecut / total) * 100}%"></span>
+      </div>
+      <p class="an-procent">${procent}% din anul universitar a trecut</p>`;
+  }
+
   function renderList() {
     if (state.range === 'anunturi') { renderAnunturiTab(); return; }
+    if (state.range === 'an') { renderAnTab(); return; }
 
     const main = $('#list');
     main.setAttribute('aria-busy', 'false');
@@ -735,9 +1023,17 @@
         document.querySelectorAll('.nav-item').forEach((t) =>
           t.setAttribute('aria-selected', String(t === tab)));
         state.range = tab.dataset.range;
-        // categoriile sunt ale evenimentelor, nu ale anunțurilor
-        document.querySelector('.cat-bar').hidden = (state.range === 'anunturi');
-        renderList();
+        // categoriile sunt ale evenimentelor
+        document.querySelector('.cat-bar').hidden =
+          (state.range === 'anunturi' || state.range === 'an');
+
+        if (state.range === 'an' && !state.an) {
+          $('#list').setAttribute('aria-busy', 'true');
+          $('#list').innerHTML = '<div class="skeleton"></div><div class="skeleton"></div>';
+          incarcaAn().then(renderList).catch(() => renderList());
+        } else {
+          renderList();
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     });

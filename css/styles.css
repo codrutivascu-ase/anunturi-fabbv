@@ -51,6 +51,24 @@
   --an-oportunitate: #115e54;
   --an-administrativ: #5a5560;
 
+  /* perioade din anul universitar */
+  --p-cursuri: #1d6a4f;
+  --p-sesiune: #a81c12;
+  --p-restante: #b06a0f;
+  --p-vacanta: #3f6ea8;
+  --p-finalizare: #770101;
+  --p-reper: #6b6b6b;
+
+  /* teme din Calendarul Studentului */
+  --t-burse: #1d6a4f;
+  --t-cazare: #3f6ea8;
+  --t-finalizare: #770101;
+  --t-examene: #a81c12;
+  --t-erasmus: #5b2d82;
+  --t-taxe: #8a5a00;
+  --t-admin: #5a5560;
+  --t-evenim: #b06a0f;
+
   /* formă — materialele sunt colțuroase, cu accente drepte */
   --r-sm: 2px;
   --r-md: 3px;
@@ -809,6 +827,400 @@ main {
   transition: transform .26s cubic-bezier(.32,.72,0,1),
               opacity .18s ease,
               visibility 0s;
+}
+
+/* --------------------------- an universitar --------------------------- */
+
+.an-antet {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--brand);
+  border-radius: var(--r-md);
+  padding: 18px 17px 16px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-1);
+}
+
+.an-eticheta {
+  margin: 0 0 6px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  color: var(--text-faint);
+}
+
+.an-acum {
+  margin: 0 0 6px;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -.2px;
+  line-height: 1.3;
+}
+
+.an-urmeaza {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+.an-urmeaza strong { color: var(--text-head); font-weight: 600; }
+
+/* banda cu toate perioadele anului */
+.an-banda {
+  position: relative;
+  height: 10px;
+  margin: 16px 0 8px;
+  border-radius: 5px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.banda-seg {
+  position: absolute;
+  top: 0; bottom: 0;
+  opacity: .75;
+}
+.banda-acum {
+  position: absolute;
+  top: -3px; bottom: -3px;
+  width: 2px;
+  background: var(--text-head);
+  box-shadow: 0 0 0 2px var(--surface);
+  border-radius: 1px;
+}
+
+.an-procent {
+  margin: 0;
+  font-size: 11.5px;
+  color: var(--text-faint);
+  letter-spacing: .02em;
+}
+
+/* cronologia */
+.an-cronologie {
+  position: relative;
+  padding-left: 22px;
+}
+.an-cronologie::before {
+  content: "";
+  position: absolute;
+  left: 5px; top: 8px; bottom: 8px;
+  width: 2px;
+  background: var(--border);
+}
+
+.perioada {
+  position: relative;
+  margin-bottom: 11px;
+}
+
+.perioada-punct {
+  position: absolute;
+  left: -21px;
+  top: 17px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--p, var(--brand));
+  box-shadow: 0 0 0 3px var(--bg);
+}
+
+.perioada-corp {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--p, var(--brand));
+  border-radius: var(--r-md);
+  padding: 13px 15px;
+  box-shadow: var(--shadow-1);
+}
+
+.perioada.is-trecuta .perioada-corp { opacity: .5; }
+.perioada.is-trecuta .perioada-punct { background: var(--border-strong); }
+
+.perioada.is-curenta .perioada-corp {
+  border-color: var(--p, var(--brand));
+  box-shadow: var(--shadow-2);
+}
+.perioada.is-curenta .perioada-punct {
+  width: 14px; height: 14px;
+  left: -23px; top: 15px;
+}
+
+.perioada-sus {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 7px;
+}
+
+.perioada-tip {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  padding: 3px 8px;
+  border-radius: var(--r-sm);
+  color: #fff;
+  background: var(--p, var(--brand));
+}
+
+.perioada-acum {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--p, var(--brand));
+}
+
+.perioada-cand {
+  margin-left: auto;
+  font-size: 11.5px;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.perioada-titlu {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.perioada-interval {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+.perioada-durata { color: var(--text-faint); }
+
+.perioada-nota {
+  margin: 7px 0 0;
+  font-size: 12px;
+  color: var(--text-faint);
+  font-style: italic;
+}
+
+/* zile libere */
+.an-libere {
+  margin-top: 26px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 15px 16px;
+}
+.an-libere h3 {
+  margin: 0 0 11px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--text-muted);
+}
+.zi-libera {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+  font-size: 13px;
+  align-items: baseline;
+}
+.zi-libera + .zi-libera { border-top: 1px solid var(--border); }
+.zi-data {
+  flex: 0 0 auto;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+  min-width: 42%;
+}
+.zi-titlu { font-weight: 500; color: var(--text-head); }
+
+@media (min-width: 640px) {
+  .zi-data { min-width: 34%; }
+}
+
+.an-sursa {
+  margin: 20px 0 0;
+  font-size: 11.5px;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+
+
+.an-termene {
+  margin: 8px 0 0;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+.an-termene strong { color: var(--brand); }
+
+.an-sectiune {
+  margin: 30px 0 14px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  color: var(--text-muted);
+}
+
+/* filtre pe teme */
+.teme-bar {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin: 0 -2px 18px;
+  padding: 0 2px 2px;
+}
+.teme-bar::-webkit-scrollbar { display: none; }
+.teme-bar .chip { flex: 0 0 auto; }
+.chip-n {
+  font-size: 10px;
+  font-weight: 700;
+  opacity: .7;
+  margin-left: 2px;
+}
+
+/* grupare pe luni */
+.luna-grup + .luna-grup { margin-top: 22px; }
+
+.luna-cap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 10px;
+}
+.luna-cap h4 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--text-head);
+}
+.luna-cap .rule { flex: 1; height: 1px; background: var(--border); }
+.luna-n {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-faint);
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+  padding: 1px 7px;
+}
+
+/* cardul de termen */
+.actiune {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--t, var(--brand));
+  border-radius: var(--r-md);
+  padding: 12px 14px;
+  margin-bottom: 9px;
+  box-shadow: var(--shadow-1);
+}
+.actiune.is-trecuta { opacity: .55; }
+
+.actiune-sus {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.actiune-tema {
+  font-size: 9.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  padding: 2px 7px;
+  border-radius: var(--r-sm);
+  color: #fff;
+  background: var(--t, var(--brand));
+}
+
+.actiune-cand {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.actiune-cand.is-acum {
+  color: var(--t, var(--brand));
+  font-weight: 600;
+}
+
+.actiune-titlu {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-head);
+}
+
+.actiune-interval {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* textul din Calendarul Studentului, pliat sub semnul + */
+.pliant { margin-top: 8px; }
+
+.pliant > summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  list-style: none;
+  width: fit-content;
+  padding: 2px 0;
+  color: var(--text-faint);
+}
+.pliant > summary::-webkit-details-marker { display: none; }
+
+.pliant > summary::before {
+  content: "+";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px; height: 15px;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--text-muted);
+}
+.pliant[open] > summary::before { content: "–"; }
+.pliant > summary:hover::before {
+  border-color: var(--text-muted);
+  color: var(--text-head);
+}
+.pliant > summary:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.pliant-eticheta {
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+.pliant-text {
+  margin: 7px 0 1px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  white-space: pre-line;
+}
+
+.an-gol {
+  text-align: center;
+  padding: 26px 10px;
+  font-size: 13.5px;
+  color: var(--text-muted);
 }
 
 /* --------------------------- bara de navigație (jos) --------------------------- */
