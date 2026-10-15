@@ -8,3 +8,6 @@ Thumbs.db
 .secrete/
 vapid-*.pem
 *.key
+
+# cache local wrangler
+.wrangler/
