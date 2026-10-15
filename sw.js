@@ -4,7 +4,7 @@
    - primește push-ul zilnic trimis de cron
    =========================================================== */
 
-const VERSION = 'fabbv-v12';
+const VERSION = 'fabbv-v13';
 const SHELL = [
   './',
   'index.html',
@@ -41,7 +41,7 @@ self.addEventListener('fetch', (e) => {
   if (url.origin !== self.location.origin) return;
 
   // datele: încearcă rețeaua, cade pe cache (ca să mergem offline)
-  if (url.pathname.endsWith('/data/events.json')) {
+  if (url.pathname.includes('/data/')) {
     e.respondWith(
       fetch(req)
         .then((res) => {
