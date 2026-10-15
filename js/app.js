@@ -13,7 +13,7 @@
      clopotelul cere permisiunea si trimite doar notificarea de test,
      fara sa inregistreze telefonul pentru rezumatul zilnic.
      ===================================================================== */
-  const PUSH_API = '';
+  const PUSH_API = 'https://anunturi-fabbv-push.fabbv-ase.workers.dev';
   const VAPID_PUBLIC_KEY =
     'BOnTwlO3AcECZxwvsL_L-3iDX9vyZKWVCiltB0k4J7udveP0k9NGYnXiUInvyhLXIzFuYkBwV4WeShv2MVT5WRY';
   const TZ = 'Europe/Bucharest';

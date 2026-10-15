@@ -20,8 +20,7 @@ VAPID_PUBLIC_KEY = "BOnTwlO3AcECZxwvsL_L-3iDX9vyZKWVCiltB0k4J7udveP0k9NGYnXiUInv
 #   npx wrangler secret put VAPID_PRIVATE_KEY
 #   npx wrangler secret put CHEIE_TEST
 
-# Sertarul cu abonamente. Înlocuiește id-ul cu cel primit la crearea spațiului:
-#   npx wrangler kv namespace create ABONAMENTE
+# Sertarul cu abonamente, creat cu: npx wrangler kv namespace create ABONAMENTE
 [[kv_namespaces]]
 binding = "ABONAMENTE"
-id = "PUNE_AICI_ID_UL_PRIMIT"
+id = "2bf0a8ef49984c26ac87917ceceb867a"
