@@ -242,7 +242,8 @@ async function difuzeaza(mesaj, env) {
 /* anunțuri noi: o notificare pentru fiecare, la publicare             */
 /* ------------------------------------------------------------------ */
 
-const LIMITA_ANUNTURI_PE_RUNDA = 3;
+const LIMITA_ANUNTURI_PE_RUNDA = 3;   // cate pot pleca intr-o singura rulare
+const PLAFON_ZILNIC = 3;              // cate notificari de anunt, cel mult, intr-o zi
 
 function mesajAnunt(a) {
   const termen = new Date(a.valabil_pana_la + 'T12:00:00Z');
@@ -280,9 +281,18 @@ async function anunturiNoi(env, date, azi) {
   }
   if (!noi.length) return null;
 
-  // Dacă secretariatul adaugă multe deodată, nu bombardăm telefoanele:
-  // restul pleacă la rundele următoare.
-  const acum = noi.slice(0, LIMITA_ANUNTURI_PE_RUNDA);
+  // Plafon pe zi: chiar daca secretariatul publica multe, telefoanele
+  // nu primesc mai mult de PLAFON_ZILNIC notificari de anunt. Ce ramane
+  // nemarcat pleaca in zilele urmatoare, cate putin.
+  const cheieZi = 'trimise-azi:' + azi;
+  const trimiseAzi = Number(await env.ABONAMENTE.get(cheieZi) || 0);
+  const ramase = Math.max(0, PLAFON_ZILNIC - trimiseAzi);
+
+  if (ramase === 0) {
+    return { amanate: noi.length, motiv: 'plafonul zilnic de ' + PLAFON_ZILNIC + ' atins' };
+  }
+
+  const acum = noi.slice(0, Math.min(LIMITA_ANUNTURI_PE_RUNDA, ramase));
   const rezultate = [];
 
   for (const a of acum) {
@@ -291,7 +301,15 @@ async function anunturiNoi(env, date, azi) {
     rezultate.push({ id: a.id, ...r });
   }
 
-  return { anunturiTrimise: rezultate, inAsteptare: noi.length - acum.length };
+  // contorul expira singur dupa doua zile
+  await env.ABONAMENTE.put(cheieZi, String(trimiseAzi + acum.length), { expirationTtl: 172800 });
+
+  return {
+    anunturiTrimise: rezultate,
+    amanate: noi.length - acum.length,
+    trimiseAzi: trimiseAzi + acum.length,
+    plafon: PLAFON_ZILNIC
+  };
 }
 
 /* ------------------------------------------------------------------ */
@@ -394,6 +412,8 @@ export default {
       return json({
         abonamente: lot.keys.length + (lot.list_complete ? 0 : '+'),
         anunturiNotificate: notif.keys.length,
+        anunturiTrimiseAzi: Number(await env.ABONAMENTE.get('trimise-azi:' + ziLocala()) || 0),
+        plafonZilnic: PLAFON_ZILNIC,
         ultimaTrimitere: await env.ABONAMENTE.get('ultima-trimitere'),
         oraBucuresti: oraLocala(),
         ziua: ziLocala()

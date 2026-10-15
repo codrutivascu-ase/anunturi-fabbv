@@ -1,0 +1,67 @@
+name: Sincronizare Google Sheet
+
+# Trage datele din Google Sheet și le publică în aplicație.
+# Rulează automat la 15 minute, dar poate fi pornită și manual din
+# fila Actions, butonul „Run workflow”.
+on:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+
+# Minimul necesar: doar scriere în acest repo.
+permissions:
+  contents: write
+
+concurrency:
+  group: sincronizare-sheet
+  cancel-in-progress: false
+
+jobs:
+  sincronizare:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verifică dacă linkurile sunt configurate
+        run: |
+          if [ -z "${{ vars.SHEET_EVENIMENTE_CSV }}" ]; then
+            echo "::error::Lipsește variabila SHEET_EVENIMENTE_CSV."
+            echo "Settings › Secrets and variables › Actions › Variables"
+            exit 1
+          fi
+
+      - name: Citește Sheet-ul și regenerează events.json
+        env:
+          SHEET_EVENIMENTE_CSV: ${{ vars.SHEET_EVENIMENTE_CSV }}
+          SHEET_ANUNTURI_CSV: ${{ vars.SHEET_ANUNTURI_CSV }}
+        run: python tools/sheets_to_json.py
+
+      - name: Publică dacă s-a schimbat ceva
+        run: |
+          if git diff --quiet -- data/events.json; then
+            echo "Nicio schimbare în Sheet."
+            exit 0
+          fi
+
+          git config user.name  "Sincronizare FABBV"
+          git config user.email "actions@github.com"
+          git add data/events.json
+          git commit -m "Date actualizate din Google Sheet"
+
+          # Dacă altcineva a făcut push între timp, reluăm peste starea lui.
+          for i in 1 2 3; do
+            if git push; then
+              echo "publicat"
+              exit 0
+            fi
+            echo "push respins, reiau (încercarea $i)"
+            git pull --rebase --autostash
+          done
+
+          echo "::error::Nu am putut publica după 3 încercări."
+          exit 1

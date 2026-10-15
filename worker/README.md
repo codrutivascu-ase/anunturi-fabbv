@@ -105,7 +105,7 @@ Un marcaj în KV (`ultima-trimitere`) garantează o singură rundă pe zi, chiar
 Două protecții:
 
 - **La prima rulare după publicare** se marchează toate anunțurile existente fără să se trimită nimic, altfel abonații ar primi deodată o notificare pentru fiecare anunț vechi.
-- **Maximum 3 anunțuri pe rundă.** Dacă secretariatul adaugă zece deodată, restul pleacă la rundele următoare, din 15 în 15 minute.
+- **Maximum 3 anunțuri pe rundă și 3 pe zi.** Dacă secretariatul adaugă zece deodată, primele trei pleacă azi, restul în zilele următoare. Un anunț neanunțat încă rămâne nemarcat, deci nu se pierde.
 
 Anunțurile proaspete nu mai intră în rezumatul zilnic: și-au primit deja notificarea la publicare.
 
