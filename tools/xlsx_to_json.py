@@ -36,7 +36,7 @@ def find_header(ws, *obligatorii):
     raise SystemExit("Nu am gasit capul de tabel (un rand cu: %s)." % ", ".join(obligatorii))
 
 
-def citeste_anunturi(wb):
+def citeste_anunturi(wb, etichete):
     """Foaia Anunturi e optionala: fara ea, aplicatia merge fara tabul de anunturi."""
     if "Anunturi" not in wb.sheetnames:
         return [], []
@@ -69,7 +69,7 @@ def citeste_anunturi(wb):
             erori.append("Anunturi, randul %d: valabil_pana_la invalid - sarit" % nr)
             continue
 
-        tip = normalizeaza_tip(get("tip"), erori, "Anunturi, randul %d" % nr)
+        tip = normalizeaza_tip(get("tip"), erori, "Anunturi, randul %d" % nr, etichete)
 
         anunturi.append({
             "id": as_text(get("id")) or "an-%d" % nr,
@@ -102,6 +102,7 @@ def main():
         raise SystemExit("Coloane obligatorii lipsă: " + ", ".join(lipsa))
 
     evenimente, erori, sarite = [], [], 0
+    et_cat, et_tip = {}, {}
 
     for row in ws.iter_rows(min_row=header_row + 1):
         cells = list(row)
@@ -134,7 +135,7 @@ def main():
             sarite += 1
             continue
 
-        cat = normalizeaza_categorie(get("categorie"), erori, "Evenimente, randul %d" % nr)
+        cat = normalizeaza_categorie(get("categorie"), erori, "Evenimente, randul %d" % nr, et_cat)
 
         ev = {
             "id": as_text(get("id")) or f"ev-{nr}",
@@ -154,7 +155,7 @@ def main():
     # important întâi, apoi cronologic
     evenimente.sort(key=lambda e: (e["data"], e["ora_start"] or "99:99", e["titlu"]))
 
-    anunturi, erori_anunt = citeste_anunturi(wb)
+    anunturi, erori_anunt = citeste_anunturi(wb, et_tip)
     erori.extend(erori_anunt)
 
     payload = {
@@ -162,6 +163,8 @@ def main():
         "sursa": SRC.name,
         "evenimente": evenimente,
         "anunturi": anunturi,
+        "categorii_noi": et_cat,
+        "tipuri_noi": et_tip,
     }
 
     OUT.parent.mkdir(parents=True, exist_ok=True)

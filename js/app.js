@@ -29,7 +29,30 @@
     'examen':      { label: 'Examen',      color: 'var(--cat-examen)'      },
     'anunt':       { label: 'Anunț',       color: 'var(--cat-anunt)'       }
   };
-  const catOf = (k) => CATEGORIES[k] || CATEGORIES['anunt'];
+  /* Categoriile si tipurile pe care le adaugi in foaie nu sunt cunoscute
+     dinainte. Vin din events.json si primesc culoarea implicita. */
+  const CULOARE_IMPLICITA = 'var(--cat-open-course)';
+  const CATEGORII_EXTRA = {};
+  const TIPURI_EXTRA = {};
+
+  /* 'seminar-stiintific' -> 'Seminar stiintific', daca foaia nu da altceva */
+  function etichetaDinCheie(k) {
+    const t = k.replace(/-/g, ' ');
+    return t.charAt(0).toUpperCase() + t.slice(1);
+  }
+
+  function adaugăExtra(tinta, brute) {
+    Object.keys(tinta).forEach((k) => delete tinta[k]);
+    Object.entries(brute || {}).forEach(([cheie, eticheta]) => {
+      const e = String(eticheta || '').trim() || etichetaDinCheie(cheie);
+      tinta[cheie] = {
+        label: e.charAt(0).toUpperCase() + e.slice(1),
+        color: CULOARE_IMPLICITA
+      };
+    });
+  }
+
+  const catOf = (k) => CATEGORIES[k] || CATEGORII_EXTRA[k] || CATEGORIES['anunt'];
 
   /* ---------- tipuri de anunț ---------- */
   const TIPURI_ANUNT = {
@@ -38,7 +61,7 @@
     'oportunitate':  { label: 'Oportunitate',  color: 'var(--an-oportunitate)' },
     'administrativ': { label: 'Administrativ', color: 'var(--an-administrativ)' }
   };
-  const tipOf = (k) => TIPURI_ANUNT[k] || TIPURI_ANUNT['administrativ'];
+  const tipOf = (k) => TIPURI_ANUNT[k] || TIPURI_EXTRA[k] || TIPURI_ANUNT['administrativ'];
 
   /* ---------- stare ---------- */
   const state = {
@@ -106,6 +129,8 @@
 
     const raw = Array.isArray(json) ? json : (json.evenimente || json.events || []);
     state.updatedAt = json.actualizat_la || null;
+    adaugăExtra(CATEGORII_EXTRA, json.categorii_noi);
+    adaugăExtra(TIPURI_EXTRA, json.tipuri_noi);
 
     state.events = raw
       .filter((e) => e && e.titlu && e.data)
@@ -229,9 +254,10 @@
     const bar = $('#cat-bar');
     bar.textContent = '';
     const present = [...new Set(state.events.map((e) => e.categorie))]
-      .filter((k) => CATEGORIES[k]);
+      .filter((k) => CATEGORIES[k] || CATEGORII_EXTRA[k]);
 
-    const order = Object.keys(CATEGORIES).filter((k) => present.includes(k));
+    const order = Object.keys(CATEGORIES).filter((k) => present.includes(k))
+      .concat(present.filter((k) => !CATEGORIES[k]).sort());
 
     order.forEach((key) => {
       const c = catOf(key);

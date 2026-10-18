@@ -84,19 +84,43 @@ def e_rand_de_indicatii(titlu):
         ("titlul afisat", "titlul anuntului", "identificator"))
 
 
-def normalizeaza_categorie(valoare, erori, unde):
-    cat = as_text(valoare).lower()
-    if cat in CATEGORII:
-        return cat
-    if cat:
-        erori.append("%s: categoria '%s' nu exista - pusa pe 'anunt'" % (unde, cat))
-    return "anunt"
+def slug(valoare):
+    """'Seminar Stiintific' -> 'seminar-stiintific'.
+
+    Diacriticele cad, ca 'inscriere' si 'inscriere' sa fie acelasi lucru,
+    iar orice nu e litera sau cifra devine o cratima.
+    """
+    t = fara_diacritice(as_text(valoare).lower())
+    t = re.sub(r"[^a-z0-9]+", "-", t)
+    return t.strip("-")
 
 
-def normalizeaza_tip(valoare, erori, unde):
-    tip = as_text(valoare).lower()
-    if tip in TIPURI_ANUNT:
-        return tip
-    if tip:
-        erori.append("%s: tipul '%s' nu exista - pus pe 'administrativ'" % (unde, tip))
-    return "administrativ"
+def _normalizeaza(valoare, cunoscute, implicita, etichete):
+    """Intoarce cheia sub care se salveaza valoarea.
+
+    Valorile din liste se recunosc chiar daca sunt scrise cu diacritice.
+    O valoare noua nu se mai pierde: se pastreaza ca atare, iar textul
+    exact din foaie se tine minte in `etichete`, ca aplicatia sa-l poata
+    afisa asa cum l-ai scris.
+    """
+    brut = as_text(valoare)
+    if not brut:
+        return implicita
+
+    cheie = slug(brut)
+    if not cheie:
+        return implicita
+    if cheie in cunoscute:
+        return cheie
+
+    if etichete is not None and cheie not in etichete:
+        etichete[cheie] = brut
+    return cheie
+
+
+def normalizeaza_categorie(valoare, erori, unde, etichete=None):
+    return _normalizeaza(valoare, CATEGORII, "anunt", etichete)
+
+
+def normalizeaza_tip(valoare, erori, unde, etichete=None):
+    return _normalizeaza(valoare, TIPURI_ANUNT, "administrativ", etichete)

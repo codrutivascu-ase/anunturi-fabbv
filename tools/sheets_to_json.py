@@ -70,7 +70,7 @@ def citeste_tabel(text, obligatorii):
     )
 
 
-def citeste_evenimente(url, erori):
+def citeste_evenimente(url, erori, etichete):
     randuri, cap = citeste_tabel(descarca(url), ("data", "titlu"))
     iesire, sarite = [], 0
 
@@ -94,7 +94,7 @@ def citeste_evenimente(url, erori):
             sarite += 1
             continue
 
-        cat = normalizeaza_categorie(r.get("categorie"), erori, "Evenimente, randul %d" % nr)
+        cat = normalizeaza_categorie(r.get("categorie"), erori, "Evenimente, randul %d" % nr, etichete)
 
         iesire.append({
             "id": as_text(r.get("id")) or "ev-%d" % nr,
@@ -114,7 +114,7 @@ def citeste_evenimente(url, erori):
     return iesire, sarite
 
 
-def citeste_anunturi(url, erori):
+def citeste_anunturi(url, erori, etichete):
     if not url:
         return []
 
@@ -138,7 +138,7 @@ def citeste_anunturi(url, erori):
             erori.append("Anunturi, randul %d: valabil_pana_la invalid - sarit" % nr)
             continue
 
-        tip = normalizeaza_tip(r.get("tip"), erori, "Anunturi, randul %d" % nr)
+        tip = normalizeaza_tip(r.get("tip"), erori, "Anunturi, randul %d" % nr, etichete)
 
         iesire.append({
             "id": as_text(r.get("id")) or "an-%d" % nr,
@@ -169,8 +169,9 @@ def main():
         )
 
     erori = []
-    evenimente, sarite = citeste_evenimente(url_ev, erori)
-    anunturi = citeste_anunturi(url_an, erori)
+    et_cat, et_tip = {}, {}
+    evenimente, sarite = citeste_evenimente(url_ev, erori, et_cat)
+    anunturi = citeste_anunturi(url_an, erori, et_tip)
 
     # Plasa de siguranta: un Sheet gol sau stricat nu trebuie sa goleasca
     # aplicatia. Mai bine pastram datele vechi si semnalam problema.
@@ -187,7 +188,9 @@ def main():
         try:
             vechi = json.loads(OUT.read_text(encoding="utf-8"))
             if (vechi.get("evenimente") == evenimente
-                    and vechi.get("anunturi") == anunturi):
+                    and vechi.get("anunturi") == anunturi
+                    and vechi.get("categorii_noi", {}) == et_cat
+                    and vechi.get("tipuri_noi", {}) == et_tip):
                 print("Nicio schimbare: %d evenimente, %d anunturi."
                       % (len(evenimente), len(anunturi)))
                 for e in erori:
@@ -201,6 +204,10 @@ def main():
         "sursa": "Google Sheets",
         "evenimente": evenimente,
         "anunturi": anunturi,
+        # categoriile si tipurile pe care le-ai inventat in foaie, cu textul
+        # exact scris de tine; aplicatia le afiseaza cu o culoare implicita
+        "categorii_noi": et_cat,
+        "tipuri_noi": et_tip,
     }
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
@@ -209,6 +216,10 @@ def main():
     print("Scris: %s" % OUT)
     print("  %d evenimente, %d sarite" % (len(evenimente), sarite))
     print("  %d anunturi" % len(anunturi))
+    for k, v in sorted(et_cat.items()):
+        print("  + categorie noua: %s (%s)" % (k, v))
+    for k, v in sorted(et_tip.items()):
+        print("  + tip nou de anunt: %s (%s)" % (k, v))
     for e in erori:
         print("  ! " + e)
 
