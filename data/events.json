@@ -1,5 +1,5 @@
 {
-  "actualizat_la": "18.10.2026, 18:47",
+  "actualizat_la": "18.10.2026, 19:36",
   "sursa": "Google Sheets",
   "evenimente": [
     {
@@ -57,12 +57,12 @@
   ],
   "anunturi": [
     {
-      "id": "an-004",
-      "adaugat_la": "2026-10-05",
-      "titlu": "Depunere dosare burse speciale pentru rezultate deosebite în activitățile culturale și organizatorice și de performanță pentru activitatea de\ncercetare științifică",
-      "descriere": "Dosarul se transmite pe mail către adresa secretariat@fin.ase.ro. Condițiile de eligibilitate se pot consulta în metodologia de burse",
+      "id": "an-005",
+      "adaugat_la": "2026-09-10",
+      "titlu": "Depunere dosar pentru bursă socială – semestrul I, an universitar 2026-2027",
+      "descriere": "Condițiile de eligibilitate se pot consulta în metodologia de burse",
       "valabil_de_la": "",
-      "valabil_pana_la": "2026-10-17",
+      "valabil_pana_la": "2026-09-25",
       "tip": "administrativ",
       "link": "https://senat.ase.ro/wp-content/uploads/2026/20260325/Hot.Senat%20nr.%2062%20din%2025.03.2026_Mod.Met.acord.burse.pdf",
       "text_buton": "Vezi condițiile",
@@ -70,12 +70,12 @@
       "important": "da"
     },
     {
-      "id": "an-005",
-      "adaugat_la": "2026-09-10",
-      "titlu": "Depunere dosar pentru bursă socială – semestrul I, an universitar 2026-2027",
-      "descriere": "Condițiile de eligibilitate se pot consulta în metodologia de burse",
+      "id": "an-004",
+      "adaugat_la": "2026-10-05",
+      "titlu": "Depunere dosare burse speciale pentru rezultate deosebite în activitățile culturale și organizatorice și de performanță pentru activitatea de\ncercetare științifică",
+      "descriere": "Dosarul se transmite pe mail către adresa secretariat@fin.ase.ro. Condițiile de eligibilitate se pot consulta în metodologia de burse",
       "valabil_de_la": "",
-      "valabil_pana_la": "2026-10-20",
+      "valabil_pana_la": "2026-10-17",
       "tip": "administrativ",
       "link": "https://senat.ase.ro/wp-content/uploads/2026/20260325/Hot.Senat%20nr.%2062%20din%2025.03.2026_Mod.Met.acord.burse.pdf",
       "text_buton": "Vezi condițiile",
