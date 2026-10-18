@@ -292,15 +292,56 @@
         </span>
       </div>
       <h3 class="anunt-title">${esc(a.titlu)}</h3>
-      ${a.descriere ? `<p class="anunt-desc">${esc(a.descriere)}</p>` : ''}
+      ${a.descriere ? `<p class="anunt-desc is-clamped">${esc(a.descriere)}</p>
+        <button class="anunt-more" type="button" aria-expanded="false" hidden>
+          <span>Vezi detalii</span>${icon('i-chevron-down')}</button>` : ''}
       <div class="anunt-foot">
         <span class="anunt-termen">${icon('i-calendar')}Termen: ${esc(fmtLong(a.valabil_pana_la))}</span>
         ${a.persoana_contact ? `<span>${icon('i-user')}${esc(a.persoana_contact)}</span>` : ''}
       </div>
       ${buton}
     `;
+
+    const desc = card.querySelector('.anunt-desc');
+    const mai = card.querySelector('.anunt-more');
+    if (desc && mai) {
+      mai.addEventListener('click', () => {
+        const strans = desc.classList.toggle('is-clamped');
+        mai.setAttribute('aria-expanded', String(!strans));
+        mai.querySelector('span').textContent = strans ? 'Vezi detalii' : 'Mai puțin';
+      });
+    }
     return card;
   }
+
+  /* Butonul „Vezi detalii” are rost doar daca textul chiar nu incape.
+     Masurarea cere elementul in pagina, deci se face dupa randare. */
+  function aratăButoaneleDeExtindere(rădăcină) {
+    rădăcină.querySelectorAll('.anunt-desc.is-clamped').forEach((desc) => {
+      const mai = desc.nextElementSibling;
+      if (!mai || !mai.classList.contains('anunt-more')) return;
+      mai.hidden = desc.scrollHeight <= desc.clientHeight + 1;
+    });
+  }
+
+  /* O singura masuratoare nu e de ajuns: fontul Poppins se incarca dupa
+     prima randare si schimba inaltimea randurilor, iar rotirea telefonului
+     schimba latimea cardului. Remasuram la ambele. */
+  function programeazăMăsurarea() {
+    const main = $('#list');
+    requestAnimationFrame(() => aratăButoaneleDeExtindere(main));
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => aratăButoaneleDeExtindere(main));
+    }
+  }
+
+  let reMăsurare;
+  window.addEventListener('resize', () => {
+    clearTimeout(reMăsurare);
+    reMăsurare = setTimeout(() => {
+      if (state.range === 'anunturi') aratăButoaneleDeExtindere($('#list'));
+    }, 150);
+  });
 
   function renderAnunturiTab() {
     const main = $('#list');
@@ -327,6 +368,7 @@
     main.appendChild(intro);
 
     list.forEach((a) => main.appendChild(anuntCard(a)));
+    programeazăMăsurarea();
   }
 
   /* ---------- structura anului universitar ---------- */
