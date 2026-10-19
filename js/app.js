@@ -1156,6 +1156,31 @@
     });
   }
 
+  /* ---------- vizite și instalări (statistici anonime) ---------- */
+
+  // id aleator, tinut pe telefon - desparte "vizitator nou" de "a revenit",
+  // fara sa identifice persoana. Statisticile ajung in Workerul de push,
+  // la /vizita si /instalare (vezi worker/src/index.js).
+  const CHEIE_VIZITATOR = 'fabbv-id-vizitator';
+
+  function idVizitator() {
+    try {
+      let id = localStorage.getItem(CHEIE_VIZITATOR);
+      if (!id) {
+        id = (crypto.randomUUID ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(16).slice(2));
+        localStorage.setItem(CHEIE_VIZITATOR, id);
+      }
+      return id;
+    } catch (_) { return null; }
+  }
+
+  function trimitePing(cale) {
+    if (!PUSH_API) return;
+    const v = idVizitator();
+    const url = PUSH_API + cale + (v ? '?v=' + encodeURIComponent(v) : '');
+    fetch(url, { keepalive: true }).catch(() => {});
+  }
+
   /* ---------- întrebarea de la prima pornire ---------- */
 
   const CHEIE_INTREBAT = 'fabbv-intrebat-notificari';
@@ -1185,6 +1210,8 @@
   async function init() {
     wireUI();
     syncBellState();
+    trimitePing('/vizita');
+    window.addEventListener('appinstalled', () => trimitePing('/instalare'));
 
     try {
       await loadEvents();

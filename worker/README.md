@@ -73,7 +73,9 @@ Urci și `VERSION` din `sw.js`, apoi commit și push.
 ```bash
 curl https://anunturi-fabbv-push.<contul-tău>.workers.dev/stare
 ```
-Îți arată câte abonamente are, ora de la București și dacă a trimis azi.
+Îți arată câte abonamente are, ora de la București, dacă a trimis azi, și
+câte vizite / instalări a înregistrat (`viziteTotal`, `viziteAzi`,
+`vizitatoriUniciTotal`, `instalariTotal`).
 
 **Te abonezi:** deschizi aplicația pe telefon, apeși clopoțelul, accepți. Apoi `/stare` ar trebui să arate `abonamente: 1`.
 
@@ -87,6 +89,24 @@ Răspunde cu câte au plecat, câte abonamente moarte a șters și câte au eșu
 ```bash
 npx wrangler tail
 ```
+
+## Vizite și instalări
+
+Aplicația trimite singură două semnale, fără nimic de configurat:
+
+- `GET /vizita` — la fiecare deschidere a paginii.
+- `GET /instalare` — o singură dată, când telefonul instalează aplicația (evenimentul `appinstalled`; pe iPhone, Safari nu trimite acest eveniment, deci instalările din „Adaugă la ecranul principal" nu se văd aici).
+
+Fiecare cerere duce un id generat aleator și ținut în `localStorage` (`fabbv-id-vizitator`) — desparte „a revenit aceeași persoană" de „vizitator nou", fără să identifice pe nimeni. Totul se vede în `/stare`:
+
+| Câmp | Ce arată |
+|---|---|
+| `viziteTotal` | câte încărcări de pagină, de la început |
+| `viziteAzi` | câte azi |
+| `vizitatoriUniciTotal` | câte telefoane distincte au deschis aplicația vreodată |
+| `instalariTotal` | de câte ori s-a instalat aplicația (Android/desktop; nu și iPhone) |
+
+Contoarele nu sunt atomice (KV nu oferă increment), la fel ca `trimise-azi` de mai sus — la traficul aplicației, diferența e neglijabilă.
 
 ## Cum funcționează trimiterea
 
