@@ -467,12 +467,12 @@
   }
 
   // o zi libera care pica in vacanta sau in weekend nu schimba nimic in program
-  function notaZiLibera(z, perioade) {
-    const vacanta = perioade.find((p) => p.tip === 'vacanta' && z.data >= p.start && z.data <= p.final);
-    if (vacanta) return 'în ' + vacanta.titlu.toLowerCase();
+  const eInVacanta = (z, perioade) => perioade.some(
+    (p) => p.tip === 'vacanta' && z.data >= p.start && z.data <= p.final);
+
+  function notaZiLibera(z) {
     const zi = new Date(z.data + 'T12:00:00Z').getUTCDay();
-    if (zi === 0 || zi === 6) return 'cade în weekend';
-    return '';
+    return (zi === 0 || zi === 6) ? 'cade în weekend' : '';
   }
 
   function cardPerioada(p, azi) {
@@ -612,12 +612,16 @@
     main.appendChild(lista);
 
     // zile libere
-    const libere = (date.zile_libere || []).filter((z) => z.data >= azi);
+    // O zi libera care cade intr-o vacanta nu spune nimic nou — tot liber
+    // era. Raman doar cele care intrerup o perioada de activitate.
+    const libere = (date.zile_libere || [])
+      .filter((z) => z.data >= azi)
+      .filter((z) => !eInVacanta(z, perioade));
     if (libere.length) {
       const sec = el('section', 'an-libere');
       sec.innerHTML = `<h3>Zile libere ce urmează</h3>` +
         libere.map((z) => {
-          const nota = notaZiLibera(z, perioade);
+          const nota = notaZiLibera(z);
           return `<div class="zi-libera">
             <span class="zi-data">${esc(fmtLong(z.data))}</span>
             <span class="zi-corp">
@@ -714,7 +718,7 @@
       const why = state.q || state.cats.size
         ? 'Niciun eveniment nu corespunde filtrelor. Încearcă să le resetezi.'
         : state.range === 'azi'
-          ? 'Nu e programat nimic astăzi. Vezi „Toate” pentru zilele următoare.'
+          ? 'Nu e programat nimic astăzi. Vezi „Evenimente” pentru zilele următoare.'
           : 'Nu există evenimente viitoare.';
       e.innerHTML = `${icon('i-inbox')}<h3>Niciun eveniment</h3><p>${esc(why)}</p>`;
       main.appendChild(e);

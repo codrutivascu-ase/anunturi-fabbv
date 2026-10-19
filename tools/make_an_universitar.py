@@ -75,7 +75,7 @@ PERIOADE = [
      "Facultatea de Drept: Proba 1 pe 12.07, Proba 2 pe 15-16.07",
      ""),
     ("vacanta-vara", "Vacanța de vară", "17.07", "24.09.2027", "vacanta", 2,
-     "Nu apare în Calendarul Studentului; intervalul rămas până la deschiderea anului următor",
+     "Intervalul rămas până la deschiderea anului următor",
      ""),
 ]
 
