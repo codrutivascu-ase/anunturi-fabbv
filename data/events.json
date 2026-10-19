@@ -1,7 +1,20 @@
 {
-  "actualizat_la": "18.10.2026, 19:36",
+  "actualizat_la": "19.10.2026, 06:59",
   "sursa": "Google Sheets",
   "evenimente": [
+    {
+      "id": "ev-005",
+      "data": "2026-10-20",
+      "ora_start": "16:00",
+      "ora_final": "",
+      "titlu": "Intră ăn culisele finanțelor din asigurări",
+      "descriere": "Află cum se iau deciziile financiare dintr-o companie de asigurări, direct de la echipa Easy Asigurari și cum poți intra în Finance Rotational Internship",
+      "locatie": "Amfiteatrul 3M1, Clădirea Moxa",
+      "organizator": "CCOC ASE, FABBV",
+      "categorie": "workshop",
+      "link": "https://docs.google.com/forms/d/e/1FAIpQLScf0b4Ct_Dazir2iRxuMa2Z3tKTUYFroH2MUAUBZofiSuMiHg/viewform",
+      "important": "da"
+    },
     {
       "id": "ev-001",
       "data": "2026-10-20",
@@ -88,7 +101,7 @@
       "titlu": "Examenul de licență — sesiunea iulie 2027",
       "descriere": "Încărcarea cererii se face online, până pe 23 octombrie 2026, la următorul link: https://forms.gle/GUp6kHTm7VLSBzsk8",
       "valabil_de_la": "",
-      "valabil_pana_la": "2026-11-10",
+      "valabil_pana_la": "2026-10-31",
       "tip": "inscriere",
       "link": "https://fabbv.ase.ro/2026/04/06/examenul-de-licenta-2027-bachelor-exam-2027/",
       "text_buton": "Vezi condițiile",
@@ -114,7 +127,7 @@
       "titlu": "Examenul de disertație— sesiunea iulie 2027",
       "descriere": "Încărcarea cererii se face online, până pe 20 noiembrie 2026, la următorul link: https://forms.gle/QZgxxqZ1fR2ndx3M8",
       "valabil_de_la": "",
-      "valabil_pana_la": "2026-12-05",
+      "valabil_pana_la": "2026-11-27",
       "tip": "inscriere",
       "link": "https://fabbv.ase.ro/2026/04/06/examenul-de-disertatie-2027-masters-exam-2027/",
       "text_buton": "Vezi condițiile",
