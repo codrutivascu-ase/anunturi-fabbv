@@ -1156,11 +1156,11 @@
     });
   }
 
-  /* ---------- vizite și instalări (statistici anonime) ---------- */
+  /* ---------- instalări (statistică anonimă) ---------- */
 
-  // id aleator, tinut pe telefon - desparte "vizitator nou" de "a revenit",
-  // fara sa identifice persoana. Statisticile ajung in Workerul de push,
-  // la /vizita si /instalare (vezi worker/src/index.js).
+  // id aleator, tinut pe telefon - ca sa nu numaram de doua ori acelasi
+  // telefon, fara sa identifice persoana. Ajunge in Workerul de push,
+  // la /instalare (vezi worker/src/index.js).
   const CHEIE_VIZITATOR = 'fabbv-id-vizitator';
 
   function idVizitator() {
@@ -1210,7 +1210,6 @@
   async function init() {
     wireUI();
     syncBellState();
-    trimitePing('/vizita');
     window.addEventListener('appinstalled', () => trimitePing('/instalare'));
 
     try {

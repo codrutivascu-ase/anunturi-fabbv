@@ -393,22 +393,8 @@ async function incrementeaza(env, cheie, ttl) {
   await env.ABONAMENTE.put(cheie, String(curent + 1), ttl ? { expirationTtl: ttl } : undefined);
 }
 
-// id-ul vizitatorului e generat de telefon si tinut in localStorage, nu
-// identifica persoana - doar desparte "aceeasi persoana a revenit" de
-// "o persoana noua". E optional: fara el, numaram doar vizitele brute.
-async function inregistreazaVizita(env, idVizitator) {
-  await incrementeaza(env, 'vizite-total');
-  await incrementeaza(env, 'vizite:' + ziLocala(), 172800);
-
-  if (idVizitator) {
-    const cheie = 'vizitator:' + idVizitator;
-    if (!(await env.ABONAMENTE.get(cheie))) {
-      await env.ABONAMENTE.put(cheie, ziLocala(), { expirationTtl: 31536000 });
-      await incrementeaza(env, 'vizitatori-unici-total');
-    }
-  }
-}
-
+// id-ul e generat de telefon si tinut in localStorage, nu identifica
+// persoana - doar nu numaram de doua ori acelasi telefon.
 async function inregistreazaInstalare(env, idVizitator) {
   if (idVizitator) {
     const cheie = 'instalat:' + idVizitator;
@@ -481,10 +467,9 @@ export default {
       return json(await anunturiNoi(env, date, ziLocala()) || { noi: 0 }, env);
     }
 
-    if (url.pathname === '/vizita') {
-      await inregistreazaVizita(env, url.searchParams.get('v'));
-      return json({ ok: true }, env);
-    }
+    // vizitele nu se mai numara (consumau scrieri KV); ruta ramane pentru
+    // versiunile vechi ale aplicatiei, ramase in cache pe telefoane
+    if (url.pathname === '/vizita') return json({ ok: true }, env);
 
     if (url.pathname === '/instalare') {
       await inregistreazaInstalare(env, url.searchParams.get('v'));
@@ -502,9 +487,6 @@ export default {
         ultimaTrimitere: await env.ABONAMENTE.get('ultima-trimitere'),
         oraBucuresti: oraLocala(),
         ziua: ziLocala(),
-        viziteTotal: Number(await env.ABONAMENTE.get('vizite-total') || 0),
-        viziteAzi: Number(await env.ABONAMENTE.get('vizite:' + ziLocala()) || 0),
-        vizitatoriUniciTotal: Number(await env.ABONAMENTE.get('vizitatori-unici-total') || 0),
         instalariTotal: Number(await env.ABONAMENTE.get('instalari-total') || 0)
       }, env);
     }

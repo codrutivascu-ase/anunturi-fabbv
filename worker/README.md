@@ -74,8 +74,7 @@ Urci și `VERSION` din `sw.js`, apoi commit și push.
 curl https://anunturi-fabbv-push.<contul-tău>.workers.dev/stare
 ```
 Îți arată câte abonamente are, ora de la București, dacă a trimis azi, și
-câte vizite / instalări a înregistrat (`viziteTotal`, `viziteAzi`,
-`vizitatoriUniciTotal`, `instalariTotal`).
+câte instalări a înregistrat (`instalariTotal`).
 
 **Te abonezi:** deschizi aplicația pe telefon, apeși clopoțelul, accepți. Apoi `/stare` ar trebui să arate `abonamente: 1`.
 
@@ -90,23 +89,18 @@ Răspunde cu câte au plecat, câte abonamente moarte a șters și câte au eșu
 npx wrangler tail
 ```
 
-## Vizite și instalări
+## Instalări
 
-Aplicația trimite singură două semnale, fără nimic de configurat:
+Aplicația trimite singură `GET /instalare`, o singură dată, când telefonul instalează aplicația (evenimentul `appinstalled`; pe iPhone, Safari nu trimite acest eveniment, deci instalările din „Adaugă la ecranul principal" nu se văd aici).
 
-- `GET /vizita` — la fiecare deschidere a paginii.
-- `GET /instalare` — o singură dată, când telefonul instalează aplicația (evenimentul `appinstalled`; pe iPhone, Safari nu trimite acest eveniment, deci instalările din „Adaugă la ecranul principal" nu se văd aici).
-
-Fiecare cerere duce un id generat aleator și ținut în `localStorage` (`fabbv-id-vizitator`) — desparte „a revenit aceeași persoană" de „vizitator nou", fără să identifice pe nimeni. Totul se vede în `/stare`:
+Cererea duce un id generat aleator și ținut în `localStorage` (`fabbv-id-vizitator`), ca același telefon să nu fie numărat de două ori; nu identifică pe nimeni. Rezultatul se vede în `/stare`:
 
 | Câmp | Ce arată |
 |---|---|
-| `viziteTotal` | câte încărcări de pagină, de la început |
-| `viziteAzi` | câte azi |
-| `vizitatoriUniciTotal` | câte telefoane distincte au deschis aplicația vreodată |
+| `abonamente` | câți abonați la notificări |
 | `instalariTotal` | de câte ori s-a instalat aplicația (Android/desktop; nu și iPhone) |
 
-Contoarele nu sunt atomice (KV nu oferă increment), la fel ca `trimise-azi` de mai sus — la traficul aplicației, diferența e neglijabilă.
+Vizitele nu se mai numără: scriau în KV la fiecare deschidere și consumau limita zilnică. Ruta `/vizita` există încă, dar nu face nimic. Contorul de instalări nu e atomic (KV nu oferă increment), dar la acest trafic diferența e neglijabilă.
 
 ## Cum funcționează trimiterea
 
