@@ -1,5 +1,5 @@
 {
-  "actualizat_la": "20.10.2026, 13:03",
+  "actualizat_la": "20.10.2026, 17:56",
   "sursa": "Google Sheets",
   "evenimente": [
     {
@@ -80,7 +80,7 @@
       "link": "https://senat.ase.ro/wp-content/uploads/2026/20260325/Hot.Senat%20nr.%2062%20din%2025.03.2026_Mod.Met.acord.burse.pdf",
       "text_buton": "Vezi condițiile",
       "persoana_contact": "Secretariat FABBV, secretariat@fin.ase.ro",
-      "important": "da"
+      "important": ""
     },
     {
       "id": "an-004",
@@ -93,6 +93,19 @@
       "link": "https://senat.ase.ro/wp-content/uploads/2026/20260325/Hot.Senat%20nr.%2062%20din%2025.03.2026_Mod.Met.acord.burse.pdf",
       "text_buton": "Vezi condițiile",
       "persoana_contact": "Secretariat FABBV, secretariat@fin.ase.ro",
+      "important": ""
+    },
+    {
+      "id": "an-010",
+      "adaugat_la": "2026-10-20",
+      "titlu": "Senior Tax Consultant - TPA Romania",
+      "descriere": "Participarea la proiecte de consultanță fiscală și structurare, tax due diligence, tax reviews și proiecte de M&A, lucrul cu legislația fiscală românească și cu reglementările fiscale internaționale relevante, precum și colaborarea cu echipele TPA Group și Baker Tilly International.",
+      "valabil_de_la": "",
+      "valabil_pana_la": "2026-10-27",
+      "tip": "oportunitate",
+      "link": "https://www.tpa-group.ro/ro/senior-tax-consultant/",
+      "text_buton": "Detalii complete job",
+      "persoana_contact": "hr@tpa-group.ro",
       "important": "da"
     },
     {
@@ -119,7 +132,7 @@
       "link": "https://consilierstudenti.ase.ro/calendarul-studentului-2026-2027/",
       "text_buton": "",
       "persoana_contact": "Secretariat FABBV, secretariat@fin.ase.ro",
-      "important": "da"
+      "important": ""
     },
     {
       "id": "an-003",
@@ -145,7 +158,7 @@
       "link": "https://fabbv.ase.ro/2026/09/23/orar/",
       "text_buton": "",
       "persoana_contact": "Secretariat FABBV, secretariat@fin.ase.ro",
-      "important": "da"
+      "important": ""
     },
     {
       "id": "an-007",
@@ -184,7 +197,7 @@
       "link": "https://fabbv.ase.ro/wp-content/uploads/2026/10/2.Ghid_practica_2026-2027_v1.5.pdf",
       "text_buton": "Accesează ghidul",
       "persoana_contact": "Prodecan Prof.univ.dr. Radu Ciobanu, radu.ciobanu@fin.ase.ro",
-      "important": "da"
+      "important": ""
     }
   ],
   "categorii_noi": {
