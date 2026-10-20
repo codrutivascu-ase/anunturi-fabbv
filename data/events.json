@@ -1,5 +1,5 @@
 {
-  "actualizat_la": "19.10.2026, 14:36",
+  "actualizat_la": "20.10.2026, 13:03",
   "sursa": "Google Sheets",
   "evenimente": [
     {
@@ -170,6 +170,19 @@
       "tip": "practica",
       "link": "https://docs.google.com/forms/d/e/1FAIpQLSfLKRgfpN3nluSk14LU8D5BkLw4Kpd-W8pKsBGpVxtO7JpSag/viewform",
       "text_buton": "Formular",
+      "persoana_contact": "Prodecan Prof.univ.dr. Radu Ciobanu, radu.ciobanu@fin.ase.ro",
+      "important": "da"
+    },
+    {
+      "id": "an-009",
+      "adaugat_la": "2026-10-20",
+      "titlu": "Ghid practică de specialitate",
+      "descriere": "Toate informațiile de care ai nevoie pentru efectuarea stagiului de practică",
+      "valabil_de_la": "",
+      "valabil_pana_la": "2027-05-21",
+      "tip": "practica",
+      "link": "https://fabbv.ase.ro/wp-content/uploads/2026/10/2.Ghid_practica_2026-2027_v1.5.pdf",
+      "text_buton": "Accesează ghidul",
       "persoana_contact": "Prodecan Prof.univ.dr. Radu Ciobanu, radu.ciobanu@fin.ase.ro",
       "important": "da"
     }
