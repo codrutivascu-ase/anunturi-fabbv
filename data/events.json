@@ -1,5 +1,5 @@
 {
-  "actualizat_la": "20.10.2026, 17:56",
+  "actualizat_la": "21.10.2026, 14:39",
   "sursa": "Google Sheets",
   "evenimente": [
     {
@@ -135,6 +135,19 @@
       "important": ""
     },
     {
+      "id": "an-014",
+      "adaugat_la": "2026-10-21",
+      "titlu": "Stagiu de practică ING Hubs",
+      "descriere": "Stagiu de practica intr-o multinatională specializată în software development, data management, non-financial risk & compliance, audit",
+      "valabil_de_la": "",
+      "valabil_pana_la": "2026-11-15",
+      "tip": "practica",
+      "link": "https://fabbv.ase.ro/oportunitati-de-angajare/",
+      "text_buton": "Mai multe detalii",
+      "persoana_contact": "recrutare_inghubs@ing.com",
+      "important": "da"
+    },
+    {
       "id": "an-003",
       "adaugat_la": "2026-10-10",
       "titlu": "Examenul de disertație— sesiunea iulie 2027",
@@ -145,6 +158,71 @@
       "link": "https://fabbv.ase.ro/2026/04/06/examenul-de-disertatie-2027-masters-exam-2027/",
       "text_buton": "Vezi condițiile",
       "persoana_contact": "Secretariat FABBV, secretariat@fin.ase.ro",
+      "important": "da"
+    },
+    {
+      "id": "an-011",
+      "adaugat_la": "2026-10-21",
+      "titlu": "Stagiu de practică ANAF",
+      "descriere": "Dacă vrei să faci practică în administrația fiscală, poți aplica aici. Domeniile în care poți transforma teoria în practică: Fiscalitate: colectare venituri, asistență contribuabili, inspecție fiscală; Juridic; Resurse umane; Economic etc.",
+      "valabil_de_la": "",
+      "valabil_pana_la": "2026-12-31",
+      "tip": "practica",
+      "link": "https://fabbv.ase.ro/oportunitati-de-angajare/",
+      "text_buton": "Mai multe detalii",
+      "persoana_contact": "formare.profesionala@anaf.ro",
+      "important": "da"
+    },
+    {
+      "id": "an-012",
+      "adaugat_la": "2026-10-21",
+      "titlu": "Stagiu de practică BCR Sucursala Unirea (Hub)",
+      "descriere": "Pentru a aplica trebuie să te duci în orice sucursală BCR și să menționezi că ești student la Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori din cadrul ASE București",
+      "valabil_de_la": "",
+      "valabil_pana_la": "2026-12-31",
+      "tip": "practica",
+      "link": "https://fabbv.ase.ro/oportunitati-de-angajare/",
+      "text_buton": "Mai multe detalii",
+      "persoana_contact": "",
+      "important": "da"
+    },
+    {
+      "id": "an-013",
+      "adaugat_la": "2026-10-21",
+      "titlu": "Stagiu de practică Ifis Finance",
+      "descriere": "IFN specializat in finantarea companiilor",
+      "valabil_de_la": "",
+      "valabil_pana_la": "2026-12-31",
+      "tip": "practica",
+      "link": "https://fabbv.ase.ro/oportunitati-de-angajare/",
+      "text_buton": "Mai multe detalii",
+      "persoana_contact": "info@bancaifis.ro",
+      "important": "da"
+    },
+    {
+      "id": "an-015",
+      "adaugat_la": "2026-10-21",
+      "titlu": "Stagiu de practică OMNIASIG",
+      "descriere": "Vei face practică într-o entitate specializată în asigurări",
+      "valabil_de_la": "",
+      "valabil_pana_la": "2026-12-31",
+      "tip": "practica",
+      "link": "https://fabbv.ase.ro/oportunitati-de-angajare/",
+      "text_buton": "Mai multe detalii",
+      "persoana_contact": "resurse.umane@omniasig.ro",
+      "important": "da"
+    },
+    {
+      "id": "an-016",
+      "adaugat_la": "2026-10-21",
+      "titlu": "Stagiu de practică UnicreditBank",
+      "descriere": "Stagii de practică în unul din liderii sistemului bancar românesc",
+      "valabil_de_la": "",
+      "valabil_pana_la": "2026-12-31",
+      "tip": "practica",
+      "link": "https://fabbv.ase.ro/oportunitati-de-angajare/",
+      "text_buton": "Mai multe detalii",
+      "persoana_contact": "practicasiinternship@unicredit.ro",
       "important": "da"
     },
     {
