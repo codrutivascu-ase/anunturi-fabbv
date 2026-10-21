@@ -1,5 +1,5 @@
 {
-  "actualizat_la": "21.10.2026, 14:39",
+  "actualizat_la": "21.10.2026, 22:16",
   "sursa": "Google Sheets",
   "evenimente": [
     {
@@ -26,6 +26,19 @@
       "organizator": "Prof. univ. dr.  Andreea Stoian, Faculty of Finance and Banking, ASE",
       "categorie": "seminar-stiintific",
       "link": "https://fabbv.ase.ro/seminar-stiintific-moneda-finante-si-banci/",
+      "important": "da"
+    },
+    {
+      "id": "ev-006",
+      "data": "2026-10-21",
+      "ora_start": "17:20",
+      "ora_final": "19:00",
+      "titlu": "Piața monetară, valutară și a titlurilor de stat",
+      "descriere": "Speaker:  Iancu Cutumișu, șef serviciu în cadrul Direcției operațiuni de piață a BNR",
+      "locatie": "Sala 3504, Clădirea Moxa",
+      "organizator": "Programul de masterat BANCAS",
+      "categorie": "open-course",
+      "link": "https://www.instagram.com/p/DewswsugKeE/?utm_source=ig_web_copy_link&mdxt=MWQ1ZGUxMzBkMA==&srtk=MWQ1ZGUxMzBkMA==",
       "important": "da"
     },
     {
