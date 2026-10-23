@@ -229,13 +229,61 @@
 
   /* ---------- randare ---------- */
 
+  /* ---------- „nevăzute”: insigne doar pentru ce e nou ----------
+     Ținem pe telefon id-urile deja văzute la Evenimente și Anunțuri.
+     Insigna arată doar ce nu e în listă. La prima pornire (sau după
+     actualizare) tot ce există deja se consideră văzut, ca să nu apară
+     un număr mare fără sens. Nu se scrie nimic în Worker/KV. */
+  const CHEIE_VAZUTE = 'fabbv-vazute';
+
+  function citesteVazute() {
+    try {
+      const v = JSON.parse(localStorage.getItem(CHEIE_VAZUTE));
+      if (v && Array.isArray(v.toate) && Array.isArray(v.anunturi)) return v;
+    } catch (_) {}
+    return null;
+  }
+
+  function idsCurente() {
+    const t = todayKey();
+    return {
+      toate: state.events.filter((e) => e.data >= t).map((e) => e.id),
+      anunturi: state.anunturi.filter(anuntActiv).map((a) => a.id)
+    };
+  }
+
+  function salveazaVazute(v) {
+    try { localStorage.setItem(CHEIE_VAZUTE, JSON.stringify(v)); } catch (_) {}
+  }
+
+  // cheie: 'toate' | 'anunturi'. Păstrează doar id-urile încă existente.
+  function marcheazaVazute(cheie) {
+    const cur = idsCurente();
+    const v = citesteVazute() || cur;
+    v[cheie] = cur[cheie];
+    salveazaVazute(v);
+  }
+
+  function nevazute() {
+    const cur = idsCurente();
+    let v = citesteVazute();
+    if (!v) { salveazaVazute(cur); v = cur; }
+    return {
+      toate: cur.toate.filter((id) => !v.toate.includes(id)).length,
+      anunturi: cur.anunturi.filter((id) => !v.anunturi.includes(id)).length
+    };
+  }
+
   function renderCounts() {
     const t = todayKey();
+    // dacă ești deja în tab, ce apare acolo e văzut
+    if (state.range === 'toate' || state.range === 'anunturi') marcheazaVazute(state.range);
+    const nou = nevazute();
     const counts = {
       azi: state.events.filter((e) => e.data === t).length,
-      toate: state.events.filter((e) => e.data >= t).length
+      toate: nou.toate,
+      anunturi: nou.anunturi
     };
-    counts.anunturi = state.anunturi.filter(anuntActiv).length;
 
     document.querySelectorAll('[data-count]').forEach((n) => {
       const v = counts[n.dataset.count] || 0;
@@ -1112,6 +1160,7 @@
         document.querySelectorAll('.nav-item').forEach((t) =>
           t.setAttribute('aria-selected', String(t === tab)));
         state.range = tab.dataset.range;
+        renderCounts();
         // categoriile sunt ale evenimentelor
         document.querySelector('.cat-bar').hidden =
           (state.range === 'anunturi' || state.range === 'an');
