@@ -72,7 +72,8 @@
     range: 'azi',
     cats: new Set(),
     q: '',
-    updatedAt: null
+    updatedAt: null,
+    incarcat: false
   };
 
   /* ---------- helperi DOM ---------- */
@@ -174,6 +175,7 @@
       .sort((a, b) =>
         a.valabil_pana_la.localeCompare(b.valabil_pana_la) ||
         a.titlu.localeCompare(b.titlu, 'ro'));
+    state.incarcat = true;
   }
 
   /* ---------- anunțuri: valabilitate și afișare ---------- */
@@ -265,7 +267,7 @@
     try { localStorage.setItem(CHEIE_VAZUTE, JSON.stringify(v)); } catch (_) {}
   }
 
-  // cheie: 'toate' | 'anunturi'. Păstrează doar id-urile încă existente.
+  // cheie: 'toate' | 'anunturi' | 'cariera'. Păstrează doar id-urile încă existente.
   function marcheazaVazute(cheie) {
     const cur = idsCurente();
     const v = citesteVazute() || cur;
@@ -295,6 +297,8 @@
   ];
 
   function renderCounts() {
+    // fără date nu atingem starea „văzut”: o bază goală ar face totul „nou”
+    if (!state.incarcat) return;
     const t = todayKey();
     const nevaz = nevazute();
     // dacă ești în tab, ce era nou se păstrează evidențiat, iar insigna se golește

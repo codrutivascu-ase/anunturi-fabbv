@@ -4,7 +4,7 @@
    - primește push-ul zilnic trimis de cron
    =========================================================== */
 
-const VERSION = 'fabbv-v21';
+const VERSION = 'fabbv-v22';
 const SHELL = [
   './',
   'index.html',
@@ -20,7 +20,9 @@ self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(VERSION)
       // addAll e atomic: dacă un fișier lipsește, cade tot installul
-      .then((c) => Promise.allSettled(SHELL.map((u) => c.add(u))))
+      // cache: 'reload' ocolește cache-ul HTTP (GitHub Pages ține 10 min),
+      // altfel index.html nou putea ajunge lângă un app.js vechi
+      .then((c) => Promise.allSettled(SHELL.map((u) => c.add(new Request(u, { cache: 'reload' })))))
       .then(() => self.skipWaiting())
   );
 });
@@ -41,7 +43,8 @@ const ASTEPTARE = 3500;
 function dinRetea(req, ms) {
   return new Promise((rezolva, respinge) => {
     const ceas = setTimeout(() => respinge(new Error('timeout')), ms);
-    fetch(req).then(
+    // no-cache: întrebăm mereu serverul, nu cache-ul HTTP al browserului
+    fetch(req, { cache: 'no-cache' }).then(
       (res) => { clearTimeout(ceas); rezolva(res); },
       (err) => { clearTimeout(ceas); respinge(err); }
     );
