@@ -269,20 +269,34 @@
     let v = citesteVazute();
     if (!v) { salveazaVazute(cur); v = cur; }
     return {
-      toate: cur.toate.filter((id) => !v.toate.includes(id)).length,
-      anunturi: cur.anunturi.filter((id) => !v.anunturi.includes(id)).length
+      toate: cur.toate.filter((id) => !v.toate.includes(id)),
+      anunturi: cur.anunturi.filter((id) => !v.anunturi.includes(id))
     };
   }
 
+  /* Ce era nevăzut când ai intrat în tab rămâne evidențiat („NOU”, primul
+     în listă) cât stai acolo. Insigna se resetează imediat; la următoarea
+     intrare în tab elementele nu mai sunt noi. */
+  const noiInTab = { toate: new Set(), anunturi: new Set() };
+  const esteNou = (cheie, id) => noiInTab[cheie].has(id);
+  const nouPrimele = (cheie, lista) => [
+    ...lista.filter((x) => esteNou(cheie, x.id)),
+    ...lista.filter((x) => !esteNou(cheie, x.id))
+  ];
+
   function renderCounts() {
     const t = todayKey();
-    // dacă ești deja în tab, ce apare acolo e văzut
-    if (state.range === 'toate' || state.range === 'anunturi') marcheazaVazute(state.range);
-    const nou = nevazute();
+    const nevaz = nevazute();
+    // dacă ești în tab, ce era nou se păstrează evidențiat, iar insigna se golește
+    if (state.range === 'toate' || state.range === 'anunturi') {
+      nevaz[state.range].forEach((id) => noiInTab[state.range].add(id));
+      marcheazaVazute(state.range);
+      nevaz[state.range] = [];
+    }
     const counts = {
       azi: state.events.filter((e) => e.data === t).length,
-      toate: nou.toate,
-      anunturi: nou.anunturi
+      toate: nevaz.toate.length,
+      anunturi: nevaz.anunturi.length
     };
 
     document.querySelectorAll('[data-count]').forEach((n) => {
@@ -328,6 +342,8 @@
     const card = el('button', 'event');
     card.type = 'button';
     card.style.setProperty('--cat', c.color);
+    const nou = esteNou('toate', ev.id);
+    if (nou) card.classList.add('is-nou');
 
     const meta = [];
     if (ev.locatie) meta.push(`<span>${icon('i-pin')}${esc(ev.locatie)}</span>`);
@@ -335,6 +351,7 @@
 
     card.innerHTML = `
       <div class="event-top">
+        ${nou ? '<span class="nou-pill">Nou</span>' : ''}
         <span class="badge">${esc(c.label)}</span>
         <span class="event-time">${icon('i-clock')}${esc(fmtTime(ev))}</span>
         ${ev.important ? `<span class="pin" title="Important">${icon('i-star')}</span>` : ''}
@@ -350,7 +367,8 @@
   function anuntCard(a) {
     const tip = tipOf(a.tip);
     const cd = countdown(a);
-    const card = el('article', 'anunt' + (a.important ? ' is-important' : ''));
+    const nou = esteNou('anunturi', a.id);
+    const card = el('article', 'anunt' + (a.important ? ' is-important' : '') + (nou ? ' is-nou' : ''));
     card.style.setProperty('--an', tip.color);
 
     const buton = a.link
@@ -360,6 +378,7 @@
 
     card.innerHTML = `
       <div class="anunt-top">
+        ${nou ? '<span class="nou-pill">Nou</span>' : ''}
         <span class="anunt-tip">${esc(tip.label)}</span>
         <span class="anunt-countdown${cd.urgent ? ' is-urgent' : ''}">
           ${icon('i-hourglass')}${esc(cd.text)}
@@ -441,7 +460,7 @@
     intro.textContent = 'Anunțuri valabile până la termenul indicat. Dispar automat după ce expiră.';
     main.appendChild(intro);
 
-    list.forEach((a) => main.appendChild(anuntCard(a)));
+    nouPrimele('anunturi', list).forEach((a) => main.appendChild(anuntCard(a)));
     programeazăMăsurarea();
   }
 
@@ -786,7 +805,7 @@
       const head = el('div', 'day-head' + (day === t ? ' is-today' : ''));
       head.innerHTML = `<h2>${esc(fmtDayHead(day))}</h2><span class="rule"></span>`;
       group.appendChild(head);
-      evs.forEach((ev) => group.appendChild(eventCard(ev)));
+      nouPrimele('toate', evs).forEach((ev) => group.appendChild(eventCard(ev)));
       main.appendChild(group);
     });
   }
@@ -1160,6 +1179,9 @@
         document.querySelectorAll('.nav-item').forEach((t) =>
           t.setAttribute('aria-selected', String(t === tab)));
         state.range = tab.dataset.range;
+        // la fiecare intrare, evidențierea de la vizita trecută dispare
+        noiInTab.toate.clear();
+        noiInTab.anunturi.clear();
         renderCounts();
         // categoriile sunt ale evenimentelor
         document.querySelector('.cat-bar').hidden =

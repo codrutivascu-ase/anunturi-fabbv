@@ -1465,3 +1465,30 @@ main {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* ===== elemente noi (nevăzute) ===== */
+.nou-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+.event.is-nou,
+.anunt.is-nou {
+  box-shadow: 0 0 0 2px var(--brand);
+  animation: nou-puls 1.6s ease-out 2;
+}
+@keyframes nou-puls {
+  0%   { box-shadow: 0 0 0 2px var(--brand), 0 0 0 0 var(--brand-soft); }
+  70%  { box-shadow: 0 0 0 2px var(--brand), 0 0 0 12px transparent; }
+  100% { box-shadow: 0 0 0 2px var(--brand), 0 0 0 0 transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .event.is-nou, .anunt.is-nou { animation: none; }
+}

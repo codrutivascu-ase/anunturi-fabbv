@@ -4,7 +4,7 @@
    - primește push-ul zilnic trimis de cron
    =========================================================== */
 
-const VERSION = 'fabbv-v19';
+const VERSION = 'fabbv-v20';
 const SHELL = [
   './',
   'index.html',
