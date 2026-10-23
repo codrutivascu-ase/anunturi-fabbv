@@ -4,7 +4,7 @@
    - primește push-ul zilnic trimis de cron
    =========================================================== */
 
-const VERSION = 'fabbv-v22';
+const VERSION = 'fabbv-v23';
 const SHELL = [
   './',
   'index.html',
@@ -112,7 +112,7 @@ self.addEventListener('push', (e) => {
     tag: d.tag || 'fabbv-daily',
     renotify: true,
     data: { url: d.url || './' },
-    actions: [{ action: 'open', title: 'Vezi evenimentele' }]
+    actions: [{ action: 'open', title: 'Deschide' }]
   };
   e.waitUntil(self.registration.showNotification(title, options));
 });

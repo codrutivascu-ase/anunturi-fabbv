@@ -1310,6 +1310,13 @@
       renderCounts();
       renderCatBar();
       renderList();
+      // venit dintr-o notificare: ./?tab=cariera | anunturi | toate
+      const tab = new URLSearchParams(location.search).get('tab');
+      const buton = tab && document.querySelector(`.nav-item[data-range="${CSS.escape(tab)}"]`);
+      if (buton) {
+        buton.click();
+        history.replaceState(null, '', location.pathname);
+      }
       if (state.updatedAt) {
         $('#meta-line').textContent = 'Ultima actualizare: ' + state.updatedAt;
       }

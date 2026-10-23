@@ -5,7 +5,7 @@
      POST /subscribe     salvează abonamentul unui telefon
      POST /unsubscribe   îl șterge
      cron (la 15 minute):
-       - trimite o notificare pentru fiecare anunț nou publicat
+       - trimite o notificare pentru fiecare anunț sau eveniment nou publicat
        - la 9:00, ora României, trimite rezumatul zilei
 
    Nu folosește nicio bibliotecă externă: semnarea VAPID și criptarea
@@ -243,13 +243,17 @@ async function difuzeaza(mesaj, env) {
 /* ------------------------------------------------------------------ */
 
 const LIMITA_ANUNTURI_PE_RUNDA = 3;   // cate pot pleca intr-o singura rulare
-const PLAFON_ZILNIC = 3;              // cate notificari de anunt, cel mult, intr-o zi
+const PLAFON_ZILNIC = 10;             // cate notificari de anunt/eveniment, cel mult, intr-o zi
+
+// la fel ca in aplicatie (js/app.js): aceste tipuri stau in tabul „Carieră”
+const TIPURI_CARIERA = ['oportunitate', 'practica', 'job'];
 
 // Amprenta campurilor care conteaza. Daca se schimba intre doua
 // citiri, inseamna ca randul inca se scrie.
 async function amprentaAnunt(a) {
   const text = [a.titlu, a.descriere, a.valabil_pana_la, a.valabil_de_la,
-                a.tip, a.link, a.text_buton, a.persoana_contact].join('\u0000');
+                a.tip, a.link, a.text_buton, a.persoana_contact,
+                a.data, a.ora_start, a.locatie, a.categorie].join('\u0000');
   const h = await crypto.subtle.digest('SHA-256', ute.encode(text));
   return b64urlEncode(new Uint8Array(h)).slice(0, 16);
 }
@@ -260,29 +264,56 @@ function mesajAnunt(a) {
   const luni = ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie',
                 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'];
 
+  const cariera = TIPURI_CARIERA.includes(String(a.tip || '').toLowerCase());
   return {
-    title: 'FABBV · anunț nou',
+    title: cariera ? 'FABBV · oportunitate nouă' : 'FABBV · anunț nou',
     body: a.titlu + `\nTermen: ${zi} ${luni[termen.getUTCMonth()]}`,
     tag: 'fabbv-anunt-' + a.id,
-    url: './?an=' + encodeURIComponent(a.id)
+    url: './?tab=' + (cariera ? 'cariera' : 'anunturi')
   };
 }
 
-async function anunturiNoi(env, date, azi) {
-  const active = (date.anunturi || []).filter((a) => {
+const LUNI_SCURT = ['ian', 'feb', 'mar', 'apr', 'mai', 'iun', 'iul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+
+function mesajEveniment(e) {
+  const d = new Date(e.data + 'T12:00:00Z');
+  const cand = `${d.getUTCDate()} ${LUNI_SCURT[d.getUTCMonth()]}` + (e.ora_start ? `, ${e.ora_start}` : '');
+  return {
+    title: 'FABBV · eveniment nou',
+    body: e.titlu + '\n' + cand + (e.locatie ? ' · ' + e.locatie : ''),
+    tag: 'fabbv-ev-' + e.id,
+    url: './?tab=toate'
+  };
+}
+
+// Anunțurile (inclusiv cele de carieră) și evenimentele viitoare, fiecare
+// cu mesajul lui. Id-urile nu se suprapun (an-…, ev-…), deci împart cheile.
+function elementeActive(date, azi) {
+  const anunturi = (date.anunturi || []).filter((a) => {
     if (a.valabil_de_la && azi < a.valabil_de_la) return false;
     return azi <= a.valabil_pana_la;
-  });
+  }).map((a) => ({ ...a, mesaj: mesajAnunt(a) }));
+  const evenimente = (date.evenimente || [])
+    .filter((e) => e.id && e.data >= azi && String(e.activ ?? 'da').toLowerCase() !== 'nu')
+    .map((e) => ({ ...e, mesaj: mesajEveniment(e) }));
+  return { anunturi, evenimente };
+}
 
-  // La prima rulare după publicarea Workerului marcăm tot ce există
-  // deja, fără să trimitem nimic. Altfel abonații ar primi deodată
-  // o notificare pentru fiecare anunț vechi.
-  const initializat = await env.ABONAMENTE.get('anunturi-initializate');
-  if (!initializat) {
-    for (const a of active) await env.ABONAMENTE.put('notificat:' + a.id, azi);
-    await env.ABONAMENTE.put('anunturi-initializate', new Date().toISOString());
-    return { initializare: active.length };
+async function anunturiNoi(env, date, azi) {
+  const { anunturi, evenimente } = elementeActive(date, azi);
+  const active = anunturi.concat(evenimente);
+
+  // La prima rulare marcăm tot ce există deja, fără să trimitem nimic.
+  // Altfel abonații ar primi deodată o notificare pentru fiecare element
+  // vechi. Evenimentele au marcajul lor, adăugat după anunțuri.
+  const initializari = {};
+  for (const [cheie, lista] of [['anunturi-initializate', anunturi], ['evenimente-initializate', evenimente]]) {
+    if (await env.ABONAMENTE.get(cheie)) continue;
+    for (const x of lista) await env.ABONAMENTE.put('notificat:' + x.id, azi);
+    await env.ABONAMENTE.put(cheie, new Date().toISOString());
+    initializari[cheie] = lista.length;
   }
+  if (Object.keys(initializari).length) return { initializare: initializari };
 
   // Daca un anunt a disparut din Sheet inainte sa apuce sa fie trimis,
   // nu lasam amprenta in urma.
@@ -333,7 +364,7 @@ async function anunturiNoi(env, date, azi) {
   const rezultate = [];
 
   for (const a of acum) {
-    const r = await difuzeaza(mesajAnunt(a), env);
+    const r = await difuzeaza(a.mesaj, env);
     await env.ABONAMENTE.put('notificat:' + a.id, azi);
     await env.ABONAMENTE.delete('vazut:' + a.id);
     rezultate.push({ id: a.id, ...r });
@@ -428,7 +459,7 @@ async function cheiaPentru(endpoint) {
 
 /* Exporturi pentru teste. Workerul foloseste doar exportul implicit de mai jos;
    acestea permit incarcarea functiilor individual, din afara. */
-export { cripteaza, vapidHeader, compuneMesaj, mesajAnunt, amprentaAnunt, ziLocala, oraLocala, b64urlDecode, b64urlEncode };
+export { cripteaza, vapidHeader, compuneMesaj, mesajAnunt, mesajEveniment, elementeActive, amprentaAnunt, ziLocala, oraLocala, b64urlDecode, b64urlEncode };
 
 export default {
   async fetch(req, env) {

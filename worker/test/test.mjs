@@ -237,7 +237,9 @@ function testAnuntIndividual() {
   verifica('corpul conține titlul anunțului', m.body.includes('Înscrie-te'));
   verifica('corpul conține termenul în cuvinte', m.body.includes('21 octombrie'), m.body);
   verifica('tag unic per anunț', m.tag === 'fabbv-anunt-an-002', m.tag);
-  verifica('linkul deschide anunțul', m.url.includes('an-002'), m.url);
+  verifica('linkul deschide tabul Anunțuri', m.url === './?tab=anunturi', m.url);
+  verifica('anunțul de practică deschide Carieră',
+    mesajAnunt({ ...m, id: 'an-x', tip: 'practica', titlu: 'P', valabil_pana_la: '2026-11-01' }).url === './?tab=cariera');
 
   // două anunțuri diferite nu trebuie să se suprascrie pe telefon
   const m2 = mesajAnunt({ id: 'an-003', titlu: 'Altul', valabil_pana_la: '2026-11-01' });
