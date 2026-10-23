@@ -1,5 +1,5 @@
 {
-  "actualizat_la": "21.10.2026, 22:16",
+  "actualizat_la": "23.10.2026, 19:55",
   "sursa": "Google Sheets",
   "evenimente": [
     {
@@ -107,6 +107,19 @@
       "text_buton": "Vezi condițiile",
       "persoana_contact": "Secretariat FABBV, secretariat@fin.ase.ro",
       "important": ""
+    },
+    {
+      "id": "an-017",
+      "adaugat_la": "2026-10-21",
+      "titlu": "Oportunitate testare Mensa Romania",
+      "descriere": "Mensa România organizează o sesiuni de testare, iar studenții FABBV au acces la 20 de locuri gratuite!",
+      "valabil_de_la": "",
+      "valabil_pana_la": "2026-10-24",
+      "tip": "oportunitate",
+      "link": "https://mensaromania.ro/test-date-post/bucuresti-24-10-2025/",
+      "text_buton": "Mai multe detalii",
+      "persoana_contact": "",
+      "important": "da"
     },
     {
       "id": "an-010",
