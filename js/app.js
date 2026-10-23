@@ -200,6 +200,10 @@
     return null;
   }
 
+  // Tabul „Carieră” strânge anunțurile cu aceste etichete; restul rămân la „Anunțuri”
+  const TIPURI_CARIERA = ['oportunitate', 'practica', 'job'];
+  const esteCariera = (a) => TIPURI_CARIERA.includes(a.tip);
+
   function countdown(a) {
     const n = zileIntre(todayKey(), a.valabil_pana_la);
     if (n <= 0) return { text: 'Ultima zi', urgent: true };
@@ -239,7 +243,11 @@
   function citesteVazute() {
     try {
       const v = JSON.parse(localStorage.getItem(CHEIE_VAZUTE));
-      if (v && Array.isArray(v.toate) && Array.isArray(v.anunturi)) return v;
+      if (v && Array.isArray(v.toate) && Array.isArray(v.anunturi)) {
+        // tabul Carieră a apărut ulterior: ce există deja la prima citire e văzut
+        if (!Array.isArray(v.cariera)) { v.cariera = idsCurente().cariera; salveazaVazute(v); }
+        return v;
+      }
     } catch (_) {}
     return null;
   }
@@ -248,7 +256,8 @@
     const t = todayKey();
     return {
       toate: state.events.filter((e) => e.data >= t).map((e) => e.id),
-      anunturi: state.anunturi.filter(anuntActiv).map((a) => a.id)
+      anunturi: state.anunturi.filter(anuntActiv).filter((a) => !esteCariera(a)).map((a) => a.id),
+      cariera: state.anunturi.filter(anuntActiv).filter(esteCariera).map((a) => a.id)
     };
   }
 
@@ -270,14 +279,15 @@
     if (!v) { salveazaVazute(cur); v = cur; }
     return {
       toate: cur.toate.filter((id) => !v.toate.includes(id)),
-      anunturi: cur.anunturi.filter((id) => !v.anunturi.includes(id))
+      anunturi: cur.anunturi.filter((id) => !v.anunturi.includes(id)),
+      cariera: cur.cariera.filter((id) => !v.cariera.includes(id))
     };
   }
 
   /* Ce era nevăzut când ai intrat în tab rămâne evidențiat („NOU”, primul
      în listă) cât stai acolo. Insigna se resetează imediat; la următoarea
      intrare în tab elementele nu mai sunt noi. */
-  const noiInTab = { toate: new Set(), anunturi: new Set() };
+  const noiInTab = { toate: new Set(), anunturi: new Set(), cariera: new Set() };
   const esteNou = (cheie, id) => noiInTab[cheie].has(id);
   const nouPrimele = (cheie, lista) => [
     ...lista.filter((x) => esteNou(cheie, x.id)),
@@ -288,7 +298,7 @@
     const t = todayKey();
     const nevaz = nevazute();
     // dacă ești în tab, ce era nou se păstrează evidențiat, iar insigna se golește
-    if (state.range === 'toate' || state.range === 'anunturi') {
+    if (state.range in noiInTab) {
       nevaz[state.range].forEach((id) => noiInTab[state.range].add(id));
       marcheazaVazute(state.range);
       nevaz[state.range] = [];
@@ -296,7 +306,8 @@
     const counts = {
       azi: state.events.filter((e) => e.data === t).length,
       toate: nevaz.toate.length,
-      anunturi: nevaz.anunturi.length
+      anunturi: nevaz.anunturi.length,
+      cariera: nevaz.cariera.length
     };
 
     document.querySelectorAll('[data-count]').forEach((n) => {
@@ -367,7 +378,7 @@
   function anuntCard(a) {
     const tip = tipOf(a.tip);
     const cd = countdown(a);
-    const nou = esteNou('anunturi', a.id);
+    const nou = esteNou(esteCariera(a) ? 'cariera' : 'anunturi', a.id);
     const card = el('article', 'anunt' + (a.important ? ' is-important' : '') + (nou ? ' is-nou' : ''));
     card.style.setProperty('--an', tip.color);
 
@@ -432,17 +443,18 @@
   window.addEventListener('resize', () => {
     clearTimeout(reMăsurare);
     reMăsurare = setTimeout(() => {
-      if (state.range === 'anunturi') aratăButoaneleDeExtindere($('#list'));
+      if (state.range === 'anunturi' || state.range === 'cariera') aratăButoaneleDeExtindere($('#list'));
     }, 150);
   });
 
-  function renderAnunturiTab() {
+  function renderAnunturiTab(cheie) {
+    const cariera = cheie === 'cariera';
     const main = $('#list');
     main.setAttribute('aria-busy', 'false');
     main.textContent = '';
 
     const q = state.q.trim().toLowerCase();
-    const list = state.anunturi.filter(anuntActiv).filter((a) => {
+    const list = state.anunturi.filter(anuntActiv).filter((a) => esteCariera(a) === cariera).filter((a) => {
       if (!q) return true;
       return [a.titlu, a.descriere, a.persoana_contact, tipOf(a.tip).label]
         .join(' ').toLowerCase().includes(q);
@@ -450,17 +462,22 @@
 
     if (!list.length) {
       const e = el('div', 'empty');
-      e.innerHTML = `${icon('i-megafon')}<h3>Niciun anunț activ</h3>
+      e.innerHTML = cariera
+        ? `${icon('i-servieta')}<h3>Nicio oportunitate activă</h3>
+        <p>${esc(q ? 'Nimic nu corespunde căutării.' : 'Momentan nu sunt oportunități, stagii de practică sau joburi.')}</p>`
+        : `${icon('i-megafon')}<h3>Niciun anunț activ</h3>
         <p>${esc(q ? 'Niciun anunț nu corespunde căutării.' : 'Nu există anunțuri în desfășurare.')}</p>`;
       main.appendChild(e);
       return;
     }
 
     const intro = el('p', 'anunt-intro');
-    intro.textContent = 'Anunțuri valabile până la termenul indicat. Dispar automat după ce expiră.';
+    intro.textContent = cariera
+      ? 'Oportunități, stagii de practică și joburi, valabile până la termenul indicat.'
+      : 'Anunțuri valabile până la termenul indicat. Dispar automat după ce expiră.';
     main.appendChild(intro);
 
-    nouPrimele('anunturi', list).forEach((a) => main.appendChild(anuntCard(a)));
+    nouPrimele(cheie, list).forEach((a) => main.appendChild(anuntCard(a)));
     programeazăMăsurarea();
   }
 
@@ -771,7 +788,7 @@
   }
 
   function renderList() {
-    if (state.range === 'anunturi') { renderAnunturiTab(); return; }
+    if (state.range === 'anunturi' || state.range === 'cariera') { renderAnunturiTab(state.range); return; }
     if (state.range === 'an') { renderAnTab(); return; }
 
     const main = $('#list');
@@ -1182,10 +1199,11 @@
         // la fiecare intrare, evidențierea de la vizita trecută dispare
         noiInTab.toate.clear();
         noiInTab.anunturi.clear();
+        noiInTab.cariera.clear();
         renderCounts();
         // categoriile sunt ale evenimentelor
         document.querySelector('.cat-bar').hidden =
-          (state.range === 'anunturi' || state.range === 'an');
+          (state.range === 'anunturi' || state.range === 'cariera' || state.range === 'an');
 
         if (state.range === 'an' && !state.an) {
           $('#list').setAttribute('aria-busy', 'true');
