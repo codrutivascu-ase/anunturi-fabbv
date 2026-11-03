@@ -1,5 +1,5 @@
 {
-  "actualizat_la": "23.10.2026, 19:55",
+  "actualizat_la": "03.11.2026, 22:34",
   "sursa": "Google Sheets",
   "evenimente": [
     {
@@ -52,6 +52,19 @@
       "organizator": "Prof. univ. dr.  Miruna Pochea, Faculty of Economics and Business Administration, Babes-Bolyai University",
       "categorie": "seminar-stiintific",
       "link": "https://fabbv.ase.ro/seminar-stiintific-moneda-finante-si-banci/",
+      "important": "da"
+    },
+    {
+      "id": "ev-007",
+      "data": "2026-11-09",
+      "ora_start": "17:30",
+      "ora_final": "19:00",
+      "titlu": "În culisele unei bănci: cum sunt gestionate riscurile în perioade de criză?",
+      "descriere": "Speaker:  Ioana Gheorghiade, vicepreședinte risc BCR",
+      "locatie": "Amfiteatrul 3M7, Clădirea Moxa",
+      "organizator": "Programul de masterat BANCAS",
+      "categorie": "open-course",
+      "link": "https://www.instagram.com/p/DfRob6-C7Gq/",
       "important": "da"
     },
     {
