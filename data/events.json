@@ -1,5 +1,5 @@
 {
-  "actualizat_la": "04.11.2026, 17:56",
+  "actualizat_la": "04.11.2026, 23:34",
   "sursa": "Google Sheets",
   "evenimente": [
     {
@@ -174,6 +174,19 @@
       "important": "da"
     },
     {
+      "id": "an-018",
+      "adaugat_la": "2026-11-04",
+      "titlu": "Intership Electica SA",
+      "descriere": "Program de Internship: O lună alături de liderii Electrica",
+      "valabil_de_la": "",
+      "valabil_pana_la": "2026-11-11",
+      "tip": "practica",
+      "link": "https://volt.electrica.ro/?utm_source=asociatii_universitati&utm_medium=email&utm_campaign=invitatie",
+      "text_buton": "Mai multe detalii",
+      "persoana_contact": "",
+      "important": "da"
+    },
+    {
       "id": "an-006",
       "adaugat_la": "2026-10-18",
       "titlu": "Afișarea listelor cu studenții beneficiari ai burselor - 12 noiembrie 2026",
@@ -314,6 +327,32 @@
       "link": "https://docs.google.com/forms/d/e/1FAIpQLSfLKRgfpN3nluSk14LU8D5BkLw4Kpd-W8pKsBGpVxtO7JpSag/viewform",
       "text_buton": "Formular",
       "persoana_contact": "Prodecan Prof.univ.dr. Radu Ciobanu, radu.ciobanu@fin.ase.ro",
+      "important": "da"
+    },
+    {
+      "id": "an-020",
+      "adaugat_la": "2026-11-04",
+      "titlu": "KPMG",
+      "descriere": "Practica in cadrul unei companii din Big4",
+      "valabil_de_la": "",
+      "valabil_pana_la": "2027-02-28",
+      "tip": "practica",
+      "link": "https://kpmg-romania.talentlyft.com/o/71dagN",
+      "text_buton": "Mai multe detalii",
+      "persoana_contact": "Info311335@kpmg.com",
+      "important": "da"
+    },
+    {
+      "id": "an-019",
+      "adaugat_la": "2026-11-04",
+      "titlu": "Otto Broker",
+      "descriere": "Echipele OttoBroker sunt pregătite să îţi arate ce înseamnă activitatea practică într-o companie de brokeraj în asigurări.\nSite: https://www.ottobroker.ro/",
+      "valabil_de_la": "",
+      "valabil_pana_la": "2027-02-28",
+      "tip": "practica",
+      "link": "https://corporate.ottobroker.ro/internship",
+      "text_buton": "Mai multe detalii",
+      "persoana_contact": "hr@ottobroker.ro",
       "important": "da"
     },
     {
