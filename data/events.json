@@ -1,5 +1,5 @@
 {
-  "actualizat_la": "03.11.2026, 22:34",
+  "actualizat_la": "04.11.2026, 17:56",
   "sursa": "Google Sheets",
   "evenimente": [
     {
@@ -52,6 +52,19 @@
       "organizator": "Prof. univ. dr.  Miruna Pochea, Faculty of Economics and Business Administration, Babes-Bolyai University",
       "categorie": "seminar-stiintific",
       "link": "https://fabbv.ase.ro/seminar-stiintific-moneda-finante-si-banci/",
+      "important": "da"
+    },
+    {
+      "id": "ev-008",
+      "data": "2026-11-05",
+      "ora_start": "09:00",
+      "ora_final": "13:00",
+      "titlu": "EUDI Wallet: Viitorul identității digitale în Europa",
+      "descriere": "Descoperă implicațiile acestei inițiative europene pentru România și pentru sectorul financiar, alături de reprezentanți ai mediului academic, autorităților, băncilor și industriei fintech.\n\nPrintre keynote speakers se numără și Prof. univ. dr. Georgiana-Camelia Georgescu, decan FABBV.",
+      "locatie": "Aula Magna, ASE",
+      "organizator": "Facultatea de Finanțe, Asigurpri, Bănci și Burse de Valori",
+      "categorie": "conferinta",
+      "link": "https://forms.gle/5H8yP6YeMw3CcLRy9",
       "important": "da"
     },
     {
