@@ -1,5 +1,5 @@
 {
-  "actualizat_la": "06.11.2026, 00:08",
+  "actualizat_la": "07.11.2026, 13:28",
   "sursa": "Google Sheets",
   "evenimente": [
     {
@@ -91,6 +91,19 @@
       "organizator": "Asist. univ. dr.  Codruț Ivașcu, Faculty of Finance and Banking, ASE",
       "categorie": "seminar-stiintific",
       "link": "https://fabbv.ase.ro/seminar-stiintific-moneda-finante-si-banci/",
+      "important": "da"
+    },
+    {
+      "id": "ev-009",
+      "data": "2026-11-11",
+      "ora_start": "16:00",
+      "ora_final": "",
+      "titlu": "Breaking the Burnout Cycle",
+      "descriere": "Burnout-ul este tot mai prezent în viața tinerilor, dar cât de bine știm să-l recunoaștem și să-l gestionăm? Te invităm la „Breaking the Burnout Cycle”, o activitate interactivă dedicată unui subiect actual, cu discuții deschise, exemple din viața de student și soluții practice pentru gestionarea stresului și prevenirea epuizării.",
+      "locatie": "ZborHub ASE",
+      "organizator": "ASFIN X USASE",
+      "categorie": "workshop",
+      "link": "https://ereper.ro/eveniment/breaking-the-burnout-cycle",
       "important": "da"
     },
     {
