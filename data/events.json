@@ -1,5 +1,5 @@
 {
-  "actualizat_la": "07.11.2026, 13:28",
+  "actualizat_la": "08.11.2026, 14:28",
   "sursa": "Google Sheets",
   "evenimente": [
     {
@@ -62,9 +62,61 @@
       "titlu": "EUDI Wallet: Viitorul identității digitale în Europa",
       "descriere": "Descoperă implicațiile acestei inițiative europene pentru România și pentru sectorul financiar, alături de reprezentanți ai mediului academic, autorităților, băncilor și industriei fintech.\n\nPrintre keynote speakers se numără și Prof. univ. dr. Georgiana-Camelia Georgescu, decan FABBV.",
       "locatie": "Aula Magna, ASE",
-      "organizator": "Facultatea de Finanțe, Asigurpri, Bănci și Burse de Valori",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
       "categorie": "conferinta",
       "link": "https://forms.gle/5H8yP6YeMw3CcLRy9",
+      "important": "da"
+    },
+    {
+      "id": "ev-012",
+      "data": "2026-11-09",
+      "ora_start": "10:50",
+      "ora_final": "12:20",
+      "titlu": "(Curs deschis) Matematici aplicate în finanțe",
+      "descriere": "Invitat: Gabriela Constantinescu, Managing Partener, Antal International",
+      "locatie": "Amfiteatrul 3M3, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
+      "link": "",
+      "important": "da"
+    },
+    {
+      "id": "ev-010",
+      "data": "2026-11-09",
+      "ora_start": "12:30",
+      "ora_final": "14:00",
+      "titlu": "(Curs deschis) Introducere în contabilitate",
+      "descriere": "Invitat: Cimpoeru Maria Violeta, Sef serviciu financiar salarizare, Inalta Curte de Casatie si Justitie (ICCJ)",
+      "locatie": "Amfiteatrul 3M3, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
+      "link": "",
+      "important": "da"
+    },
+    {
+      "id": "ev-013",
+      "data": "2026-11-09",
+      "ora_start": "12:30",
+      "ora_final": "14:00",
+      "titlu": "(Curs deschis) Tehnologia aplicațiilor Office",
+      "descriere": "Invitat: Georgia Salagean, Vicepresedinte Executiv Finante (CFO), Unicredit BANK",
+      "locatie": "Amfiteatrul 3M4, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
+      "link": "",
+      "important": "da"
+    },
+    {
+      "id": "ev-011",
+      "data": "2026-11-09",
+      "ora_start": "15:50",
+      "ora_final": "17:20",
+      "titlu": "(Curs deschis) Microeconomie",
+      "descriere": "Invitat: Adrian Manolache, Director Marketing si Imagine Corporativa, Exim Banca Romaneasca",
+      "locatie": "Amfiteatrul 3M3, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
+      "link": "",
       "important": "da"
     },
     {
@@ -396,7 +448,8 @@
     }
   ],
   "categorii_noi": {
-    "seminar-stiintific": "Seminar stiintific"
+    "seminar-stiintific": "Seminar stiintific",
+    "business-week": "Business Week"
   },
   "tipuri_noi": {
     "practica": "Practică"
