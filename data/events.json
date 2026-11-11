@@ -1,5 +1,5 @@
 {
-  "actualizat_la": "10.11.2026, 18:10",
+  "actualizat_la": "11.11.2026, 18:08",
   "sursa": "Google Sheets",
   "evenimente": [
     {
@@ -625,6 +625,97 @@
       "categorie": "business-week",
       "link": "",
       "important": "da"
+    },
+    {
+      "id": "ev-055",
+      "data": "2026-11-12",
+      "ora_start": "09:10",
+      "ora_final": "10:40",
+      "titlu": "[Curs deschis LICENȚĂ] Fiscalitate",
+      "descriere": "Invitat: Adrian Nica, Președinte ANAF",
+      "locatie": "Amfiteatrul 3M3, Clădirea Moxa",
+      "organizator": "",
+      "categorie": "anunt",
+      "link": "",
+      "important": ""
+    },
+    {
+      "id": "ev-054",
+      "data": "2026-11-12",
+      "ora_start": "10:50",
+      "ora_final": "12:20",
+      "titlu": "[Curs deschis LICENȚĂ] Instituții de credit",
+      "descriere": "Invitat: Consuela Popescu, Consilier financiar-bancar, Biroul de Credit",
+      "locatie": "Amfiteatrul 3M4, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
+      "link": "",
+      "important": ""
+    },
+    {
+      "id": "ev-056",
+      "data": "2026-11-12",
+      "ora_start": "12:30",
+      "ora_final": "14:00",
+      "titlu": "[Curs deschis LICENȚĂ] Baze de date financiar-bancare",
+      "descriere": "Invitat: Consuela Popescu, Consilier financiar-bancar, Biroul de Credit",
+      "locatie": "",
+      "organizator": "",
+      "categorie": "anunt",
+      "link": "",
+      "important": ""
+    },
+    {
+      "id": "ev-050",
+      "data": "2026-11-12",
+      "ora_start": "14:10",
+      "ora_final": "15:40",
+      "titlu": "[Curs deschis LICENȚĂ] Introducere în contabilitate",
+      "descriere": "Invitat: Simona Stanculescu, Senior Consultant, Smac Accounting & Consultancyl",
+      "locatie": "Amfiteatrul 3M3, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
+      "link": "",
+      "important": ""
+    },
+    {
+      "id": "ev-051",
+      "data": "2026-11-12",
+      "ora_start": "14:10",
+      "ora_final": "15:40",
+      "titlu": "[Curs deschis LICENȚĂ] Tehnologia aplicațiilor Office",
+      "descriere": "Invitat: Stefan Jiru, Coordonator Central Reporting, Unicredit BANK",
+      "locatie": "Amfiteatrul 3M4, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
+      "link": "",
+      "important": ""
+    },
+    {
+      "id": "ev-052",
+      "data": "2026-11-12",
+      "ora_start": "14:10",
+      "ora_final": "15:40",
+      "titlu": "[Curs deschis LICENȚĂ] Tehnologia aplicațiilor Office",
+      "descriere": "Invitat: Carmen Bora, Asociat INTOCO",
+      "locatie": "Sala 3607, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
+      "link": "",
+      "important": ""
+    },
+    {
+      "id": "ev-053",
+      "data": "2026-11-12",
+      "ora_start": "15:50",
+      "ora_final": "17:20",
+      "titlu": "[Curs deschis LICENȚĂ] Managementul general al firmei",
+      "descriere": "Invitat: Diana TUDORAN, Fondator și coordonator de programe, UROCK",
+      "locatie": "Amfiteatrul 3M3, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
+      "link": "",
+      "important": ""
     },
     {
       "id": "ev-004",
