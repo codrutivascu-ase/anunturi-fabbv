@@ -1,5 +1,5 @@
 {
-  "actualizat_la": "11.11.2026, 18:08",
+  "actualizat_la": "12.11.2026, 00:50",
   "sursa": "Google Sheets",
   "evenimente": [
     {
@@ -627,6 +627,19 @@
       "important": "da"
     },
     {
+      "id": "ev-060",
+      "data": "2026-11-12",
+      "ora_start": "09:10",
+      "ora_final": "10:40",
+      "titlu": "[Curs deschis LICENȚĂ] Asigurări sociale și pensii private",
+      "descriere": "Invitat: Ionut Stroie, CEO BT Pensii",
+      "locatie": "Amfiteatrul 3M4, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
+      "link": "",
+      "important": "da"
+    },
+    {
       "id": "ev-055",
       "data": "2026-11-12",
       "ora_start": "09:10",
@@ -634,10 +647,49 @@
       "titlu": "[Curs deschis LICENȚĂ] Fiscalitate",
       "descriere": "Invitat: Adrian Nica, Președinte ANAF",
       "locatie": "Amfiteatrul 3M3, Clădirea Moxa",
-      "organizator": "",
-      "categorie": "anunt",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
       "link": "",
-      "important": ""
+      "important": "da"
+    },
+    {
+      "id": "ev-059",
+      "data": "2026-11-12",
+      "ora_start": "10:50",
+      "ora_final": "12:20",
+      "titlu": "[Curs deschis LICENȚĂ] Asigurări sociale și pensii private",
+      "descriere": "Invitat: Ionut Stroie, CEO BT Pensii",
+      "locatie": "Amfiteatrul 3M6, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
+      "link": "",
+      "important": "da"
+    },
+    {
+      "id": "ev-058",
+      "data": "2026-11-12",
+      "ora_start": "10:50",
+      "ora_final": "12:20",
+      "titlu": "[Curs deschis LICENȚĂ] Evaluarea și finanțarea proiectelor de investiții",
+      "descriere": "Invitat: Adina Călin, Director Produse si Servicii Bancare, CEC Bank",
+      "locatie": "Amfiteatrul 3M4, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
+      "link": "",
+      "important": "da"
+    },
+    {
+      "id": "ev-061",
+      "data": "2026-11-12",
+      "ora_start": "10:50",
+      "ora_final": "12:20",
+      "titlu": "[Curs deschis LICENȚĂ] Inginerie financiară",
+      "descriere": "Invitat: Adrian Codîrlașu, Președinte, CFA Society România",
+      "locatie": "Sala 3607, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
+      "link": "",
+      "important": "da"
     },
     {
       "id": "ev-054",
@@ -650,7 +702,20 @@
       "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
       "categorie": "business-week",
       "link": "",
-      "important": ""
+      "important": "da"
+    },
+    {
+      "id": "ev-057",
+      "data": "2026-11-12",
+      "ora_start": "10:50",
+      "ora_final": "12:20",
+      "titlu": "[Curs deschis LICENȚĂ] Instituții de credit",
+      "descriere": "Invitat: Alecsandra Valasuteanu, Director General, Ifis Finance IFN",
+      "locatie": "Amfiteatrul 3M3, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
+      "link": "",
+      "important": "da"
     },
     {
       "id": "ev-056",
@@ -658,12 +723,12 @@
       "ora_start": "12:30",
       "ora_final": "14:00",
       "titlu": "[Curs deschis LICENȚĂ] Baze de date financiar-bancare",
-      "descriere": "Invitat: Consuela Popescu, Consilier financiar-bancar, Biroul de Credit",
-      "locatie": "",
-      "organizator": "",
-      "categorie": "anunt",
+      "descriere": "Invitat: Alexandru Soaica, Partener KPMG",
+      "locatie": "Amfiteatrul 3M6, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
       "link": "",
-      "important": ""
+      "important": "da"
     },
     {
       "id": "ev-050",
@@ -676,7 +741,7 @@
       "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
       "categorie": "business-week",
       "link": "",
-      "important": ""
+      "important": "da"
     },
     {
       "id": "ev-051",
@@ -689,7 +754,7 @@
       "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
       "categorie": "business-week",
       "link": "",
-      "important": ""
+      "important": "da"
     },
     {
       "id": "ev-052",
@@ -702,7 +767,20 @@
       "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
       "categorie": "business-week",
       "link": "",
-      "important": ""
+      "important": "da"
+    },
+    {
+      "id": "ev-062",
+      "data": "2026-11-12",
+      "ora_start": "15:50",
+      "ora_final": "17:20",
+      "titlu": "[Curs deschis LICENȚĂ] Instituții de credit",
+      "descriere": "Invitat: Manuela Bădescu, Director General, FactorPay IFN SA",
+      "locatie": "Sala 3209, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
+      "link": "",
+      "important": "da"
     },
     {
       "id": "ev-053",
@@ -715,7 +793,33 @@
       "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
       "categorie": "business-week",
       "link": "",
-      "important": ""
+      "important": "da"
+    },
+    {
+      "id": "ev-063",
+      "data": "2026-11-12",
+      "ora_start": "17:30",
+      "ora_final": "19:00",
+      "titlu": "[Curs deschis MASTERAT] Managementul financiar al proprietatilor imobiliare",
+      "descriere": "Invitat: Daniel Tudor, CEO, The Concept",
+      "locatie": "Sala 3602, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
+      "link": "",
+      "important": "da"
+    },
+    {
+      "id": "ev-064",
+      "data": "2026-11-12",
+      "ora_start": "19:10",
+      "ora_final": "",
+      "titlu": "[Curs deschis MASTERAT] Economie Financiară și Monetară",
+      "descriere": "Invitat: Dimitrie Miheș, Specialist Senior Guvernanță, Banca Mondială",
+      "locatie": "Amfiteatrul 3M4, Clădirea Moxa",
+      "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
+      "categorie": "business-week",
+      "link": "",
+      "important": "da"
     },
     {
       "id": "ev-004",
