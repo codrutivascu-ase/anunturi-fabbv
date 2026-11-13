@@ -1,5 +1,5 @@
 {
-  "actualizat_la": "12.11.2026, 22:19",
+  "actualizat_la": "13.11.2026, 17:40",
   "sursa": "Google Sheets",
   "evenimente": [
     {
@@ -1068,6 +1068,19 @@
       "link": "https://fabbv.ase.ro/oportunitati-de-angajare/",
       "text_buton": "Mai multe detalii",
       "persoana_contact": "recrutare_inghubs@ing.com",
+      "important": "da"
+    },
+    {
+      "id": "an-022",
+      "adaugat_la": "2026-11-13",
+      "titlu": "Repartizare studenți/absolvednți FABBV pe coordonator",
+      "descriere": "",
+      "valabil_de_la": "",
+      "valabil_pana_la": "2026-11-20",
+      "tip": "administrativ",
+      "link": "https://fabbv.ase.ro/wp-content/uploads/2026/11/coordonatori_licenta.pdf",
+      "text_buton": "Mai multe detalii",
+      "persoana_contact": "",
       "important": "da"
     },
     {
