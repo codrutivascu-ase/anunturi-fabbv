@@ -1,5 +1,5 @@
 {
-  "actualizat_la": "13.11.2026, 17:40",
+  "actualizat_la": "15.11.2026, 14:59",
   "sursa": "Google Sheets",
   "evenimente": [
     {
@@ -936,6 +936,32 @@
       "organizator": "Facultatea de Finanțe, Asigurări, Bănci și Burse de Valori",
       "categorie": "business-week",
       "link": "",
+      "important": "da"
+    },
+    {
+      "id": "ev-074",
+      "data": "2026-11-16",
+      "ora_start": "17:30",
+      "ora_final": "",
+      "titlu": "Încotro se îndreaptă sectorul bancar românesc?",
+      "descriere": "Speaker: Bogdan Neacșu, Președinte al CEC Bank și al Asociației Române a Băncilor",
+      "locatie": "Amfiteatrul 3M7, Clădirea Moxa",
+      "organizator": "Programul de masterat BANCAS",
+      "categorie": "open-course",
+      "link": "https://www.instagram.com/p/Dfos3friLBg/?srtk=Yjd4dTdseXFqeGYy",
+      "important": "da"
+    },
+    {
+      "id": "ev-075",
+      "data": "2026-11-17",
+      "ora_start": "17:20",
+      "ora_final": "",
+      "titlu": "Anatomia unei bule speculative, de la euforie la pierderi",
+      "descriere": "Speakeri: Robert Grecu, economist principal BNR – Direcția Stabilitate financiară și Ștefania Stancu, economist BNR – Direcția Stabilitate financiară",
+      "locatie": "Sala 3504, Clădirea Moxa",
+      "organizator": "Programul de masterat BANCAS",
+      "categorie": "open-course",
+      "link": "https://www.instagram.com/p/DfowAfviRAD/?dlrf=Y3JlOGR2bnZ6a3Bi",
       "important": "da"
     },
     {
