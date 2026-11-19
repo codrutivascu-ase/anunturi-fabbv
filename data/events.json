@@ -1,5 +1,5 @@
 {
-  "actualizat_la": "15.11.2026, 14:59",
+  "actualizat_la": "19.11.2026, 12:55",
   "sursa": "Google Sheets",
   "evenimente": [
     {
@@ -973,6 +973,19 @@
       "descriere": "This paper investigates the association between democracy and corporate dividend policy, with an emphasis on periods of economic and health uncertainty related to pandemic crises (using the COVID-19 pandemic crisis as a proxy). The analysis relies on 116,750 firm-year observations from 11,675 firms across 46 countries for the period 2013 – 2022. The results show that democracy is positively associated with dividend payments. Pandemic shock is captured through a wide range of complementary measures related to epidemiological severity, government measures, and population sentiments. We find that the pandemic crisis is negatively associated with dividend payments. One of the main findings indicates that interactional variables between democracy and the different proxy variables of the pandemic are significant, but the results depend on the level of the country economic development. Furthermore, the choice of the angle from which the pandemic shock is captured becomes relevant for the sign and scale of the association between dividend payout and each interactional variable with democracy. For companies from developed countries, democratic cultures positively interact with pandemic crisis proxies in explaining dividend payments. In emerging and developing economies, democracy negatively interacts with the variables of pandemic crises when dividend payments are decided. Our results can offer insights for top management decision makers and international investors for better dividend forecasting and provide clarifications for dividend policies..",
       "locatie": "Sala 3607, Clădirea Moxa",
       "organizator": "Prof. univ. dr.  Victor Dragotă, Faculty of Finance and Banking, ASE",
+      "categorie": "seminar-stiintific",
+      "link": "https://fabbv.ase.ro/seminar-stiintific-moneda-finante-si-banci/",
+      "important": "da"
+    },
+    {
+      "id": "ev-076",
+      "data": "2026-12-15",
+      "ora_start": "17:30",
+      "ora_final": "19:00",
+      "titlu": "Narrow Portfolios in a Thin Market: Retail Investor Diversification in Romania",
+      "descriere": "Retail portfolios in emerging markets are often narrow, a pattern commonly attributed to a limited investment opportunity set. This paper separates limited opportunities from demand-side frictions using anonymized position-level holdings for 43360 clients of a large Romanian broker observed at four dates between the end of 2020 and August 22, 2023. The opportunity set is large. At least 3534 foreign and 674 domestic financial instruments were held by at least one client. In 2023, the value-weighted portfolio of all clients combined is as diversified, in concentration terms, as an equally weighted 44-asset portfolio. On average, a client portfolio is as diversified as an equally weighted 4.11-asset portfolio. Limited availability of instruments is therefore unlikely to be the main reason individual portfolios are narrow. Three demand-side results are consistent with standard mechanisms in the household-finance literature. First, across investors at a given date, larger portfolios tend to include more distinct financial instruments. In contrast, when a given investor’s portfolio value rises because the prices of existing holdings rise, there is little evidence that the number of distinct instruments increases between observation dates. Second, the share of portfolio value held in investment funds and exchange-traded funds falls with portfolio size, even though higher-value investors are more likely to hold at least one such instrument. Third, most investors hold only Romanian instruments, and an investor’s domestic share falls little as their own portfolio grows. Once portfolio size is taken into account, most differences by age, education, and income become small. However, women hold fewer distinct instruments than men among investors with portfolios of similar size.",
+      "locatie": "Sala 3607, Clădirea Moxa",
+      "organizator": "Conf. univ. dr.  Dan Anghel, Faculty of Finance and Banking, ASE",
       "categorie": "seminar-stiintific",
       "link": "https://fabbv.ase.ro/seminar-stiintific-moneda-finante-si-banci/",
       "important": "da"
