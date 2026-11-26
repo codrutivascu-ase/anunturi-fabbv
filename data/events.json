@@ -1,5 +1,5 @@
 {
-  "actualizat_la": "19.11.2026, 12:55",
+  "actualizat_la": "26.11.2026, 03:13",
   "sursa": "Google Sheets",
   "evenimente": [
     {
@@ -1133,6 +1133,19 @@
       "link": "https://fabbv.ase.ro/2026/04/06/examenul-de-disertatie-2027-masters-exam-2027/",
       "text_buton": "Vezi condițiile",
       "persoana_contact": "Secretariat FABBV, secretariat@fin.ase.ro",
+      "important": "da"
+    },
+    {
+      "id": "an-023",
+      "adaugat_la": "2026-11-25",
+      "titlu": "Junior Auditor - Deloitte",
+      "descriere": "Oportunitate de job full time, start date: ianuarie 2027",
+      "valabil_de_la": "",
+      "valabil_pana_la": "2026-12-30",
+      "tip": "oportunitate",
+      "link": "https://apply.deloittece.com/en_US/careers/Jobdetail?jobId=20961&source=Partnership+with+ASE+%28Romania%29&tags=newsletter+ase",
+      "text_buton": "Mai multe detalii",
+      "persoana_contact": "elnitu@deloittece.com",
       "important": "da"
     },
     {
